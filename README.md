@@ -1,58 +1,58 @@
 # kontur
 
-**Architektur wird sichtbar.**
+**Make architecture visible.**
 
-Kontur ist ein Open-Source-Projekt für C4-basierte Softwarearchitektur als Code. Ziel ist, Architekturmodelle direkt in der IDE verständlich zu beschreiben, zu prüfen und interaktiv zu erkunden — zunächst lokal für eine Person oder ein Team, später verbunden über mehrere Git-Repositories.
+Kontur is an open-source project for C4-based software architecture as code. Its goal is to make architecture models easy to describe, validate, and explore interactively within the IDE — initially locally for an individual or team, and later across multiple Git repositories.
 
-Das Projekt befindet sich in der Konzept- und Aufbauphase. Die folgenden Punkte beschreiben die Zielsetzung, noch keine verfügbaren Funktionen.
+The project is in the planning and initial setup phase. The following sections describe intended capabilities, not features that are already available.
 
-## Zielsetzung
+## Vision
 
-Architekturbeschreibungen sollen wie Quellcode gepflegt werden: textbasiert, versioniert und über Git überprüfbar. Aus einem gemeinsamen Modell entstehen unterschiedliche Sichten auf Systeme, Container und ihre Beziehungen.
+Architecture descriptions should be maintained like source code: as text, versioned and reviewed through Git. A shared model provides different views of systems, containers, and their relationships.
 
-Kontur soll dabei drei Dinge verbinden:
+Kontur aims to bring together three things:
 
-- **Gute Bedienbarkeit:** Modellierung in VS Code mit Sprachunterstützung, verständlichen Fehlermeldungen und einer lokalen Live-Vorschau.
-- **Nachvollziehbare Architektur:** Git-versionierte Dateien bleiben die verbindliche Quelle. Diagramme und spätere zentrale Indizes werden daraus abgeleitet.
-- **AI-Unterstützung:** Assistenten sollen Modelle über MCP verstehen, prüfen und Änderungen vorbereiten können. Änderungen erfolgen an den Quelldateien und durchlaufen den normalen Git-Review-Prozess.
+- **Usability:** Modeling in VS Code with language support, clear diagnostics, and a local live preview.
+- **Traceable architecture:** Git-versioned files remain the authoritative source. Diagrams and future central indexes are derived from them.
+- **AI assistance:** Assistants should be able to understand and inspect models through MCP and prepare changes. Changes are made to source files and follow the normal Git review workflow.
 
-Langfristig soll daraus ein föderiertes Architektur-Repository entstehen: Teams pflegen ihre Modelle eigenständig, während eine konsolidierte Sicht teamübergreifende Zusammenhänge sichtbar macht.
+The long-term goal is a federated architecture repository: teams maintain their models independently, while a consolidated view reveals relationships across teams.
 
-## Grundprinzipien
+## Core principles
 
-- **Lokal zuerst:** Modellierung und Visualisierung funktionieren offline, ohne Konto oder zentralen Dienst.
-- **Eigener Rust-Kern:** Parser, Architekturmodell, Referenzauflösung, Validierung und Language Server werden in Rust entwickelt.
-- **Structurizr DSL als erstes Eingabeformat:** Kontur verwendet eine eigene Implementierung und benötigt weder den Structurizr-Server noch dessen Bibliotheken. Zunächst wird ein dokumentierter Sprachumfang unterstützt; nicht unterstützte Syntax erzeugt explizite Diagnosen.
-- **Ein gemeinsamer Kern:** VS-Code-Unterstützung, CLI und späterer Service verwenden dieselbe Modellverarbeitung und dieselben Prüfungen.
-- **Modell und Darstellung getrennt:** Fachliche Architektur bleibt unabhängig von Layout und Visualisierung. Für Darstellung und Layout sollen bestehende Bibliotheken genutzt werden.
-- **Durchgehend Open Source:** Alle Produktbestandteile stehen unter der [MIT-Lizenz](LICENSE).
+- **Local first:** Modeling and visualization work offline, without an account or central service.
+- **Our own Rust core:** The parser, architecture model, reference resolution, validation, and language server are developed in Rust.
+- **Structurizr DSL as the first input format:** Kontur uses its own implementation and depends on neither the Structurizr server nor its libraries. Initial support covers a documented language subset; unsupported syntax produces explicit diagnostics.
+- **One shared core:** VS Code support, the CLI, and the future service share model processing and validation.
+- **Separate model and presentation:** The semantic architecture model remains independent of layout and visualization. Existing libraries will handle rendering and layout.
+- **Open source throughout:** All product components are released under the [MIT license](LICENSE).
 
-## Entwicklungsschritte
+## Roadmap
 
-| Schritt | Ziel |
+| Phase | Goal |
 | --- | --- |
-| **1. Lokale Modellierung** | Architektur in einem lokalen Workspace in VS Code beschreiben, prüfen und visualisieren. |
-| **2. Lokale AI-Unterstützung** | Über MCP Modelle abfragen, Konsistenz prüfen und Änderungen an lokalen Dateien vorbereiten. |
-| **3. Externe Modelle referenzieren** | Architektur-Workspaces anderer Teams aus Git-Repositories über festgelegte Versionen einbinden. |
-| **4. Zentrale Gesamtsicht** | Teammodelle zusammenführen und über Suche, Weboberfläche und lesenden MCP-Zugriff gemeinsam erkunden. |
+| **1. Local modeling** | Describe, validate, and visualize architecture in a local workspace within VS Code. |
+| **2. Local AI assistance** | Query models, check consistency, and prepare changes to local files through MCP. |
+| **3. Reference external models** | Include other teams' architecture workspaces from Git repositories at pinned versions. |
+| **4. Consolidated central view** | Aggregate team models and explore them through search, a web interface, and read-only MCP access. |
 
-## Aktueller Fokus: lokale Modellierung
+## Current focus: local modeling
 
-Der erste Meilenstein konzentriert sich auf einen lokalen Workspace für eine Person oder ein Team. Das Modell darf auf mehrere Dateien verteilt sein.
+The first milestone focuses on a local workspace for an individual or team. A model may span multiple files.
 
-Geplant sind:
+Planned capabilities include:
 
-- Ein erster DSL-Umfang mit Personen, Softwaresystemen, Containern, Beziehungen, grundlegenden Metadaten und Sichten.
-- Ein eigener Language Server mit Diagnosen, Vervollständigung, Hover und Navigation zur Definition.
-- Eine VS-Code-Erweiterung mit lokaler Live-Vorschau, Auswahl von Sichten, Zoom und Verschieben sowie Navigation zwischen Diagramm und Quelltext.
-- Vorschau ungespeicherter Änderungen. Bei ungültigen Eingaben bleibt die letzte gültige Darstellung sichtbar und wird als veraltet gekennzeichnet.
-- Möglichst stabile Diagrammlayouts während der Bearbeitung.
-- Eine lokale Validierungs-CLI, deren Prüfungen auch in einer Git-Pipeline ausgeführt werden können.
+- An initial DSL subset covering people, software systems, containers, relationships, basic metadata, and views.
+- Our own language server with diagnostics, completion, hover information, and go-to-definition.
+- A VS Code extension with a local live preview, view selection, pan and zoom, and navigation between diagrams and source code.
+- Preview updates for unsaved changes. When input is invalid, the last valid visualization remains visible and is marked as stale.
+- Diagram layouts that remain as stable as possible while editing.
+- A local validation CLI whose checks can also run in a Git-based CI pipeline.
 
-**Erstes Akzeptanzszenario:** Ein Team öffnet sein Repository in VS Code, beschreibt zwei Systeme mit Containern und beschrifteten Beziehungen und kann diese lokal visualisieren und bearbeiten. Fehler werden verständlich angezeigt; Diagrammelemente führen zu ihrer Definition im Quelltext.
+**First acceptance scenario:** A team opens its repository in VS Code, describes two systems with containers and labeled relationships, and visualizes and edits them locally. Diagnostics are clear, and diagram elements link back to their definitions in the source code.
 
-## Technische Richtung
+## Technical direction
 
-Der Rust-Kern hält Architekturmodell, stabile Elementidentitäten und Quellpositionen vor. Die browserbasierte Visualisierung soll sowohl in einer VS-Code-Webview als auch später in der Weboberfläche wiederverwendbar sein.
+The Rust core maintains the architecture model, stable element identities, and source locations. The browser-based visualization should be reusable in both a VS Code webview and the future web interface.
 
-Die Auswahl der Visualisierungs- und Layoutbibliotheken sowie die Verpackung des lokalen Kerns sind noch offen. React Flow mit ELK.js ist ein Kandidat; Mermaid wurde als mögliche Prototyp- oder Exportoption diskutiert. Die Entscheidung soll anhand eines kleinen Prototyps mit verschachtelten Containern, beschrifteten Beziehungen und Änderungen am Modell getroffen werden.
+The visualization and layout libraries, as well as the packaging of the local core, are still undecided. React Flow with ELK.js is one candidate; Mermaid has been discussed as a possible prototype or export option. The decision will be based on a small prototype with nested containers, labeled relationships, and model updates.

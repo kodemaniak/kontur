@@ -16,6 +16,12 @@ target
 # rustc will dump stack traces when hitting an internal compiler error to PWD
 rustc-ice-*.txt
 
+# Node packages and browser test artifacts for the product preview.
+apps/preview/node_modules/
+apps/preview/dist/
+apps/preview/test-results/
+apps/preview/playwright-report/
+
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore

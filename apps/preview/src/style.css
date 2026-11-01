@@ -1,0 +1,34 @@
+* { box-sizing: border-box; }
+html, body, #app { width: 100%; height: 100%; margin: 0; }
+body { overflow: hidden; color: #172033; background: #f5f7fb; font: 14px system-ui, sans-serif; }
+button { color: inherit; font: inherit; }
+header { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 18px; background: #fff; border-bottom: 1px solid #d9dfeb; }
+.brand { display: flex; align-items: baseline; gap: 12px; }
+.brand strong { font-size: 17px; letter-spacing: .02em; }
+.brand span, .canvas-toolbar span:last-child { color: #667085; font-size: 12px; }
+.actions { display: flex; align-items: center; gap: 7px; }
+.actions button { min-width: 34px; min-height: 32px; border: 1px solid #cbd3e0; border-radius: 5px; background: white; cursor: pointer; }
+.actions button:hover { background: #f0f4fa; }
+#reload { padding: 0 12px; background: #243b5c; border-color: #243b5c; color: white; }
+#reload:hover { background: #314e75; }
+.divider { height: 22px; margin: 0 5px; border-left: 1px solid #d9dfeb; }
+main { display: flex; flex-direction: column; height: calc(100% - 56px); padding: 14px; gap: 10px; }
+.workspace { display: flex; flex: 1; flex-direction: column; min-height: 0; overflow: hidden; border: 1px solid #d9dfeb; border-radius: 7px; background: white; }
+.canvas-toolbar { height: 38px; flex: 0 0 38px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; border-bottom: 1px solid #e7ebf2; }
+.canvas-toolbar span:first-child { font-weight: 600; }
+#diagram { position: relative; flex: 1; min-height: 0; overflow: hidden; touch-action: none; cursor: grab; }
+#diagram.is-panning { cursor: grabbing; }
+#diagram svg { display: block; width: 100%; height: 100%; user-select: none; }
+#status { min-height: 32px; display: flex; align-items: center; padding: 0 12px; color: #56647a; border-top: 1px solid #e7ebf2; font-size: 12px; }
+#status[data-stale="true"] { color: #8a3c23; background: #fff6f1; }
+#diagnostics:empty { display: none; }
+#diagnostics { max-height: 30vh; overflow: auto; padding: 10px 14px; border: 1px solid #f0c4b1; border-radius: 6px; background: #fff8f4; color: #652d1e; }
+#diagnostics h2 { margin: 0 0 7px; font-size: 13px; }
+#diagnostics ul { display: grid; gap: 5px; margin: 0; padding-left: 20px; }
+#diagnostics li code { margin-right: 8px; color: #8a3c23; }
+@media (max-width: 600px) {
+  header { padding: 0 10px; }
+  .brand span { display: none; }
+  main { padding: 8px; }
+  .canvas-toolbar span:last-child { font-size: 10px; }
+}

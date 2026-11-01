@@ -1,0 +1,25 @@
+workspace = { SOI ~ line_ends* ~ "workspace" ~ quoted_string ~ "{" ~ line_ends* ~ implied_directive? ~ line_ends* ~ model_block ~ line_ends* ~ views_block ~ line_ends* ~ "}" ~ line_ends* ~ EOI }
+implied_directive = { "!impliedRelationships" ~ "false" }
+
+model_block = { "model" ~ "{" ~ line_ends* ~ (model_item ~ (line_ends+ ~ model_item)*)? ~ line_ends* ~ "}" }
+model_item = { person_decl | software_system_decl | relationship_decl }
+person_decl = { identifier ~ "=" ~ "person" ~ quoted_string ~ quoted_string? }
+software_system_decl = { identifier ~ "=" ~ "softwareSystem" ~ quoted_string ~ quoted_string? ~ "{" ~ line_ends* ~ (container_decl ~ (line_ends+ ~ container_decl)*)? ~ line_ends* ~ "}" }
+container_decl = { identifier ~ "=" ~ "container" ~ quoted_string ~ quoted_string? ~ quoted_string? ~ tags_block? }
+tags_block = { "{" ~ line_ends* ~ tag_stmt ~ line_ends* ~ "}" }
+tag_stmt = { "tags" ~ quoted_string }
+relationship_decl = { identifier ~ "=" ~ identifier ~ "->" ~ identifier ~ quoted_string ~ quoted_string? }
+
+views_block = { "views" ~ "{" ~ line_ends* ~ container_view ~ line_ends* ~ "}" }
+container_view = { "container" ~ identifier ~ quoted_string ~ "{" ~ line_ends* ~ (view_item ~ (line_ends+ ~ view_item)*)? ~ line_ends* ~ "}" }
+view_item = { include_stmt | auto_layout }
+include_stmt = ${ "include" ~ HSPACE+ ~ identifier ~ (HSPACE+ ~ identifier)* }
+auto_layout = { "autoLayout" ~ "lr" }
+
+identifier = @{ (ASCII_ALPHANUMERIC | "_")+ }
+quoted_string = @{ "\"" ~ ("\\" ~ ("\\" | "\"") | !("\"" | "\\" | NEWLINE) ~ ANY)* ~ "\"" }
+line_ends = _{ HSPACE* ~ line_comment? ~ NEWLINE }
+line_comment = _{ "//" ~ (!NEWLINE ~ ANY)* }
+block_comment = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
+HSPACE = _{ " " | "\t" }
+WHITESPACE = _{ HSPACE | block_comment }

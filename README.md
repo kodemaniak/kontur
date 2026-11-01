@@ -4,7 +4,7 @@
 
 Kontur is an open-source project for C4-based software architecture as code. Its goal is to make architecture models easy to describe, validate, and explore interactively within the IDE — initially locally for an individual or team, and later across multiple Git repositories.
 
-The project is in the planning and initial setup phase. The following sections describe intended capabilities, not features that are already available.
+The repository now includes the first local-modeling foundation: a Rust DSL subset/model/validation pipeline, a JSON CLI, and a manually reloaded local Mermaid preview. LSP and VS Code integration are still future work.
 
 ## Vision
 
@@ -38,26 +38,56 @@ The long-term goal is a federated architecture repository: teams maintain their 
 
 ## Current focus: local modeling
 
-The first milestone focuses on a local workspace for an individual or team. A model may span multiple files.
+The first milestone focuses on a local workspace for an individual or team. The initial implementation handles one saved DSL file; multi-file workspaces remain deferred.
 
-Planned capabilities include:
+Implemented in this slice:
 
-- An initial DSL subset covering people, software systems, containers, relationships, basic metadata, and views.
-- Our own language server with diagnostics, completion, hover information, and go-to-definition.
-- A VS Code extension with a local live preview, view selection, pan and zoom, and navigation between diagrams and source code.
-- Preview updates for unsaved changes. When input is invalid, the last valid visualization remains visible and is marked as stale.
-- Diagram layouts that remain as stable as possible while editing.
-- A local validation CLI whose checks can also run in a Git-based CI pipeline.
+- A documented Structurizr DSL subset for people, software systems, containers, relationships, basic metadata, and an explicitly selected container view.
+- The Rust parser, architecture model, reference resolution, semantic validation and view projection shared by the CLI and preview.
+- The `kontur view <file.dsl> --view <key>` JSON CLI and a local browser preview with explicit Reload, diagnostics, stale last-valid output, pan and zoom.
+- A saved-file acceptance example and CI checks for formatting, linting, Rust/TypeScript contracts, build and browser behavior.
 
-**First acceptance scenario:** A team opens its repository in VS Code, describes two systems with containers and labeled relationships, and visualizes and edits them locally. Diagnostics are clear, and diagram elements link back to their definitions in the source code.
+Still planned: an LSP with completion/hover/navigation, VS Code integration, unsaved-buffer updates, source/diagram navigation, multiple files and stable layout across edits. At Fit, the left-to-right Mermaid view is a wide overview with compact labels; zoom is needed at ordinary screen sizes. This matches the Mermaid spike's readability trade-off and does not promise layout parity or stability. See [the supported DSL subset](docs/dsl-subset.md) and [core/CLI contracts](docs/core-api.md).
+
+**Overall milestone acceptance (not yet complete):** A team opens its repository in VS Code, describes two systems with containers and labeled relationships, and visualizes and edits them locally. Diagnostics are clear, and diagram elements link back to their definitions in the source code.
+
+## Getting started
+
+Requirements: Rust `1.94.1` (selected by `rust-toolchain.toml`) and Node.js `22.12` or newer.
+
+```sh
+cd apps/preview
+npm ci
+npm run dev
+```
+
+The command builds the native CLI and serves the preview at `http://127.0.0.1:5173`. It initially reads `examples/orders-payments/workspace.dsl` and the `orders-payments` view. Edit and save that file, then click **Reload**. For a different saved file/view, set `KONTUR_DSL_PATH` and `KONTUR_VIEW_KEY` before `npm run dev`. The bridge accepts no browser-provided file or command paths.
+
+Run the CLI without the browser:
+
+```sh
+cargo run --locked -p kontur-cli -- view examples/orders-payments/workspace.dsl --view orders-payments
+```
+
+Run all local checks (install Chromium once with `npx playwright install chromium` if needed):
+
+```sh
+cargo fmt --all -- --check
+cargo clippy --locked --workspace --all-targets -- -D warnings
+cargo test --locked --workspace
+cd apps/preview
+npm ci
+npx playwright install chromium
+npm run verify
+```
 
 ## Technical direction
 
-The Rust core maintains the architecture model, stable element identities, and source locations. The browser-based visualization should be reusable in both a VS Code webview and the future web interface.
+The Rust core maintains the architecture model, stable element identities, and source locations. The browser-based visualization is separate from the core. Mermaid is used only by this initial local preview; the renderer and final packaging approach remain undecided. Preview bundle notices, including Mermaid's ELK dependency under EPL-2.0, are generated in [`apps/preview/THIRD_PARTY_NOTICES.md`](apps/preview/THIRD_PARTY_NOTICES.md).
 
-The visualization and layout libraries, as well as the packaging of the local core, are still undecided. React Flow with ELK.js is one candidate; Mermaid has been discussed as a possible prototype or export option. The decision will be based on a small prototype with nested containers, labeled relationships, and model updates.
+The final visualization/layout library and packaging of the local core are still undecided. React Flow with ELK.js remains a candidate; Mermaid currently powers only the small local-preview slice. The spikes remain separate evaluation prototypes.
 
-## Proposed first spike: interactive C4 visualization
+## Visualization spikes: interactive C4 candidates
 
 **Question:** Can React Flow + ELK.js provide readable nested diagrams and predictable updates in an offline VS Code webview with a small amount of integration code?
 

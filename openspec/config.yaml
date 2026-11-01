@@ -1,20 +1,23 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
-
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+context: |
+  Kontur is local-first, MIT-licensed C4 architecture-as-code tooling.
+  Git-versioned source is authoritative. Build our own Rust core for a documented
+  Structurizr DSL subset; do not depend on Structurizr server or libraries.
+  Keep architecture semantics separate from rendering, layout and host adapters.
+  Follow Clean Code, Clean Architecture and test-driven development as defined
+  in AGENTS.md: minimal cohesive modules, explicit typed APIs, dependencies
+  pointing inward, and red-green-refactor for each behavior or bug fix.
+rules:
+  proposal:
+    - Name distinct Rust core responsibilities as separate capabilities/specs; do not equate capability boundaries with separate crates.
+    - State scope, non-goals and the observable end-to-end acceptance criterion.
+  specs:
+    - For each core capability, specify inputs, outputs, errors, ownership and allowed dependency direction.
+    - Cover success, invalid/unsupported input and relevant identity/source preservation with observable scenarios.
+  design:
+    - Define typed API contracts between core modules and the host boundary, including failure behavior; keep the domain independent of DSL syntax, transport and rendering.
+    - Apply Clean Architecture without speculative traits, crate proliferation or unused extension points; explain required trade-offs.
+  tasks:
+    - Order behavioral work as failing test and observed failure, minimal passing implementation, then refactoring; include contract and integration checks.
+    - Include applicable formatting, linting, test/build commands and documentation of checks that cannot be run.

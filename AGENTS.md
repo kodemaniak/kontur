@@ -22,11 +22,20 @@
 - Renderer and packaging are not decided. TypeScript + React Flow + ELK.js was a provisional recommendation, not an adopted stack; Mermaid was discussed as a prototype/export option. Native process versus WASM also remains open.
 - The proposed first visualization spike and its acceptance criteria are in `README.md`. For ELK.js, use the EPL-2.0 option; packaged artifacts need third-party notices and corresponding-source instructions, including source for any distributed ELK modifications.
 
+## Development principles
+
+- **Clean Code:** Use clear domain names, small cohesive functions/modules, explicit errors and minimal duplication. Prefer the simplest readable solution; do not introduce abstractions, dependencies or configuration for hypothetical future needs.
+- **Clean Architecture:** Dependencies point inward. The architecture model and semantic rules must not depend on DSL syntax, CLI/file/network/process APIs, transport DTOs, Mermaid, layout engines or UI frameworks. Parsing, resolution, validation and view projection have distinct responsibilities and explicit typed APIs; hosts compose them rather than reimplementing their rules.
+- Define each core responsibility as a separate OpenSpec capability, documenting its inputs, outputs, errors and dependency direction. Separate specs and modules do not require separate crates, traits or a generic plugin framework. Change API contracts, their callers and their tests together.
+- **Test-driven development:** For each new behavior or bug fix, first write a focused failing test and run it to establish the intended failure (red); implement the smallest passing change (green); then refactor with tests passing. Organize implementation tasks in this order and report any test cycle that could not be run.
+- Test observable contracts, not private implementation details. Cover normal cases, invalid/unsupported input and identity/source preservation; use integration tests for cross-boundary behavior and the local preview. Tests after implementation alone are not evidence of a red-green cycle.
+- Keep validation at trust boundaries, preserve useful diagnostics and source locations, and never present invalid or stale output as current. Run applicable formatting, linting, unit and integration checks before declaring implementation complete; document skipped checks and known limits.
+
 ## Later phases, not current scope
 
 - After local modeling: local AI assistance through MCP → references to other teams' Git workspaces at pinned versions → central aggregation, search and web-based exploration. Keep local editing independent of the future central read view.
 
 ## Repository status and design source
 
-- Still a scaffold: no application source, manifests, tests, CI or established build/lint/test commands. Rust is intended but Cargo and a toolchain are not initialized.
+- Visualization experiments and their npm build/test commands remain under `spikes/visualization/`. The repository now also has a pinned Rust workspace, the first local DSL/model/validation/CLI slice, a separate Mermaid preview and CI. This is a foundation rather than the full local-modeling milestone: LSP, VS Code integration, unsaved-buffer updates, source navigation and multi-file input remain deferred. Keep the spikes unchanged and do not treat Mermaid as the final renderer decision.
 - Design basis: [shared planning conversation](https://chatgpt.com/share/6ae60834-e38c-83ed-82d3-2cc1202667d7). Later decisions supersede its early proposals to reuse Structurizr or build the central service first.

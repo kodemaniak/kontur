@@ -72,6 +72,6 @@
     "sprotty-elk": "1.4.0",
     "typescript": "5.9.3",
     "vite": "8.3.5",
-    "vitest": "4.1.0"
+    "vitest": "4.1.12"
   }
 }

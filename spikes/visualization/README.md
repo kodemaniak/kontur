@@ -2,6 +2,8 @@
 
 Small, runnable comparisons using the same `fixtures/small.json` and `fixtures/large.json` (8/8 and 101/105 elements/relationships). These are fixed-fixture prototypes, not a parser, language server, or renderer decision. Run `npm ci` once in this directory.
 
+**Current shortlist, not an adoption decision:** React Flow + ELK has the stronger interactive/editor path; current browser geometry checks pass containment and route attachment on both fixtures. Mermaid is the simpler renderer and passes fixture-count and pan/zoom checks, but its large diagram is extremely wide and offers less control. Further work should compare readability and editing needs before choosing either.
+
 | Variant | Start | Browser check |
 | --- | --- | --- |
 | [React Flow + ELK](webview/README.md) | `npm run dev` | `npm run test:browser` |

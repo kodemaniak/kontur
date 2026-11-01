@@ -1,0 +1,16 @@
+node_modules/**
+dist/sprotty/**
+webview/**
+extension/**
+tests/**
+scripts/**
+*.ts
+*.mjs
+tsconfig*.json
+vite.config.ts
+vitest.config.ts
+package-lock.json
+license-report.json
+results/**
+.gitignore
+.vscodeignore

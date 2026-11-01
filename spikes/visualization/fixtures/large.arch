@@ -1,0 +1,207 @@
+person person-ops "Operations analyst"
+system commerce "Commerce platform"
+container commerce-service-01 "Service 1" in commerce
+container commerce-service-02 "Service 2" in commerce
+container commerce-service-03 "Service 3" in commerce
+container commerce-service-04 "Service 4" in commerce
+container commerce-service-05 "Service 5" in commerce
+container commerce-service-06 "Service 6" in commerce
+container commerce-service-07 "Service 7" in commerce
+container commerce-service-08 "Service 8" in commerce
+container commerce-service-09 "Service 9" in commerce
+container commerce-service-10 "Service 10" in commerce
+container commerce-service-11 "Service 11" in commerce
+container commerce-service-12 "Service 12" in commerce
+container commerce-service-13 "Service 13" in commerce
+container commerce-service-14 "Service 14" in commerce
+container commerce-service-15 "Service 15" in commerce
+container commerce-service-16 "Service 16" in commerce
+container commerce-service-17 "Service 17" in commerce
+container commerce-service-18 "Service 18" in commerce
+container commerce-service-19 "Service 19" in commerce
+container commerce-service-20 "Service 20" in commerce
+container commerce-service-21 "Service 21" in commerce
+container commerce-service-22 "Service 22" in commerce
+container commerce-service-23 "Service 23" in commerce
+container commerce-service-24 "Service 24" in commerce
+container commerce-service-25 "Service 25" in commerce
+container commerce-service-26 "Service 26" in commerce
+container commerce-service-27 "Service 27" in commerce
+container commerce-service-28 "Service 28" in commerce
+container commerce-service-29 "Service 29" in commerce
+container commerce-service-30 "Service 30" in commerce
+container commerce-service-31 "Service 31" in commerce
+container commerce-service-32 "Service 32" in commerce
+container commerce-service-33 "Service 33" in commerce
+container commerce-service-34 "Service 34" in commerce
+container commerce-service-35 "Service 35" in commerce
+container commerce-service-36 "Service 36" in commerce
+container commerce-service-37 "Service 37" in commerce
+container commerce-service-38 "Service 38" in commerce
+container commerce-service-39 "Service 39" in commerce
+container commerce-service-40 "Service 40" in commerce
+container commerce-service-41 "Service 41" in commerce
+container commerce-service-42 "Service 42" in commerce
+container commerce-service-43 "Service 43" in commerce
+container commerce-service-44 "Service 44" in commerce
+container commerce-service-45 "Service 45" in commerce
+container commerce-service-46 "Service 46" in commerce
+container commerce-service-47 "Service 47" in commerce
+container commerce-service-48 "Service 48" in commerce
+database commerce-service-49 "Ledger database" in commerce
+rel person-ops commerce-service-01 "Checks platform health and order exceptions"
+rel commerce-service-01 commerce-service-02 "Passes workflow 1 state"
+rel commerce-service-02 commerce-service-03 "Passes workflow 2 state"
+rel commerce-service-03 commerce-service-04 "Passes workflow 3 state"
+rel commerce-service-04 commerce-service-05 "Passes workflow 4 state"
+rel commerce-service-05 commerce-service-06 "Passes workflow 5 state"
+rel commerce-service-06 commerce-service-07 "Passes workflow 6 state"
+rel commerce-service-07 commerce-service-08 "Passes workflow 7 state"
+rel commerce-service-08 commerce-service-09 "Passes workflow 8 state"
+rel commerce-service-09 commerce-service-10 "Passes workflow 9 state"
+rel commerce-service-10 commerce-service-11 "Passes workflow 10 state"
+rel commerce-service-11 commerce-service-12 "Passes workflow 11 state"
+rel commerce-service-12 commerce-service-13 "Passes workflow 12 state"
+rel commerce-service-13 commerce-service-14 "Passes workflow 13 state"
+rel commerce-service-12 commerce-service-14 "Publishes an independent audit event"
+rel commerce-service-14 commerce-service-15 "Passes workflow 14 state"
+rel commerce-service-15 commerce-service-16 "Passes workflow 15 state"
+rel commerce-service-16 commerce-service-17 "Passes workflow 16 state"
+rel commerce-service-17 commerce-service-18 "Passes workflow 17 state"
+rel commerce-service-18 commerce-service-19 "Passes workflow 18 state"
+rel commerce-service-19 commerce-service-20 "Passes workflow 19 state"
+rel commerce-service-20 commerce-service-21 "Passes workflow 20 state"
+rel commerce-service-21 commerce-service-22 "Passes workflow 21 state"
+rel commerce-service-22 commerce-service-23 "Passes workflow 22 state"
+rel commerce-service-23 commerce-service-24 "Passes workflow 23 state"
+rel commerce-service-24 commerce-service-25 "Passes workflow 24 state"
+rel commerce-service-25 commerce-service-26 "Passes workflow 25 state"
+rel commerce-service-24 commerce-service-26 "Publishes an independent audit event"
+rel commerce-service-26 commerce-service-27 "Passes workflow 26 state"
+rel commerce-service-27 commerce-service-28 "Passes workflow 27 state"
+rel commerce-service-28 commerce-service-29 "Passes workflow 28 state"
+rel commerce-service-29 commerce-service-30 "Passes workflow 29 state"
+rel commerce-service-30 commerce-service-31 "Passes workflow 30 state"
+rel commerce-service-31 commerce-service-32 "Passes workflow 31 state"
+rel commerce-service-32 commerce-service-33 "Passes workflow 32 state"
+rel commerce-service-33 commerce-service-34 "Passes workflow 33 state"
+rel commerce-service-34 commerce-service-35 "Passes workflow 34 state"
+rel commerce-service-35 commerce-service-36 "Passes workflow 35 state"
+rel commerce-service-36 commerce-service-37 "Passes workflow 36 state"
+rel commerce-service-37 commerce-service-38 "Passes workflow 37 state"
+rel commerce-service-36 commerce-service-38 "Publishes an independent audit event"
+rel commerce-service-38 commerce-service-39 "Passes workflow 38 state"
+rel commerce-service-39 commerce-service-40 "Passes workflow 39 state"
+rel commerce-service-40 commerce-service-41 "Passes workflow 40 state"
+rel commerce-service-41 commerce-service-42 "Passes workflow 41 state"
+rel commerce-service-42 commerce-service-43 "Passes workflow 42 state"
+rel commerce-service-43 commerce-service-44 "Passes workflow 43 state"
+rel commerce-service-44 commerce-service-45 "Passes workflow 44 state"
+rel commerce-service-45 commerce-service-46 "Passes workflow 45 state"
+rel commerce-service-46 commerce-service-47 "Passes workflow 46 state"
+rel commerce-service-47 commerce-service-48 "Passes workflow 47 state"
+rel commerce-service-48 commerce-service-49 "Passes workflow 48 state"
+system payments "Payments platform"
+container payments-service-01 "Service 1" in payments
+container payments-service-02 "Service 2" in payments
+container payments-service-03 "Service 3" in payments
+container payments-service-04 "Service 4" in payments
+container payments-service-05 "Service 5" in payments
+container payments-service-06 "Service 6" in payments
+container payments-service-07 "Service 7" in payments
+container payments-service-08 "Service 8" in payments
+container payments-service-09 "Service 9" in payments
+container payments-service-10 "Service 10" in payments
+container payments-service-11 "Service 11" in payments
+container payments-service-12 "Service 12" in payments
+container payments-service-13 "Service 13" in payments
+container payments-service-14 "Service 14" in payments
+container payments-service-15 "Service 15" in payments
+container payments-service-16 "Service 16" in payments
+container payments-service-17 "Service 17" in payments
+container payments-service-18 "Service 18" in payments
+container payments-service-19 "Service 19" in payments
+container payments-service-20 "Service 20" in payments
+container payments-service-21 "Service 21" in payments
+container payments-service-22 "Service 22" in payments
+container payments-service-23 "Service 23" in payments
+container payments-service-24 "Service 24" in payments
+container payments-service-25 "Service 25" in payments
+container payments-service-26 "Service 26" in payments
+container payments-service-27 "Service 27" in payments
+container payments-service-28 "Service 28" in payments
+container payments-service-29 "Service 29" in payments
+container payments-service-30 "Service 30" in payments
+container payments-service-31 "Service 31" in payments
+container payments-service-32 "Service 32" in payments
+container payments-service-33 "Service 33" in payments
+container payments-service-34 "Service 34" in payments
+container payments-service-35 "Service 35" in payments
+container payments-service-36 "Service 36" in payments
+container payments-service-37 "Service 37" in payments
+container payments-service-38 "Service 38" in payments
+container payments-service-39 "Service 39" in payments
+container payments-service-40 "Service 40" in payments
+container payments-service-41 "Service 41" in payments
+container payments-service-42 "Service 42" in payments
+container payments-service-43 "Service 43" in payments
+container payments-service-44 "Service 44" in payments
+container payments-service-45 "Service 45" in payments
+container payments-service-46 "Service 46" in payments
+container payments-service-47 "Service 47" in payments
+container payments-service-48 "Service 48" in payments
+database payments-service-49 "Ledger database" in payments
+rel payments-service-01 payments-service-02 "Passes workflow 1 state"
+rel payments-service-02 payments-service-03 "Passes workflow 2 state"
+rel payments-service-03 payments-service-04 "Passes workflow 3 state"
+rel payments-service-04 payments-service-05 "Passes workflow 4 state"
+rel payments-service-05 payments-service-06 "Passes workflow 5 state"
+rel payments-service-06 payments-service-07 "Passes workflow 6 state"
+rel payments-service-07 payments-service-08 "Passes workflow 7 state"
+rel payments-service-08 payments-service-09 "Passes workflow 8 state"
+rel payments-service-09 payments-service-10 "Passes workflow 9 state"
+rel payments-service-10 payments-service-11 "Passes workflow 10 state"
+rel payments-service-11 payments-service-12 "Passes workflow 11 state"
+rel payments-service-12 payments-service-13 "Passes workflow 12 state"
+rel payments-service-13 payments-service-14 "Passes workflow 13 state"
+rel payments-service-12 payments-service-14 "Publishes an independent audit event"
+rel payments-service-14 payments-service-15 "Passes workflow 14 state"
+rel payments-service-15 payments-service-16 "Passes workflow 15 state"
+rel payments-service-16 payments-service-17 "Passes workflow 16 state"
+rel payments-service-17 payments-service-18 "Passes workflow 17 state"
+rel payments-service-18 payments-service-19 "Passes workflow 18 state"
+rel payments-service-19 payments-service-20 "Passes workflow 19 state"
+rel payments-service-20 payments-service-21 "Passes workflow 20 state"
+rel payments-service-21 payments-service-22 "Passes workflow 21 state"
+rel payments-service-22 payments-service-23 "Passes workflow 22 state"
+rel payments-service-23 payments-service-24 "Passes workflow 23 state"
+rel payments-service-24 payments-service-25 "Passes workflow 24 state"
+rel payments-service-25 payments-service-26 "Passes workflow 25 state"
+rel payments-service-24 payments-service-26 "Publishes an independent audit event"
+rel payments-service-26 payments-service-27 "Passes workflow 26 state"
+rel payments-service-27 payments-service-28 "Passes workflow 27 state"
+rel payments-service-28 payments-service-29 "Passes workflow 28 state"
+rel payments-service-29 payments-service-30 "Passes workflow 29 state"
+rel payments-service-30 payments-service-31 "Passes workflow 30 state"
+rel payments-service-31 payments-service-32 "Passes workflow 31 state"
+rel payments-service-32 payments-service-33 "Passes workflow 32 state"
+rel payments-service-33 payments-service-34 "Passes workflow 33 state"
+rel payments-service-34 payments-service-35 "Passes workflow 34 state"
+rel payments-service-35 payments-service-36 "Passes workflow 35 state"
+rel payments-service-36 payments-service-37 "Passes workflow 36 state"
+rel payments-service-37 payments-service-38 "Passes workflow 37 state"
+rel payments-service-36 payments-service-38 "Publishes an independent audit event"
+rel payments-service-38 payments-service-39 "Passes workflow 38 state"
+rel payments-service-39 payments-service-40 "Passes workflow 39 state"
+rel payments-service-40 payments-service-41 "Passes workflow 40 state"
+rel payments-service-41 payments-service-42 "Passes workflow 41 state"
+rel payments-service-42 payments-service-43 "Passes workflow 42 state"
+rel payments-service-43 payments-service-44 "Passes workflow 43 state"
+rel payments-service-44 payments-service-45 "Passes workflow 44 state"
+rel payments-service-45 payments-service-46 "Passes workflow 45 state"
+rel payments-service-46 payments-service-47 "Passes workflow 46 state"
+rel payments-service-47 payments-service-48 "Passes workflow 47 state"
+rel payments-service-48 payments-service-49 "Passes workflow 48 state"
+rel commerce-service-21 payments-service-01 "Requests payment authorization across the platform boundary"
+rel payments-service-06 commerce-service-31 "Publishes the final provider settlement status"
+# simulated addition source

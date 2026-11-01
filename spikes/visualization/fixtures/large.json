@@ -1,0 +1,2890 @@
+{
+  "id": "large",
+  "title": "Generated architecture — 101 elements",
+  "sourceFile": "fixtures/large.arch",
+  "mutationSource": {
+    "file": "fixtures/large.arch",
+    "line": 207,
+    "column": 1,
+    "endLine": 207,
+    "endColumn": 28
+  },
+  "elements": [
+    {
+      "id": "person-ops",
+      "kind": "person",
+      "name": "Operations analyst",
+      "description": "Follows order and payment health.",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 1,
+        "column": 1,
+        "endLine": 1,
+        "endColumn": 39
+      }
+    },
+    {
+      "id": "commerce",
+      "kind": "system",
+      "name": "Commerce platform",
+      "description": "Commerce platform architecture boundary.",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 2,
+        "column": 1,
+        "endLine": 2,
+        "endColumn": 36
+      }
+    },
+    {
+      "id": "commerce-service-01",
+      "kind": "container",
+      "name": "Commerce platform service 1",
+      "description": "Handles commerce platform workflow 1.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 3,
+        "column": 1,
+        "endLine": 3,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-02",
+      "kind": "container",
+      "name": "Commerce platform service 2",
+      "description": "Handles commerce platform workflow 2.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 4,
+        "column": 1,
+        "endLine": 4,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-03",
+      "kind": "container",
+      "name": "Commerce platform service 3",
+      "description": "Handles commerce platform workflow 3.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 5,
+        "column": 1,
+        "endLine": 5,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-04",
+      "kind": "container",
+      "name": "Commerce platform service 4",
+      "description": "Handles commerce platform workflow 4.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 6,
+        "column": 1,
+        "endLine": 6,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-05",
+      "kind": "container",
+      "name": "Commerce platform service 5",
+      "description": "Handles commerce platform workflow 5.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 7,
+        "column": 1,
+        "endLine": 7,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-06",
+      "kind": "container",
+      "name": "Commerce platform service 6",
+      "description": "Handles commerce platform workflow 6.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 8,
+        "column": 1,
+        "endLine": 8,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-07",
+      "kind": "container",
+      "name": "Commerce platform service 7",
+      "description": "Handles commerce platform workflow 7.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 9,
+        "column": 1,
+        "endLine": 9,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-08",
+      "kind": "container",
+      "name": "Commerce platform service 8",
+      "description": "Handles commerce platform workflow 8.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 10,
+        "column": 1,
+        "endLine": 10,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-09",
+      "kind": "container",
+      "name": "Commerce platform service 9",
+      "description": "Handles commerce platform workflow 9.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 11,
+        "column": 1,
+        "endLine": 11,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "commerce-service-10",
+      "kind": "container",
+      "name": "Commerce platform service 10",
+      "description": "Handles commerce platform workflow 10.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 12,
+        "column": 1,
+        "endLine": 12,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-11",
+      "kind": "container",
+      "name": "Commerce platform service 11",
+      "description": "Handles commerce platform workflow 11.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 13,
+        "column": 1,
+        "endLine": 13,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-12",
+      "kind": "container",
+      "name": "Commerce platform service 12",
+      "description": "Handles commerce platform workflow 12.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 14,
+        "column": 1,
+        "endLine": 14,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-13",
+      "kind": "container",
+      "name": "Commerce platform service 13",
+      "description": "Handles commerce platform workflow 13.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 15,
+        "column": 1,
+        "endLine": 15,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-14",
+      "kind": "container",
+      "name": "Commerce platform service 14",
+      "description": "Handles commerce platform workflow 14.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 16,
+        "column": 1,
+        "endLine": 16,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-15",
+      "kind": "container",
+      "name": "Commerce platform service 15",
+      "description": "Handles commerce platform workflow 15.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 17,
+        "column": 1,
+        "endLine": 17,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-16",
+      "kind": "container",
+      "name": "Commerce platform service 16",
+      "description": "Handles commerce platform workflow 16.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 18,
+        "column": 1,
+        "endLine": 18,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-17",
+      "kind": "container",
+      "name": "Commerce platform service 17",
+      "description": "Handles commerce platform workflow 17.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 19,
+        "column": 1,
+        "endLine": 19,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-18",
+      "kind": "container",
+      "name": "Commerce platform service 18",
+      "description": "Handles commerce platform workflow 18.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 20,
+        "column": 1,
+        "endLine": 20,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-19",
+      "kind": "container",
+      "name": "Commerce platform service 19",
+      "description": "Handles commerce platform workflow 19.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 21,
+        "column": 1,
+        "endLine": 21,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-20",
+      "kind": "container",
+      "name": "Commerce platform service 20",
+      "description": "Handles commerce platform workflow 20.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 22,
+        "column": 1,
+        "endLine": 22,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-21",
+      "kind": "container",
+      "name": "Commerce platform service 21",
+      "description": "Handles commerce platform workflow 21.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 23,
+        "column": 1,
+        "endLine": 23,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-22",
+      "kind": "container",
+      "name": "Commerce platform service 22",
+      "description": "Handles commerce platform workflow 22.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 24,
+        "column": 1,
+        "endLine": 24,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-23",
+      "kind": "container",
+      "name": "Commerce platform service 23",
+      "description": "Handles commerce platform workflow 23.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 25,
+        "column": 1,
+        "endLine": 25,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-24",
+      "kind": "container",
+      "name": "Commerce platform service 24",
+      "description": "Handles commerce platform workflow 24.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 26,
+        "column": 1,
+        "endLine": 26,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-25",
+      "kind": "container",
+      "name": "Commerce platform service 25",
+      "description": "Handles commerce platform workflow 25.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 27,
+        "column": 1,
+        "endLine": 27,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-26",
+      "kind": "container",
+      "name": "Commerce platform service 26",
+      "description": "Handles commerce platform workflow 26.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 28,
+        "column": 1,
+        "endLine": 28,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-27",
+      "kind": "container",
+      "name": "Commerce platform service 27",
+      "description": "Handles commerce platform workflow 27.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 29,
+        "column": 1,
+        "endLine": 29,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-28",
+      "kind": "container",
+      "name": "Commerce platform service 28",
+      "description": "Handles commerce platform workflow 28.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 30,
+        "column": 1,
+        "endLine": 30,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-29",
+      "kind": "container",
+      "name": "Commerce platform service 29",
+      "description": "Handles commerce platform workflow 29.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 31,
+        "column": 1,
+        "endLine": 31,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-30",
+      "kind": "container",
+      "name": "Commerce platform service 30",
+      "description": "Handles commerce platform workflow 30.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 32,
+        "column": 1,
+        "endLine": 32,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-31",
+      "kind": "container",
+      "name": "Commerce platform service 31",
+      "description": "Handles commerce platform workflow 31.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 33,
+        "column": 1,
+        "endLine": 33,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-32",
+      "kind": "container",
+      "name": "Commerce platform service 32",
+      "description": "Handles commerce platform workflow 32.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 34,
+        "column": 1,
+        "endLine": 34,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-33",
+      "kind": "container",
+      "name": "Commerce platform service 33",
+      "description": "Handles commerce platform workflow 33.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 35,
+        "column": 1,
+        "endLine": 35,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-34",
+      "kind": "container",
+      "name": "Commerce platform service 34",
+      "description": "Handles commerce platform workflow 34.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 36,
+        "column": 1,
+        "endLine": 36,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-35",
+      "kind": "container",
+      "name": "Commerce platform service 35",
+      "description": "Handles commerce platform workflow 35.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 37,
+        "column": 1,
+        "endLine": 37,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-36",
+      "kind": "container",
+      "name": "Commerce platform service 36",
+      "description": "Handles commerce platform workflow 36.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 38,
+        "column": 1,
+        "endLine": 38,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-37",
+      "kind": "container",
+      "name": "Commerce platform service 37",
+      "description": "Handles commerce platform workflow 37.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 39,
+        "column": 1,
+        "endLine": 39,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-38",
+      "kind": "container",
+      "name": "Commerce platform service 38",
+      "description": "Handles commerce platform workflow 38.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 40,
+        "column": 1,
+        "endLine": 40,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-39",
+      "kind": "container",
+      "name": "Commerce platform service 39",
+      "description": "Handles commerce platform workflow 39.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 41,
+        "column": 1,
+        "endLine": 41,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-40",
+      "kind": "container",
+      "name": "Commerce platform service 40",
+      "description": "Handles commerce platform workflow 40.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 42,
+        "column": 1,
+        "endLine": 42,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-41",
+      "kind": "container",
+      "name": "Commerce platform service 41",
+      "description": "Handles commerce platform workflow 41.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 43,
+        "column": 1,
+        "endLine": 43,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-42",
+      "kind": "container",
+      "name": "Commerce platform service 42",
+      "description": "Handles commerce platform workflow 42.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 44,
+        "column": 1,
+        "endLine": 44,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-43",
+      "kind": "container",
+      "name": "Commerce platform service 43",
+      "description": "Handles commerce platform workflow 43.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 45,
+        "column": 1,
+        "endLine": 45,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-44",
+      "kind": "container",
+      "name": "Commerce platform service 44",
+      "description": "Handles commerce platform workflow 44.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 46,
+        "column": 1,
+        "endLine": 46,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-45",
+      "kind": "container",
+      "name": "Commerce platform service 45",
+      "description": "Handles commerce platform workflow 45.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 47,
+        "column": 1,
+        "endLine": 47,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-46",
+      "kind": "container",
+      "name": "Commerce platform service 46",
+      "description": "Handles commerce platform workflow 46.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 48,
+        "column": 1,
+        "endLine": 48,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-47",
+      "kind": "container",
+      "name": "Commerce platform service 47",
+      "description": "Handles commerce platform workflow 47.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 49,
+        "column": 1,
+        "endLine": 49,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-48",
+      "kind": "container",
+      "name": "Commerce platform service 48",
+      "description": "Handles commerce platform workflow 48.",
+      "technology": "TypeScript · events",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 50,
+        "column": 1,
+        "endLine": 50,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "commerce-service-49",
+      "kind": "database",
+      "name": "Commerce platform ledger database",
+      "description": "Persists the platform ledger and audit trail.",
+      "technology": "PostgreSQL",
+      "parentId": "commerce",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 51,
+        "column": 1,
+        "endLine": 51,
+        "endColumn": 59
+      }
+    },
+    {
+      "id": "payments",
+      "kind": "system",
+      "name": "Payments platform",
+      "description": "Payments platform architecture boundary.",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 104,
+        "column": 1,
+        "endLine": 104,
+        "endColumn": 36
+      }
+    },
+    {
+      "id": "payments-service-01",
+      "kind": "container",
+      "name": "Payments platform service 1",
+      "description": "Handles payments platform workflow 1.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 105,
+        "column": 1,
+        "endLine": 105,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-02",
+      "kind": "container",
+      "name": "Payments platform service 2",
+      "description": "Handles payments platform workflow 2.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 106,
+        "column": 1,
+        "endLine": 106,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-03",
+      "kind": "container",
+      "name": "Payments platform service 3",
+      "description": "Handles payments platform workflow 3.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 107,
+        "column": 1,
+        "endLine": 107,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-04",
+      "kind": "container",
+      "name": "Payments platform service 4",
+      "description": "Handles payments platform workflow 4.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 108,
+        "column": 1,
+        "endLine": 108,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-05",
+      "kind": "container",
+      "name": "Payments platform service 5",
+      "description": "Handles payments platform workflow 5.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 109,
+        "column": 1,
+        "endLine": 109,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-06",
+      "kind": "container",
+      "name": "Payments platform service 6",
+      "description": "Handles payments platform workflow 6.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 110,
+        "column": 1,
+        "endLine": 110,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-07",
+      "kind": "container",
+      "name": "Payments platform service 7",
+      "description": "Handles payments platform workflow 7.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 111,
+        "column": 1,
+        "endLine": 111,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-08",
+      "kind": "container",
+      "name": "Payments platform service 8",
+      "description": "Handles payments platform workflow 8.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 112,
+        "column": 1,
+        "endLine": 112,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-09",
+      "kind": "container",
+      "name": "Payments platform service 9",
+      "description": "Handles payments platform workflow 9.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 113,
+        "column": 1,
+        "endLine": 113,
+        "endColumn": 54
+      }
+    },
+    {
+      "id": "payments-service-10",
+      "kind": "container",
+      "name": "Payments platform service 10",
+      "description": "Handles payments platform workflow 10.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 114,
+        "column": 1,
+        "endLine": 114,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-11",
+      "kind": "container",
+      "name": "Payments platform service 11",
+      "description": "Handles payments platform workflow 11.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 115,
+        "column": 1,
+        "endLine": 115,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-12",
+      "kind": "container",
+      "name": "Payments platform service 12",
+      "description": "Handles payments platform workflow 12.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 116,
+        "column": 1,
+        "endLine": 116,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-13",
+      "kind": "container",
+      "name": "Payments platform service 13",
+      "description": "Handles payments platform workflow 13.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 117,
+        "column": 1,
+        "endLine": 117,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-14",
+      "kind": "container",
+      "name": "Payments platform service 14",
+      "description": "Handles payments platform workflow 14.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 118,
+        "column": 1,
+        "endLine": 118,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-15",
+      "kind": "container",
+      "name": "Payments platform service 15",
+      "description": "Handles payments platform workflow 15.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 119,
+        "column": 1,
+        "endLine": 119,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-16",
+      "kind": "container",
+      "name": "Payments platform service 16",
+      "description": "Handles payments platform workflow 16.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 120,
+        "column": 1,
+        "endLine": 120,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-17",
+      "kind": "container",
+      "name": "Payments platform service 17",
+      "description": "Handles payments platform workflow 17.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 121,
+        "column": 1,
+        "endLine": 121,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-18",
+      "kind": "container",
+      "name": "Payments platform service 18",
+      "description": "Handles payments platform workflow 18.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 122,
+        "column": 1,
+        "endLine": 122,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-19",
+      "kind": "container",
+      "name": "Payments platform service 19",
+      "description": "Handles payments platform workflow 19.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 123,
+        "column": 1,
+        "endLine": 123,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-20",
+      "kind": "container",
+      "name": "Payments platform service 20",
+      "description": "Handles payments platform workflow 20.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 124,
+        "column": 1,
+        "endLine": 124,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-21",
+      "kind": "container",
+      "name": "Payments platform service 21",
+      "description": "Handles payments platform workflow 21.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 125,
+        "column": 1,
+        "endLine": 125,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-22",
+      "kind": "container",
+      "name": "Payments platform service 22",
+      "description": "Handles payments platform workflow 22.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 126,
+        "column": 1,
+        "endLine": 126,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-23",
+      "kind": "container",
+      "name": "Payments platform service 23",
+      "description": "Handles payments platform workflow 23.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 127,
+        "column": 1,
+        "endLine": 127,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-24",
+      "kind": "container",
+      "name": "Payments platform service 24",
+      "description": "Handles payments platform workflow 24.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 128,
+        "column": 1,
+        "endLine": 128,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-25",
+      "kind": "container",
+      "name": "Payments platform service 25",
+      "description": "Handles payments platform workflow 25.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 129,
+        "column": 1,
+        "endLine": 129,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-26",
+      "kind": "container",
+      "name": "Payments platform service 26",
+      "description": "Handles payments platform workflow 26.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 130,
+        "column": 1,
+        "endLine": 130,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-27",
+      "kind": "container",
+      "name": "Payments platform service 27",
+      "description": "Handles payments platform workflow 27.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 131,
+        "column": 1,
+        "endLine": 131,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-28",
+      "kind": "container",
+      "name": "Payments platform service 28",
+      "description": "Handles payments platform workflow 28.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 132,
+        "column": 1,
+        "endLine": 132,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-29",
+      "kind": "container",
+      "name": "Payments platform service 29",
+      "description": "Handles payments platform workflow 29.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 133,
+        "column": 1,
+        "endLine": 133,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-30",
+      "kind": "container",
+      "name": "Payments platform service 30",
+      "description": "Handles payments platform workflow 30.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 134,
+        "column": 1,
+        "endLine": 134,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-31",
+      "kind": "container",
+      "name": "Payments platform service 31",
+      "description": "Handles payments platform workflow 31.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 135,
+        "column": 1,
+        "endLine": 135,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-32",
+      "kind": "container",
+      "name": "Payments platform service 32",
+      "description": "Handles payments platform workflow 32.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 136,
+        "column": 1,
+        "endLine": 136,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-33",
+      "kind": "container",
+      "name": "Payments platform service 33",
+      "description": "Handles payments platform workflow 33.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 137,
+        "column": 1,
+        "endLine": 137,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-34",
+      "kind": "container",
+      "name": "Payments platform service 34",
+      "description": "Handles payments platform workflow 34.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 138,
+        "column": 1,
+        "endLine": 138,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-35",
+      "kind": "container",
+      "name": "Payments platform service 35",
+      "description": "Handles payments platform workflow 35.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 139,
+        "column": 1,
+        "endLine": 139,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-36",
+      "kind": "container",
+      "name": "Payments platform service 36",
+      "description": "Handles payments platform workflow 36.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 140,
+        "column": 1,
+        "endLine": 140,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-37",
+      "kind": "container",
+      "name": "Payments platform service 37",
+      "description": "Handles payments platform workflow 37.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 141,
+        "column": 1,
+        "endLine": 141,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-38",
+      "kind": "container",
+      "name": "Payments platform service 38",
+      "description": "Handles payments platform workflow 38.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 142,
+        "column": 1,
+        "endLine": 142,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-39",
+      "kind": "container",
+      "name": "Payments platform service 39",
+      "description": "Handles payments platform workflow 39.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 143,
+        "column": 1,
+        "endLine": 143,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-40",
+      "kind": "container",
+      "name": "Payments platform service 40",
+      "description": "Handles payments platform workflow 40.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 144,
+        "column": 1,
+        "endLine": 144,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-41",
+      "kind": "container",
+      "name": "Payments platform service 41",
+      "description": "Handles payments platform workflow 41.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 145,
+        "column": 1,
+        "endLine": 145,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-42",
+      "kind": "container",
+      "name": "Payments platform service 42",
+      "description": "Handles payments platform workflow 42.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 146,
+        "column": 1,
+        "endLine": 146,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-43",
+      "kind": "container",
+      "name": "Payments platform service 43",
+      "description": "Handles payments platform workflow 43.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 147,
+        "column": 1,
+        "endLine": 147,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-44",
+      "kind": "container",
+      "name": "Payments platform service 44",
+      "description": "Handles payments platform workflow 44.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 148,
+        "column": 1,
+        "endLine": 148,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-45",
+      "kind": "container",
+      "name": "Payments platform service 45",
+      "description": "Handles payments platform workflow 45.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 149,
+        "column": 1,
+        "endLine": 149,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-46",
+      "kind": "container",
+      "name": "Payments platform service 46",
+      "description": "Handles payments platform workflow 46.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 150,
+        "column": 1,
+        "endLine": 150,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-47",
+      "kind": "container",
+      "name": "Payments platform service 47",
+      "description": "Handles payments platform workflow 47.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 151,
+        "column": 1,
+        "endLine": 151,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-48",
+      "kind": "container",
+      "name": "Payments platform service 48",
+      "description": "Handles payments platform workflow 48.",
+      "technology": "TypeScript · events",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 152,
+        "column": 1,
+        "endLine": 152,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "payments-service-49",
+      "kind": "database",
+      "name": "Payments platform ledger database",
+      "description": "Persists the platform ledger and audit trail.",
+      "technology": "PostgreSQL",
+      "parentId": "payments",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 153,
+        "column": 1,
+        "endLine": 153,
+        "endColumn": 59
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "ops-commerce",
+      "sourceId": "person-ops",
+      "targetId": "commerce-service-01",
+      "label": "Checks platform health and order exceptions",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 52,
+        "column": 1,
+        "endLine": 52,
+        "endColumn": 81
+      }
+    },
+    {
+      "id": "commerce-flow-1",
+      "sourceId": "commerce-service-01",
+      "targetId": "commerce-service-02",
+      "label": "Passes workflow 1 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 53,
+        "column": 1,
+        "endLine": 53,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-2",
+      "sourceId": "commerce-service-02",
+      "targetId": "commerce-service-03",
+      "label": "Passes workflow 2 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 54,
+        "column": 1,
+        "endLine": 54,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-3",
+      "sourceId": "commerce-service-03",
+      "targetId": "commerce-service-04",
+      "label": "Passes workflow 3 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 55,
+        "column": 1,
+        "endLine": 55,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-4",
+      "sourceId": "commerce-service-04",
+      "targetId": "commerce-service-05",
+      "label": "Passes workflow 4 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 56,
+        "column": 1,
+        "endLine": 56,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-5",
+      "sourceId": "commerce-service-05",
+      "targetId": "commerce-service-06",
+      "label": "Passes workflow 5 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 57,
+        "column": 1,
+        "endLine": 57,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-6",
+      "sourceId": "commerce-service-06",
+      "targetId": "commerce-service-07",
+      "label": "Passes workflow 6 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 58,
+        "column": 1,
+        "endLine": 58,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-7",
+      "sourceId": "commerce-service-07",
+      "targetId": "commerce-service-08",
+      "label": "Passes workflow 7 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 59,
+        "column": 1,
+        "endLine": 59,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-8",
+      "sourceId": "commerce-service-08",
+      "targetId": "commerce-service-09",
+      "label": "Passes workflow 8 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 60,
+        "column": 1,
+        "endLine": 60,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-9",
+      "sourceId": "commerce-service-09",
+      "targetId": "commerce-service-10",
+      "label": "Passes workflow 9 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 61,
+        "column": 1,
+        "endLine": 61,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "commerce-flow-10",
+      "sourceId": "commerce-service-10",
+      "targetId": "commerce-service-11",
+      "label": "Passes workflow 10 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 62,
+        "column": 1,
+        "endLine": 62,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-11",
+      "sourceId": "commerce-service-11",
+      "targetId": "commerce-service-12",
+      "label": "Passes workflow 11 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 63,
+        "column": 1,
+        "endLine": 63,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-12",
+      "sourceId": "commerce-service-12",
+      "targetId": "commerce-service-13",
+      "label": "Passes workflow 12 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 64,
+        "column": 1,
+        "endLine": 64,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-13",
+      "sourceId": "commerce-service-13",
+      "targetId": "commerce-service-14",
+      "label": "Passes workflow 13 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 65,
+        "column": 1,
+        "endLine": 65,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-parallel-12",
+      "sourceId": "commerce-service-12",
+      "targetId": "commerce-service-14",
+      "label": "Publishes an independent audit event",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 66,
+        "column": 1,
+        "endLine": 66,
+        "endColumn": 83
+      }
+    },
+    {
+      "id": "commerce-flow-14",
+      "sourceId": "commerce-service-14",
+      "targetId": "commerce-service-15",
+      "label": "Passes workflow 14 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 67,
+        "column": 1,
+        "endLine": 67,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-15",
+      "sourceId": "commerce-service-15",
+      "targetId": "commerce-service-16",
+      "label": "Passes workflow 15 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 68,
+        "column": 1,
+        "endLine": 68,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-16",
+      "sourceId": "commerce-service-16",
+      "targetId": "commerce-service-17",
+      "label": "Passes workflow 16 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 69,
+        "column": 1,
+        "endLine": 69,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-17",
+      "sourceId": "commerce-service-17",
+      "targetId": "commerce-service-18",
+      "label": "Passes workflow 17 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 70,
+        "column": 1,
+        "endLine": 70,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-18",
+      "sourceId": "commerce-service-18",
+      "targetId": "commerce-service-19",
+      "label": "Passes workflow 18 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 71,
+        "column": 1,
+        "endLine": 71,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-19",
+      "sourceId": "commerce-service-19",
+      "targetId": "commerce-service-20",
+      "label": "Passes workflow 19 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 72,
+        "column": 1,
+        "endLine": 72,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-20",
+      "sourceId": "commerce-service-20",
+      "targetId": "commerce-service-21",
+      "label": "Passes workflow 20 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 73,
+        "column": 1,
+        "endLine": 73,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-21",
+      "sourceId": "commerce-service-21",
+      "targetId": "commerce-service-22",
+      "label": "Passes workflow 21 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 74,
+        "column": 1,
+        "endLine": 74,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-22",
+      "sourceId": "commerce-service-22",
+      "targetId": "commerce-service-23",
+      "label": "Passes workflow 22 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 75,
+        "column": 1,
+        "endLine": 75,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-23",
+      "sourceId": "commerce-service-23",
+      "targetId": "commerce-service-24",
+      "label": "Passes workflow 23 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 76,
+        "column": 1,
+        "endLine": 76,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-24",
+      "sourceId": "commerce-service-24",
+      "targetId": "commerce-service-25",
+      "label": "Passes workflow 24 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 77,
+        "column": 1,
+        "endLine": 77,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-25",
+      "sourceId": "commerce-service-25",
+      "targetId": "commerce-service-26",
+      "label": "Passes workflow 25 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 78,
+        "column": 1,
+        "endLine": 78,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-parallel-24",
+      "sourceId": "commerce-service-24",
+      "targetId": "commerce-service-26",
+      "label": "Publishes an independent audit event",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 79,
+        "column": 1,
+        "endLine": 79,
+        "endColumn": 83
+      }
+    },
+    {
+      "id": "commerce-flow-26",
+      "sourceId": "commerce-service-26",
+      "targetId": "commerce-service-27",
+      "label": "Passes workflow 26 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 80,
+        "column": 1,
+        "endLine": 80,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-27",
+      "sourceId": "commerce-service-27",
+      "targetId": "commerce-service-28",
+      "label": "Passes workflow 27 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 81,
+        "column": 1,
+        "endLine": 81,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-28",
+      "sourceId": "commerce-service-28",
+      "targetId": "commerce-service-29",
+      "label": "Passes workflow 28 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 82,
+        "column": 1,
+        "endLine": 82,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-29",
+      "sourceId": "commerce-service-29",
+      "targetId": "commerce-service-30",
+      "label": "Passes workflow 29 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 83,
+        "column": 1,
+        "endLine": 83,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-30",
+      "sourceId": "commerce-service-30",
+      "targetId": "commerce-service-31",
+      "label": "Passes workflow 30 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 84,
+        "column": 1,
+        "endLine": 84,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-31",
+      "sourceId": "commerce-service-31",
+      "targetId": "commerce-service-32",
+      "label": "Passes workflow 31 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 85,
+        "column": 1,
+        "endLine": 85,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-32",
+      "sourceId": "commerce-service-32",
+      "targetId": "commerce-service-33",
+      "label": "Passes workflow 32 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 86,
+        "column": 1,
+        "endLine": 86,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-33",
+      "sourceId": "commerce-service-33",
+      "targetId": "commerce-service-34",
+      "label": "Passes workflow 33 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 87,
+        "column": 1,
+        "endLine": 87,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-34",
+      "sourceId": "commerce-service-34",
+      "targetId": "commerce-service-35",
+      "label": "Passes workflow 34 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 88,
+        "column": 1,
+        "endLine": 88,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-35",
+      "sourceId": "commerce-service-35",
+      "targetId": "commerce-service-36",
+      "label": "Passes workflow 35 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 89,
+        "column": 1,
+        "endLine": 89,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-36",
+      "sourceId": "commerce-service-36",
+      "targetId": "commerce-service-37",
+      "label": "Passes workflow 36 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 90,
+        "column": 1,
+        "endLine": 90,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-37",
+      "sourceId": "commerce-service-37",
+      "targetId": "commerce-service-38",
+      "label": "Passes workflow 37 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 91,
+        "column": 1,
+        "endLine": 91,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-parallel-36",
+      "sourceId": "commerce-service-36",
+      "targetId": "commerce-service-38",
+      "label": "Publishes an independent audit event",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 92,
+        "column": 1,
+        "endLine": 92,
+        "endColumn": 83
+      }
+    },
+    {
+      "id": "commerce-flow-38",
+      "sourceId": "commerce-service-38",
+      "targetId": "commerce-service-39",
+      "label": "Passes workflow 38 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 93,
+        "column": 1,
+        "endLine": 93,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-39",
+      "sourceId": "commerce-service-39",
+      "targetId": "commerce-service-40",
+      "label": "Passes workflow 39 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 94,
+        "column": 1,
+        "endLine": 94,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-40",
+      "sourceId": "commerce-service-40",
+      "targetId": "commerce-service-41",
+      "label": "Passes workflow 40 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 95,
+        "column": 1,
+        "endLine": 95,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-41",
+      "sourceId": "commerce-service-41",
+      "targetId": "commerce-service-42",
+      "label": "Passes workflow 41 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 96,
+        "column": 1,
+        "endLine": 96,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-42",
+      "sourceId": "commerce-service-42",
+      "targetId": "commerce-service-43",
+      "label": "Passes workflow 42 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 97,
+        "column": 1,
+        "endLine": 97,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-43",
+      "sourceId": "commerce-service-43",
+      "targetId": "commerce-service-44",
+      "label": "Passes workflow 43 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 98,
+        "column": 1,
+        "endLine": 98,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-44",
+      "sourceId": "commerce-service-44",
+      "targetId": "commerce-service-45",
+      "label": "Passes workflow 44 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 99,
+        "column": 1,
+        "endLine": 99,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-45",
+      "sourceId": "commerce-service-45",
+      "targetId": "commerce-service-46",
+      "label": "Passes workflow 45 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 100,
+        "column": 1,
+        "endLine": 100,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-46",
+      "sourceId": "commerce-service-46",
+      "targetId": "commerce-service-47",
+      "label": "Passes workflow 46 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 101,
+        "column": 1,
+        "endLine": 101,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-47",
+      "sourceId": "commerce-service-47",
+      "targetId": "commerce-service-48",
+      "label": "Passes workflow 47 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 102,
+        "column": 1,
+        "endLine": 102,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-flow-48",
+      "sourceId": "commerce-service-48",
+      "targetId": "commerce-service-49",
+      "label": "Passes workflow 48 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 103,
+        "column": 1,
+        "endLine": 103,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-1",
+      "sourceId": "payments-service-01",
+      "targetId": "payments-service-02",
+      "label": "Passes workflow 1 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 154,
+        "column": 1,
+        "endLine": 154,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-2",
+      "sourceId": "payments-service-02",
+      "targetId": "payments-service-03",
+      "label": "Passes workflow 2 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 155,
+        "column": 1,
+        "endLine": 155,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-3",
+      "sourceId": "payments-service-03",
+      "targetId": "payments-service-04",
+      "label": "Passes workflow 3 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 156,
+        "column": 1,
+        "endLine": 156,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-4",
+      "sourceId": "payments-service-04",
+      "targetId": "payments-service-05",
+      "label": "Passes workflow 4 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 157,
+        "column": 1,
+        "endLine": 157,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-5",
+      "sourceId": "payments-service-05",
+      "targetId": "payments-service-06",
+      "label": "Passes workflow 5 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 158,
+        "column": 1,
+        "endLine": 158,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-6",
+      "sourceId": "payments-service-06",
+      "targetId": "payments-service-07",
+      "label": "Passes workflow 6 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 159,
+        "column": 1,
+        "endLine": 159,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-7",
+      "sourceId": "payments-service-07",
+      "targetId": "payments-service-08",
+      "label": "Passes workflow 7 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 160,
+        "column": 1,
+        "endLine": 160,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-8",
+      "sourceId": "payments-service-08",
+      "targetId": "payments-service-09",
+      "label": "Passes workflow 8 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 161,
+        "column": 1,
+        "endLine": 161,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-9",
+      "sourceId": "payments-service-09",
+      "targetId": "payments-service-10",
+      "label": "Passes workflow 9 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 162,
+        "column": 1,
+        "endLine": 162,
+        "endColumn": 70
+      }
+    },
+    {
+      "id": "payments-flow-10",
+      "sourceId": "payments-service-10",
+      "targetId": "payments-service-11",
+      "label": "Passes workflow 10 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 163,
+        "column": 1,
+        "endLine": 163,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-11",
+      "sourceId": "payments-service-11",
+      "targetId": "payments-service-12",
+      "label": "Passes workflow 11 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 164,
+        "column": 1,
+        "endLine": 164,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-12",
+      "sourceId": "payments-service-12",
+      "targetId": "payments-service-13",
+      "label": "Passes workflow 12 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 165,
+        "column": 1,
+        "endLine": 165,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-13",
+      "sourceId": "payments-service-13",
+      "targetId": "payments-service-14",
+      "label": "Passes workflow 13 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 166,
+        "column": 1,
+        "endLine": 166,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-parallel-12",
+      "sourceId": "payments-service-12",
+      "targetId": "payments-service-14",
+      "label": "Publishes an independent audit event",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 167,
+        "column": 1,
+        "endLine": 167,
+        "endColumn": 83
+      }
+    },
+    {
+      "id": "payments-flow-14",
+      "sourceId": "payments-service-14",
+      "targetId": "payments-service-15",
+      "label": "Passes workflow 14 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 168,
+        "column": 1,
+        "endLine": 168,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-15",
+      "sourceId": "payments-service-15",
+      "targetId": "payments-service-16",
+      "label": "Passes workflow 15 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 169,
+        "column": 1,
+        "endLine": 169,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-16",
+      "sourceId": "payments-service-16",
+      "targetId": "payments-service-17",
+      "label": "Passes workflow 16 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 170,
+        "column": 1,
+        "endLine": 170,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-17",
+      "sourceId": "payments-service-17",
+      "targetId": "payments-service-18",
+      "label": "Passes workflow 17 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 171,
+        "column": 1,
+        "endLine": 171,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-18",
+      "sourceId": "payments-service-18",
+      "targetId": "payments-service-19",
+      "label": "Passes workflow 18 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 172,
+        "column": 1,
+        "endLine": 172,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-19",
+      "sourceId": "payments-service-19",
+      "targetId": "payments-service-20",
+      "label": "Passes workflow 19 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 173,
+        "column": 1,
+        "endLine": 173,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-20",
+      "sourceId": "payments-service-20",
+      "targetId": "payments-service-21",
+      "label": "Passes workflow 20 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 174,
+        "column": 1,
+        "endLine": 174,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-21",
+      "sourceId": "payments-service-21",
+      "targetId": "payments-service-22",
+      "label": "Passes workflow 21 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 175,
+        "column": 1,
+        "endLine": 175,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-22",
+      "sourceId": "payments-service-22",
+      "targetId": "payments-service-23",
+      "label": "Passes workflow 22 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 176,
+        "column": 1,
+        "endLine": 176,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-23",
+      "sourceId": "payments-service-23",
+      "targetId": "payments-service-24",
+      "label": "Passes workflow 23 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 177,
+        "column": 1,
+        "endLine": 177,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-24",
+      "sourceId": "payments-service-24",
+      "targetId": "payments-service-25",
+      "label": "Passes workflow 24 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 178,
+        "column": 1,
+        "endLine": 178,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-25",
+      "sourceId": "payments-service-25",
+      "targetId": "payments-service-26",
+      "label": "Passes workflow 25 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 179,
+        "column": 1,
+        "endLine": 179,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-parallel-24",
+      "sourceId": "payments-service-24",
+      "targetId": "payments-service-26",
+      "label": "Publishes an independent audit event",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 180,
+        "column": 1,
+        "endLine": 180,
+        "endColumn": 83
+      }
+    },
+    {
+      "id": "payments-flow-26",
+      "sourceId": "payments-service-26",
+      "targetId": "payments-service-27",
+      "label": "Passes workflow 26 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 181,
+        "column": 1,
+        "endLine": 181,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-27",
+      "sourceId": "payments-service-27",
+      "targetId": "payments-service-28",
+      "label": "Passes workflow 27 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 182,
+        "column": 1,
+        "endLine": 182,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-28",
+      "sourceId": "payments-service-28",
+      "targetId": "payments-service-29",
+      "label": "Passes workflow 28 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 183,
+        "column": 1,
+        "endLine": 183,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-29",
+      "sourceId": "payments-service-29",
+      "targetId": "payments-service-30",
+      "label": "Passes workflow 29 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 184,
+        "column": 1,
+        "endLine": 184,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-30",
+      "sourceId": "payments-service-30",
+      "targetId": "payments-service-31",
+      "label": "Passes workflow 30 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 185,
+        "column": 1,
+        "endLine": 185,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-31",
+      "sourceId": "payments-service-31",
+      "targetId": "payments-service-32",
+      "label": "Passes workflow 31 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 186,
+        "column": 1,
+        "endLine": 186,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-32",
+      "sourceId": "payments-service-32",
+      "targetId": "payments-service-33",
+      "label": "Passes workflow 32 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 187,
+        "column": 1,
+        "endLine": 187,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-33",
+      "sourceId": "payments-service-33",
+      "targetId": "payments-service-34",
+      "label": "Passes workflow 33 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 188,
+        "column": 1,
+        "endLine": 188,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-34",
+      "sourceId": "payments-service-34",
+      "targetId": "payments-service-35",
+      "label": "Passes workflow 34 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 189,
+        "column": 1,
+        "endLine": 189,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-35",
+      "sourceId": "payments-service-35",
+      "targetId": "payments-service-36",
+      "label": "Passes workflow 35 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 190,
+        "column": 1,
+        "endLine": 190,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-36",
+      "sourceId": "payments-service-36",
+      "targetId": "payments-service-37",
+      "label": "Passes workflow 36 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 191,
+        "column": 1,
+        "endLine": 191,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-37",
+      "sourceId": "payments-service-37",
+      "targetId": "payments-service-38",
+      "label": "Passes workflow 37 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 192,
+        "column": 1,
+        "endLine": 192,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-parallel-36",
+      "sourceId": "payments-service-36",
+      "targetId": "payments-service-38",
+      "label": "Publishes an independent audit event",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 193,
+        "column": 1,
+        "endLine": 193,
+        "endColumn": 83
+      }
+    },
+    {
+      "id": "payments-flow-38",
+      "sourceId": "payments-service-38",
+      "targetId": "payments-service-39",
+      "label": "Passes workflow 38 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 194,
+        "column": 1,
+        "endLine": 194,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-39",
+      "sourceId": "payments-service-39",
+      "targetId": "payments-service-40",
+      "label": "Passes workflow 39 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 195,
+        "column": 1,
+        "endLine": 195,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-40",
+      "sourceId": "payments-service-40",
+      "targetId": "payments-service-41",
+      "label": "Passes workflow 40 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 196,
+        "column": 1,
+        "endLine": 196,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-41",
+      "sourceId": "payments-service-41",
+      "targetId": "payments-service-42",
+      "label": "Passes workflow 41 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 197,
+        "column": 1,
+        "endLine": 197,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-42",
+      "sourceId": "payments-service-42",
+      "targetId": "payments-service-43",
+      "label": "Passes workflow 42 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 198,
+        "column": 1,
+        "endLine": 198,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-43",
+      "sourceId": "payments-service-43",
+      "targetId": "payments-service-44",
+      "label": "Passes workflow 43 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 199,
+        "column": 1,
+        "endLine": 199,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-44",
+      "sourceId": "payments-service-44",
+      "targetId": "payments-service-45",
+      "label": "Passes workflow 44 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 200,
+        "column": 1,
+        "endLine": 200,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-45",
+      "sourceId": "payments-service-45",
+      "targetId": "payments-service-46",
+      "label": "Passes workflow 45 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 201,
+        "column": 1,
+        "endLine": 201,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-46",
+      "sourceId": "payments-service-46",
+      "targetId": "payments-service-47",
+      "label": "Passes workflow 46 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 202,
+        "column": 1,
+        "endLine": 202,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-47",
+      "sourceId": "payments-service-47",
+      "targetId": "payments-service-48",
+      "label": "Passes workflow 47 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 203,
+        "column": 1,
+        "endLine": 203,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "payments-flow-48",
+      "sourceId": "payments-service-48",
+      "targetId": "payments-service-49",
+      "label": "Passes workflow 48 state",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 204,
+        "column": 1,
+        "endLine": 204,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "commerce-to-payments",
+      "sourceId": "commerce-service-21",
+      "targetId": "payments-service-01",
+      "label": "Requests payment authorization across the platform boundary",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 205,
+        "column": 1,
+        "endLine": 205,
+        "endColumn": 106
+      }
+    },
+    {
+      "id": "payments-to-commerce",
+      "sourceId": "payments-service-06",
+      "targetId": "commerce-service-31",
+      "label": "Publishes the final provider settlement status",
+      "source": {
+        "file": "fixtures/large.arch",
+        "line": 206,
+        "column": 1,
+        "endLine": 206,
+        "endColumn": 93
+      }
+    }
+  ]
+}

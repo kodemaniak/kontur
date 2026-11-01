@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.vsix
+license-report.json
+playwright-report/
+test-results/
+webview/public/layout-worker.js
+results/*
+!results/react-flow-direct-elk-small.png
+!results/sprotty-small.png
+!results/elk-only-small.png
+!results/elk-only-small-manual.png
+!results/mermaid-only-small.png
+!results/dagre-only-small.png

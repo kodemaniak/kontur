@@ -1,0 +1,233 @@
+{
+  "id": "small",
+  "title": "Orders and payments — representative nested C4 view",
+  "sourceFile": "fixtures/small.arch",
+  "mutationSource": { "file": "fixtures/small.arch", "line": 17, "column": 1, "endLine": 17, "endColumn": 28 },
+  "elements": [
+    {
+      "id": "end-user",
+      "kind": "person",
+      "name": "Operations analyst",
+      "description": "Reviews orders and investigates delayed payments.",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 1,
+        "column": 1,
+        "endLine": 1,
+        "endColumn": 37
+      }
+    },
+    {
+      "id": "order-hub",
+      "kind": "system",
+      "name": "Order Hub",
+      "description": "Accepts customer orders and coordinates fulfillment.",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 2,
+        "column": 1,
+        "endLine": 2,
+        "endColumn": 29
+      }
+    },
+    {
+      "id": "storefront",
+      "kind": "container",
+      "name": "Customer storefront",
+      "description": "Lets customers review and submit orders.",
+      "technology": "TypeScript · React",
+      "parentId": "order-hub",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 3,
+        "column": 1,
+        "endLine": 3,
+        "endColumn": 56
+      }
+    },
+    {
+      "id": "order-api",
+      "kind": "container",
+      "name": "Order management API",
+      "description": "Coordinates order state, pricing and payment requests.",
+      "technology": "Rust · HTTP/JSON",
+      "parentId": "order-hub",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 4,
+        "column": 1,
+        "endLine": 4,
+        "endColumn": 56
+      }
+    },
+    {
+      "id": "order-db",
+      "kind": "database",
+      "name": "Orders and audit database",
+      "description": "Stores orders and their audit history.",
+      "technology": "PostgreSQL",
+      "parentId": "order-hub",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 5,
+        "column": 1,
+        "endLine": 5,
+        "endColumn": 59
+      }
+    },
+    {
+      "id": "payment-network",
+      "kind": "system",
+      "name": "Payment Network",
+      "description": "Authorizes payments and records settlement events.",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 6,
+        "column": 1,
+        "endLine": 6,
+        "endColumn": 41
+      }
+    },
+    {
+      "id": "payment-api",
+      "kind": "container",
+      "name": "Payment authorization API",
+      "description": "Authorizes a payment and tracks its provider status.",
+      "technology": "Kotlin · HTTP/JSON",
+      "parentId": "payment-network",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 7,
+        "column": 1,
+        "endLine": 7,
+        "endColumn": 69
+      }
+    },
+    {
+      "id": "payment-db",
+      "kind": "database",
+      "name": "Settlement ledger database",
+      "description": "Stores authorization and settlement events.",
+      "technology": "PostgreSQL",
+      "parentId": "payment-network",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 8,
+        "column": 1,
+        "endLine": 8,
+        "endColumn": 68
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r-user-storefront",
+      "sourceId": "end-user",
+      "targetId": "storefront",
+      "label": "Reviews and places orders",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 9,
+        "column": 1,
+        "endLine": 9,
+        "endColumn": 52
+      }
+    },
+    {
+      "id": "r-storefront-order-status",
+      "sourceId": "storefront",
+      "targetId": "order-api",
+      "label": "Loads the current order and delivery status",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 10,
+        "column": 1,
+        "endLine": 10,
+        "endColumn": 71
+      }
+    },
+    {
+      "id": "r-storefront-order-submit",
+      "sourceId": "storefront",
+      "targetId": "order-api",
+      "label": "Submits an order with its idempotency key",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 11,
+        "column": 1,
+        "endLine": 11,
+        "endColumn": 69
+      }
+    },
+    {
+      "id": "r-order-db",
+      "sourceId": "order-api",
+      "targetId": "order-db",
+      "label": "Reads and writes orders",
+      "technology": "SQL",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 12,
+        "column": 1,
+        "endLine": 12,
+        "endColumn": 55
+      }
+    },
+    {
+      "id": "r-order-payment-auth",
+      "sourceId": "order-api",
+      "targetId": "payment-api",
+      "label": "Requests authorization with customer and currency context",
+      "technology": "HTTPS/JSON",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 13,
+        "column": 1,
+        "endLine": 13,
+        "endColumn": 99
+      }
+    },
+    {
+      "id": "r-order-payment-status",
+      "sourceId": "order-api",
+      "targetId": "payment-api",
+      "label": "Queries transaction status after a timeout",
+      "technology": "HTTPS/JSON",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 14,
+        "column": 1,
+        "endLine": 14,
+        "endColumn": 84
+      }
+    },
+    {
+      "id": "r-payment-db",
+      "sourceId": "payment-api",
+      "targetId": "payment-db",
+      "label": "Records authorization and settlement events",
+      "technology": "SQL",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 15,
+        "column": 75,
+        "endLine": 15,
+        "endColumn": 79
+      }
+    },
+    {
+      "id": "r-payment-order-result",
+      "sourceId": "payment-api",
+      "targetId": "order-api",
+      "label": "Returns authorization result and provider reference",
+      "technology": "HTTPS/JSON",
+      "source": {
+        "file": "fixtures/small.arch",
+        "line": 16,
+        "column": 1,
+        "endLine": 16,
+        "endColumn": 93
+      }
+    }
+  ]
+}

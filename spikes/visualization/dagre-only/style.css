@@ -1,0 +1,25 @@
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; font: 14px system-ui, sans-serif; color: #172033; background: #f5f7fb; }
+body { display: flex; flex-direction: column; }
+header { height: 52px; display: flex; align-items: center; gap: 16px; padding: 0 16px; background: white; border-bottom: 1px solid #d9dfeb; }
+header strong { font-size: 15px; }
+header label { display: flex; gap: 8px; align-items: center; }
+header select, header button { font: inherit; padding: 5px 8px; }
+header span, header output { color: #667085; }
+header output { margin-left: auto; }
+#diagram { flex: 1; min-height: 0; }
+svg { display: block; width: 100%; height: 100%; touch-action: none; user-select: none; }
+.system-boundary { fill: #edf2fb; stroke: #7587a8; stroke-width: 1.5; stroke-dasharray: 7 4; }
+.system-title { font-size: 13px; font-weight: 650; fill: #172033; }
+.element-box { fill: #fff; stroke: #465977; stroke-width: 1.4; }
+.element-box.element-person { fill: #fff8e8; stroke: #a56d18; }
+.element-box.element-database { fill: #eef8f3; stroke: #328060; }
+.element-kind, .element-description, .element-technology { fill: #53627a; }
+.element-kind { font-size: 10px; font-weight: 650; letter-spacing: .04em; }
+.element-title { font-size: 13px; font-weight: 650; fill: #172033; }
+.element-description { font-size: 11px; }
+.element-technology { font-size: 10px; font-style: italic; }
+.edge-path { fill: none; stroke: #596b86; stroke-width: 1.5; }
+.edge-path.fallback { stroke-dasharray: 5 4; }
+.edge-label-bg { fill: #fff; stroke: #cdd5e2; stroke-width: .8; }
+.edge-label { fill: #344054; font-size: 10px; text-anchor: middle; }

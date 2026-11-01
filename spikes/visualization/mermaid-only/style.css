@@ -1,0 +1,11 @@
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; font: 14px system-ui, sans-serif; color: #172033; background: #f5f7fb; }
+body { display: flex; flex-direction: column; }
+header { height: 52px; display: flex; align-items: center; gap: 16px; padding: 0 16px; background: white; border-bottom: 1px solid #d9dfeb; }
+header strong { font-size: 15px; }
+header label { display: flex; gap: 8px; align-items: center; }
+header select, header button { font: inherit; padding: 5px 8px; }
+header span, header output { color: #667085; }
+header output { margin-left: auto; }
+#diagram { flex: 1; min-height: 0; }
+#diagram svg { display: block; width: 100%; height: 100%; touch-action: none; user-select: none; }

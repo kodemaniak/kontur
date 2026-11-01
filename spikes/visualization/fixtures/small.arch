@@ -1,0 +1,17 @@
+person end_user "Operations analyst"
+system order_hub "Order Hub"
+container storefront "Customer storefront" in order_hub
+container order_api "Order management API" in order_hub
+database order_db "Orders and audit database" in order_hub
+system payment_network "Payment Network"
+container payment_api "Payment authorization API" in payment_network
+database payment_db "Settlement ledger database" in payment_network
+rel end_user storefront "Reviews and places orders"
+rel storefront order_api "Loads the current order and delivery status"
+rel storefront order_api "Submits an order with its idempotency key"
+rel order_api order_db "Reads and writes orders" "SQL"
+rel order_api payment_api "Requests authorization with customer and currency context" "HTTPS/JSON"
+rel order_api payment_api "Queries transaction status after a timeout" "HTTPS/JSON"
+rel payment_api payment_db "Records authorization and settlement events" "SQL"
+rel payment_api order_api "Returns authorization result and provider reference" "HTTPS/JSON"
+# simulated addition source

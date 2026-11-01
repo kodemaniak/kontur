@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mermaid-only C4 spike</title>
+  </head>
+  <body>
+    <header>
+      <strong>Mermaid-only C4 spike</strong>
+      <label>Fixture <select id="fixture"><option value="small">Small</option><option value="large">Large</option></select></label>
+      <button id="fit" type="button">Fit</button>
+      <span>Wheel: zoom · Drag: pan</span>
+      <output id="status">Loading…</output>
+    </header>
+    <main id="diagram" aria-label="Architecture diagram"></main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

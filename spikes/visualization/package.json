@@ -1,0 +1,77 @@
+{
+  "name": "kontur-visualization-spike",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Timeboxed React Flow and Sprotty + ELK C4 visualization evaluation",
+  "license": "MIT",
+  "publisher": "kontur",
+  "main": "./dist/extension.cjs",
+  "engines": {
+    "vscode": "^1.140.0"
+  },
+  "activationEvents": [
+    "onCommand:kontur.openVisualization"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "kontur.openVisualization",
+        "title": "Kontur: Open Visualization Spike"
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "npm run build:worker && vite --host 127.0.0.1",
+    "dev:sprotty": "vite --config vite.sprotty.config.ts --host 127.0.0.1 --port 5174",
+    "dev:elk-only": "vite --config vite.elk-only.config.ts --host 127.0.0.1 --port 5175",
+    "dev:mermaid-only": "vite --config vite.mermaid-only.config.ts --host 127.0.0.1 --port 5176",
+    "dev:dagre-only": "vite --config vite.dagre-only.config.ts --host 127.0.0.1 --port 5177",
+    "fixtures:large": "node scripts/generate-large-fixture.mjs",
+    "build:worker": "esbuild webview/src/layout.worker.ts --bundle --format=iife --platform=browser --target=es2022 --minify --outfile=webview/public/layout-worker.js",
+    "build:web": "vite build",
+    "build:sprotty": "vite build --config vite.sprotty.config.ts",
+    "build:elk-only": "vite build --config vite.elk-only.config.ts",
+    "build:mermaid-only": "vite build --config vite.mermaid-only.config.ts",
+    "build:dagre-only": "vite build --config vite.dagre-only.config.ts",
+    "build:extension": "esbuild extension/src/extension.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/extension.cjs",
+    "build": "npm run build:worker && npm run build:web && npm run build:extension",
+    "test:browser": "node scripts/evaluate-browser.mjs",
+    "test:sprotty": "npm run build:sprotty && node scripts/evaluate-sprotty.mjs",
+    "test:elk-only": "npm run build:elk-only && node scripts/evaluate-elk-only.mjs",
+    "test:mermaid-only": "npm run build:mermaid-only && node scripts/evaluate-mermaid-only.mjs",
+    "test:dagre-only": "npm run build:dagre-only && node scripts/evaluate-dagre-only.mjs",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.extension.json --noEmit",
+    "test": "vitest run --config vitest.config.ts",
+    "package": "npm run build && vsce package --no-dependencies --allow-missing-repository",
+    "verify": "npm run typecheck && npm test && npm run build",
+    "licenses:report": "license-checker-rseidelsohn --production --json --out license-report.json"
+  },
+  "dependencies": {
+    "@xyflow/react": "12.12.0",
+    "elkjs": "0.12.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@dagrejs/dagre": "3.1.3",
+    "@types/node": "26.0.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/vscode": "1.140.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "@vscode/vsce": "4.1.0",
+    "elkjs-sprotty": "npm:elkjs@0.8.2",
+    "esbuild": "0.27.4",
+    "inversify": "6.2.2",
+    "license-checker-rseidelsohn": "5.0.1",
+    "mermaid": "12.2.0",
+    "playwright": "1.64.1",
+    "reflect-metadata": "0.2.2",
+    "sprotty": "1.4.0",
+    "sprotty-elk": "1.4.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.5",
+    "vitest": "4.1.0"
+  }
+}

@@ -5,7 +5,7 @@
 - This is kontur's core repository: open-source C4 architecture-as-code tooling, ultimately a federated architecture repository with a consolidated view across teams' Git repositories.
 - Use Rust for the backend/model core. Structurizr DSL is the first input format, not the implementation: build our own parser, architecture model, validation and language server; do not depend on Structurizr server or libraries.
 - Git-versioned source files remain authoritative. Visualizations and the future central index are derived views; AI changes must go through source-file edits and the normal Git review workflow, not mutate a separate central truth.
-- All product components are open source; the repository uses MIT (`LICENSE`). Local modeling must work offline without an account, central service or license server.
+- Kontur's own code is MIT (`LICENSE`); third-party dependencies retain their licenses. Local modeling must work offline without an account, central service or license server.
 
 ## Current milestone: local modeling
 
@@ -20,6 +20,7 @@
 - Share Rust parsing, reference resolution, model and validation between LSP, CLI and preview, with reuse by the later service in mind. Preserve stable element identities and source locations for diagnostics and navigation.
 - Keep the semantic model separate from diagram layout/presentation. Reuse browser-based visualization in the VS Code webview and later web UI; use existing diagram/layout libraries rather than building those engines ourselves.
 - Renderer and packaging are not decided. TypeScript + React Flow + ELK.js was a provisional recommendation, not an adopted stack; Mermaid was discussed as a prototype/export option. Native process versus WASM also remains open.
+- The proposed first visualization spike and its acceptance criteria are in `README.md`. For ELK.js, use the EPL-2.0 option; packaged artifacts need third-party notices and corresponding-source instructions, including source for any distributed ELK modifications.
 
 ## Later phases, not current scope
 

@@ -21,6 +21,14 @@ apps/preview/node_modules/
 apps/preview/dist/
 apps/preview/test-results/
 apps/preview/playwright-report/
+apps/vscode/node_modules/
+apps/vscode/.vscode-test/
+apps/vscode/dist/
+apps/vscode/test/
+apps/vscode/media/
+apps/vscode/*.vsix
+apps/vscode/bin/
+apps/vscode/LICENSE
 
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can

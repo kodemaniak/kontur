@@ -1,7 +1,25 @@
 use kontur_core::diagnostic::{Diagnostic, Severity};
 use kontur_core::model::{Element, ElementKind, LayoutDirection, Relationship, ResolvedView};
 use kontur_core::source::{SourceFile, SourceSpan};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct PreviewRequest {
+    pub schema_version: u32,
+    pub revision: u64,
+    pub document_uri: String,
+    pub text: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PreviewResponse {
+    pub schema_version: u32,
+    pub revision: u64,
+    pub document_uri: String,
+    pub result: PreviewResult,
+}
 
 #[derive(Serialize)]
 #[serde(tag = "status")]

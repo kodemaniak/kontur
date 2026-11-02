@@ -1,0 +1,10 @@
+**
+!package.json
+!README.md
+!LICENSE
+!bin/
+!bin/**
+!dist/
+!dist/**
+!media/
+!media/**

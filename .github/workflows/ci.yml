@@ -13,7 +13,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: apps/preview/package-lock.json
+          cache-dependency-path: |
+            apps/preview/package-lock.json
+            apps/vscode/package-lock.json
       - name: Rust formatting
         run: cargo fmt --all -- --check
       - name: Rust lint
@@ -35,3 +37,9 @@ jobs:
       - name: Browser acceptance
         working-directory: apps/preview
         run: npm run test:e2e
+      - name: Install VS Code extension dependencies
+        working-directory: apps/vscode
+        run: npm ci
+      - name: VS Code extension and installed VSIX acceptance
+        working-directory: apps/vscode
+        run: npm run typecheck && npm run test:unit && xvfb-run --auto-servernum npm run test:vsix

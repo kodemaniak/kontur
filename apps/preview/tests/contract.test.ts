@@ -1,8 +1,10 @@
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { parsePreviewJson, type PreviewResult } from '../src/contract';
+import { parsePreviewResponse } from '../src/serviceContract';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 let actualRustOutput = '';
@@ -31,6 +33,25 @@ describe('Rust CLI transport contract', () => {
     expect(actual.view.boundaries).toHaveLength(2);
     expect(actual.view.relationships).toHaveLength(8);
     expect(actual.view.elements.filter((element) => element.kind === 'container' && element.tags.includes('Database'))).toHaveLength(2);
+  });
+
+  it('accepts the actual Rust preview-service envelope and preserves identities and source locations', () => {
+    const dslPath = resolve(root, 'examples/orders-payments/workspace.dsl');
+    const documentUri = pathToFileURL(dslPath).toString();
+    const request = { schemaVersion: 1, revision: 17, documentUri, text: readFileSync(dslPath, 'utf8') };
+    const output = execFileSync('cargo', [
+      'run', '--locked', '--quiet', '-p', 'kontur-cli', '--', 'preview-service',
+    ], { cwd: root, encoding: 'utf8', input: `${JSON.stringify(request)}\n` });
+    const response = parsePreviewResponse(output, { revision: request.revision, documentUri });
+
+    expect(response.revision).toBe(17);
+    expect(response.documentUri).toBe(documentUri);
+    expect(response.result.status).toBe('ok');
+    if (response.result.status !== 'ok' || actual.status !== 'ok') throw new Error('expected a successful view');
+    expect(response.result.view.elements.map(({ id }) => id)).toEqual(actual.view.elements.map(({ id }) => id));
+    expect(response.result.view.relationships.map(({ id }) => id)).toEqual(actual.view.relationships.map(({ id }) => id));
+    expect(response.result.view.relationships[0].source?.file).toBe(documentUri);
+    expect(response.result.view.relationships[0].source?.line).toBe(22);
   });
 
   it('rejects malformed JSON, incompatible versions, and mixed success/error fields', () => {
@@ -67,5 +88,30 @@ describe('Rust CLI transport contract', () => {
       },
     }] };
     expect(parsePreviewJson(JSON.stringify(error))).toEqual(error);
+  });
+
+  it('accepts a correlated service response and rejects a mismatched revision', () => {
+    const expected = { revision: 7, documentUri: 'file:///workspace.dsl' };
+    const response = { schemaVersion: 1, ...expected, result: actual };
+    expect(parsePreviewResponse(JSON.stringify(response), expected)).toEqual(response);
+    expect(() => parsePreviewResponse(
+      JSON.stringify({ ...response, revision: 8 }), expected,
+    )).toThrow(/revision|correlat/i);
+  });
+
+  it('rejects a service response for a different document URI', () => {
+    const expected = { revision: 7, documentUri: 'file:///workspace.dsl' };
+    const response = { schemaVersion: 1, ...expected, result: actual };
+    expect(() => parsePreviewResponse(
+      JSON.stringify({ ...response, documentUri: 'file:///other.dsl' }), expected,
+    )).toThrow(/URI|document|correlat/i);
+  });
+
+  it('rejects a corrupted nested preview result', () => {
+    const expected = { revision: 7, documentUri: 'file:///workspace.dsl' };
+    const response = { schemaVersion: 1, ...expected, result: actual };
+    expect(() => parsePreviewResponse(
+      JSON.stringify({ ...response, result: { schemaVersion: 1, status: 'ok', view: {} } }), expected,
+    )).toThrow(/result|view|shape/i);
   });
 });

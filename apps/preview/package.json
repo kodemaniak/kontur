@@ -7,11 +7,10 @@
     "node": ">=22.12"
   },
   "scripts": {
-    "dev": "node scripts/dev.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "build": "vite build && node scripts/writeNotices.mjs",
+    "build": "node scripts/build.mjs",
     "verify": "npm run typecheck && npm test && npm run build && npm run test:e2e"
   },
   "dependencies": {
@@ -20,8 +19,8 @@
   "devDependencies": {
     "@playwright/test": "1.64.1",
     "@types/node": "26.0.0",
+    "esbuild": "0.27.4",
     "typescript": "5.9.3",
-    "vite": "8.3.5",
     "vitest": "4.1.12"
   }
 }

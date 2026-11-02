@@ -48,3 +48,7 @@ People and systems may have descriptions. Containers may have a description and 
 Anonymous declarations, hierarchical identifiers, `!include`, other workspace directives, implied relationships, relationship tags/properties, components, deployment models/views, other view kinds, `include *`, expressions, `exclude`, styles, scripts, manual layout, multiple files and full error recovery are not supported. These constructs return explicit unsupported-feature diagnostics where recognized; malformed syntax returns syntax diagnostics. No input is accepted partially.
 
 `autoLayout lr` is a renderer-neutral layout direction hint. The core does not calculate positions or generate Mermaid.
+
+## VS Code preview scope
+
+On Linux x64, install the packaged Kontur extension, open a local `.dsl` file and run **Kontur: Open Preview**. The preview follows that file's unsaved edits, reports diagnostics, keeps the last valid diagram visible and marked stale after invalid input, and retains the viewport across edits and webview recreation. The Rust core selects the file's single declared view; there is no view picker, LSP, source navigation or multi-file workspace support in this slice. The extension bundles its Rust service and web assets and does not need a local server, Cargo, separately installed Node.js or network access at runtime. The documented package baseline is Ubuntu 26.04.1 x86-64 with glibc 2.43; musl/Alpine and other host architectures are not supported.

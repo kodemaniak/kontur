@@ -1,0 +1,51 @@
+{
+  "name": "kontur-vscode-preview",
+  "displayName": "Kontur",
+  "description": "Local architecture preview for Kontur DSL",
+  "version": "0.1.0",
+  "publisher": "kontur",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "./dist/extension.cjs",
+  "engines": {
+    "vscode": "^1.144.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    }
+  },
+  "activationEvents": [
+    "onCommand:kontur.openPreview"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "kontur.openPreview",
+        "title": "Kontur: Open Preview"
+      }
+    ]
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "node scripts/build.mjs",
+    "build:binary": "node scripts/buildBinary.mjs",
+    "package": "npm run build && npm run build:binary && vsce package --target linux-x64 --allow-missing-repository",
+    "test": "npm run typecheck && npm run test:unit && npm run test:vsix",
+    "test:unit": "npm run build && node --test test/unit.test.cjs",
+    "test:vsix": "npm run package && node scripts/checkPackage.mjs && node scripts/testVsix.mjs",
+    "vscode:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "26.0.0",
+    "@types/vscode": "1.144.0",
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.1.0",
+    "esbuild": "0.27.4",
+    "playwright-core": "1.64.1",
+    "typescript": "5.9.3"
+  }
+}

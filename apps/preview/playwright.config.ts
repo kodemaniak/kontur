@@ -1,24 +1,20 @@
-import { copyFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from '@playwright/test';
 
 const repoRoot = resolve(import.meta.dirname, '../..');
 const appRoot = resolve(repoRoot, 'apps/preview');
-const fixturePath = resolve(appRoot, 'test-results/orders-payments.dsl');
-mkdirSync(resolve(appRoot, 'test-results'), { recursive: true });
-copyFileSync(resolve(repoRoot, 'examples/orders-payments/workspace.dsl'), fixturePath);
+const port = Number(process.env.KONTUR_PREVIEW_PORT ?? 5178);
 
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: false,
   workers: 1,
-  use: { baseURL: 'http://127.0.0.1:5173', browserName: 'chromium' },
+  use: { baseURL: `http://127.0.0.1:${port}`, browserName: 'chromium' },
   webServer: {
-    command: 'node scripts/dev.mjs',
+    command: 'node scripts/testServer.mjs',
     cwd: appRoot,
-    url: 'http://127.0.0.1:5173',
+    url: `http://127.0.0.1:${port}/presenter.html`,
     reuseExistingServer: false,
-    timeout: 120_000,
-    env: { ...process.env, KONTUR_DSL_PATH: fixturePath, KONTUR_VIEW_KEY: 'orders-payments' },
+    env: { ...process.env, KONTUR_PREVIEW_PORT: String(port) },
   },
 });

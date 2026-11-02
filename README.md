@@ -4,7 +4,7 @@
 
 Kontur is an open-source project for C4-based software architecture as code. Its goal is to make architecture models easy to describe, validate, and explore interactively within the IDE — initially locally for an individual or team, and later across multiple Git repositories.
 
-The repository now includes the first local-modeling foundation: a Rust DSL subset/model/validation pipeline, a JSON CLI, and a manually reloaded local Mermaid preview. LSP and VS Code integration are still future work.
+The repository now includes a local Rust DSL/model/validation pipeline, a JSON CLI, a Mermaid preview, and a Linux x64 VS Code live-preview extension. LSP, completion, source navigation and multi-file workspaces remain future work.
 
 ## Vision
 
@@ -38,30 +38,32 @@ The long-term goal is a federated architecture repository: teams maintain their 
 
 ## Current focus: local modeling
 
-The first milestone focuses on a local workspace for an individual or team. The initial implementation handles one saved DSL file; multi-file workspaces remain deferred.
+The first milestone focuses on a local workspace for an individual or team. The preview currently handles one local `.dsl` file and its single declared container view; multi-file workspaces remain deferred.
 
 Implemented in this slice:
 
-- A documented Structurizr DSL subset for people, software systems, containers, relationships, basic metadata, and an explicitly selected container view.
+- A documented Structurizr DSL subset for people, software systems, containers, relationships, basic metadata, and one explicitly keyed container view.
 - The Rust parser, architecture model, reference resolution, semantic validation and view projection shared by the CLI and preview.
-- The `kontur view <file.dsl> --view <key>` JSON CLI and a local browser preview with explicit Reload, diagnostics, stale last-valid output, pan and zoom.
-- A saved-file acceptance example and CI checks for formatting, linting, Rust/TypeScript contracts, build and browser behavior.
+- The `kontur view <file.dsl> --view <key>` JSON CLI and a VS Code preview opened with **Kontur: Open Preview**. It reflects unsaved edits, reports diagnostics, retains the last valid diagram as stale on errors, and preserves pan/zoom through edits and webview recreation.
+- A Linux x64 VSIX containing the Rust service executable and browser assets. At runtime it needs no separately installed Rust/Cargo or Node.js, network service, account or license server.
+- A saved-file example and CI checks for formatting, linting, Rust/TypeScript contracts, package contents and browser behavior.
 
-Still planned: an LSP with completion/hover/navigation, VS Code integration, unsaved-buffer updates, source/diagram navigation, multiple files and stable layout across edits. At Fit, the left-to-right Mermaid view is a wide overview with compact labels; zoom is needed at ordinary screen sizes. This matches the Mermaid spike's readability trade-off and does not promise layout parity or stability. See [the supported DSL subset](docs/dsl-subset.md) and [core/CLI contracts](docs/core-api.md).
+Still planned: an LSP with completion/hover/navigation, source/diagram navigation, view selection, multiple files and stable layout across edits. The current preview uses one Rust-selected view and is supported on Linux x64 only. At Fit, the left-to-right Mermaid view is a wide overview with compact labels; zoom is needed at ordinary screen sizes. This does not promise layout parity or stability. See [the supported DSL subset](docs/dsl-subset.md) and [core/CLI/service contracts](docs/core-api.md).
 
 **Overall milestone acceptance (not yet complete):** A team opens its repository in VS Code, describes two systems with containers and labeled relationships, and visualizes and edits them locally. Diagnostics are clear, and diagram elements link back to their definitions in the source code.
 
 ## Getting started
 
-Requirements: Rust `1.94.1` (selected by `rust-toolchain.toml`) and Node.js `22.12` or newer.
+Build from source requires Rust `1.94.1` (selected by `rust-toolchain.toml`) and Node.js `22.12` or newer. The packaged VSIX targets Linux x64; its documented baseline is Ubuntu 26.04.1 x86-64 with glibc 2.43. The VSIX bundles the runtime binary and web assets, so these build tools are not needed to use it.
 
 ```sh
-cd apps/preview
+cd apps/vscode
 npm ci
-npm run dev
+npm run package
+code --install-extension kontur-vscode-preview-linux-x64-0.1.0.vsix
 ```
 
-The command builds the native CLI and serves the preview at `http://127.0.0.1:5173`. It initially reads `examples/orders-payments/workspace.dsl` and the `orders-payments` view. Edit and save that file, then click **Reload**. For a different saved file/view, set `KONTUR_DSL_PATH` and `KONTUR_VIEW_KEY` before `npm run dev`. The bridge accepts no browser-provided file or command paths.
+Open a local `.dsl` file and run **Kontur: Open Preview** from the Command Palette. The extension starts the bundled Rust preview service locally; it does not start a development server or write changes to the source file. The current DSL format declares one view per file, which the Rust core selects automatically.
 
 Run the CLI without the browser:
 
@@ -79,11 +81,18 @@ cd apps/preview
 npm ci
 npx playwright install chromium
 npm run verify
+cd ../vscode
+npm ci
+npm run typecheck
+npm run test:unit
+npm run package
+node scripts/checkPackage.mjs
+npm run test:vsix
 ```
 
 ## Technical direction
 
-The Rust core maintains the architecture model, stable element identities, and source locations. The browser-based visualization is separate from the core. Mermaid is used only by this initial local preview; the renderer and final packaging approach remain undecided. Preview bundle notices, including Mermaid's ELK dependency under EPL-2.0, are generated in [`apps/preview/THIRD_PARTY_NOTICES.md`](apps/preview/THIRD_PARTY_NOTICES.md).
+The Rust core maintains the architecture model, stable element identities, and source locations. The browser-based visualization is separate from the core. The VS Code extension currently packages Mermaid assets and starts the Rust core as a managed JSON-lines stdio child process; the renderer remains replaceable. Third-party notices are generated into the extension package, including Mermaid's ELK dependency under EPL-2.0 and corresponding-source instructions.
 
 The final visualization/layout library and packaging of the local core are still undecided. React Flow with ELK.js remains a candidate; Mermaid currently powers only the small local-preview slice. The spikes remain separate evaluation prototypes.
 

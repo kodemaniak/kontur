@@ -29,9 +29,9 @@ describe('Rust CLI transport contract', () => {
     expect(actual.status).toBe('ok');
     if (actual.status !== 'ok') throw new Error('expected a successful view');
     expect(actual.schemaVersion).toBe(1);
-    expect(actual.view.elements).toHaveLength(6);
-    expect(actual.view.boundaries).toHaveLength(2);
-    expect(actual.view.relationships).toHaveLength(8);
+    expect(actual.view.elements).toHaveLength(7);
+    expect(actual.view.boundaries).toHaveLength(3);
+    expect(actual.view.relationships).toHaveLength(9);
     expect(actual.view.elements.filter((element) => element.kind === 'container' && element.tags.includes('Database'))).toHaveLength(2);
   });
 

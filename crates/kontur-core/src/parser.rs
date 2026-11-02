@@ -393,11 +393,11 @@ mod tests {
             include_str!("../../../examples/orders-payments/workspace.dsl"),
         );
         let parsed = parse(&source).expect("valid DSL subset");
-        assert_eq!(parsed.elements.len(), 8);
-        assert_eq!(parsed.relationships.len(), 8);
+        assert_eq!(parsed.elements.len(), 10);
+        assert_eq!(parsed.relationships.len(), 9);
         assert_eq!(parsed.views.len(), 1);
         assert!(parsed.implied_relationships_disabled);
-        assert_eq!(parsed.views[0].includes.len(), 6);
+        assert_eq!(parsed.views[0].includes.len(), 7);
         assert!(
             parsed
                 .elements

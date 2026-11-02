@@ -53,9 +53,9 @@ mod tests {
     fn facade_composes_all_stages_for_the_real_example() {
         let source = SourceFile::new("example", "workspace.dsl", EXAMPLE);
         let view = compile_view(&source, &ViewKey("orders-payments".into())).unwrap();
-        assert_eq!(view.elements.len(), 6);
-        assert_eq!(view.boundaries.len(), 2);
-        assert_eq!(view.relationships.len(), 8);
+        assert_eq!(view.elements.len(), 7);
+        assert_eq!(view.boundaries.len(), 3);
+        assert_eq!(view.relationships.len(), 9);
     }
 
     #[test]

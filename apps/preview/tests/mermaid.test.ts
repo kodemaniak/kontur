@@ -21,8 +21,8 @@ beforeAll(() => {
 it('renders the selected people, containers, boundaries and all labeled relationships', () => {
   const definition = buildMermaidDefinition(view);
   expect(definition.startsWith('flowchart LR')).toBe(true);
-  expect((definition.match(/^subgraph /gm) ?? [])).toHaveLength(2);
-  expect((definition.match(/-->/g) ?? [])).toHaveLength(8);
+  expect((definition.match(/^subgraph /gm) ?? [])).toHaveLength(3);
+  expect((definition.match(/-->/g) ?? [])).toHaveLength(9);
   expect(definition).toContain('Operations Analyst');
   expect(definition).toContain('Orders and audit database');
   expect(definition).toContain('class n');

@@ -28,9 +28,9 @@ fn successful_view_emits_versioned_renderer_neutral_json() {
     assert_eq!(status, 0);
     assert_eq!(json["schemaVersion"], 1);
     assert_eq!(json["status"], "ok");
-    assert_eq!(json["view"]["elements"].as_array().unwrap().len(), 6);
-    assert_eq!(json["view"]["boundaries"].as_array().unwrap().len(), 2);
-    assert_eq!(json["view"]["relationships"].as_array().unwrap().len(), 8);
+    assert_eq!(json["view"]["elements"].as_array().unwrap().len(), 7);
+    assert_eq!(json["view"]["boundaries"].as_array().unwrap().len(), 3);
+    assert_eq!(json["view"]["relationships"].as_array().unwrap().len(), 9);
     assert!(json["view"]["elements"][0]["source"]["line"].is_number());
 }
 

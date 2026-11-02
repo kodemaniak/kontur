@@ -51,7 +51,7 @@ describe('Rust CLI transport contract', () => {
     expect(response.result.view.elements.map(({ id }) => id)).toEqual(actual.view.elements.map(({ id }) => id));
     expect(response.result.view.relationships.map(({ id }) => id)).toEqual(actual.view.relationships.map(({ id }) => id));
     expect(response.result.view.relationships[0].source?.file).toBe(documentUri);
-    expect(response.result.view.relationships[0].source?.line).toBe(22);
+    expect(response.result.view.relationships[0].source?.line).toBe(26);
   });
 
   it('rejects malformed JSON, incompatible versions, and mixed success/error fields', () => {

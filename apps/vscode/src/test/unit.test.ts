@@ -6,6 +6,8 @@ import { describe, it } from 'node:test';
 import { PreviewSession, type PreviewSessionMessage, type PreviewServiceClient } from '../previewSession';
 import { isSupportedHost } from '../platform';
 import { PreviewService } from '../serviceProcess';
+import { findSourceElementId, parseNavigationRequest, sourceRange, type SourceMappingDocument } from '../sourceMapping';
+import type { LocationDto, ResolvedViewDto } from '../../../preview/src/contract';
 
 const validRequest = (revision: number) => ({
   schemaVersion: 1 as const,
@@ -53,6 +55,69 @@ describe('supported extension host', () => {
     assert.equal(isSupportedHost('win32', 'x64'), false);
   });
 });
+
+describe('source location mapping', () => {
+  it('converts Unicode-scalar columns to UTF-16 editor positions', () => {
+    const document = mappingDocument(['x😀Y']);
+    assert.deepEqual(sourceRange(location(1, 3, 1, 4), document), {
+      start: { line: 0, character: 3 },
+      end: { line: 0, character: 4 },
+    });
+  });
+
+  it('converts multiline locations and rejects unrepresentable ranges', () => {
+    const document = mappingDocument(['ab', 'cd'], 2);
+    assert.deepEqual(sourceRange(location(1, 2, 2, 2), document), {
+      start: { line: 0, character: 1 },
+      end: { line: 1, character: 1 },
+    });
+    assert.equal(sourceRange(location(1, 4, 1, 5), document), undefined);
+    assert.equal(sourceRange(location(3, 1, 3, 1), document), undefined);
+    assert.equal(sourceRange(location(2, 2, 1, 2), document), undefined);
+    assert.equal(sourceRange({ ...location(1, 1, 1, 2), file: 'file:///other.dsl' }, document), undefined);
+  });
+
+  it('matches the narrowest visible source range and ignores invalid candidates', () => {
+    const document = mappingDocument(['system {', '  container {', '  }', '}']);
+    const view = {
+      elements: [{ id: 'container', source: location(2, 3, 3, 4) }],
+      boundaries: [{ id: 'system', name: 'System', description: null, source: location(1, 1, 4, 2) }],
+    } as unknown as ResolvedViewDto;
+    assert.equal(findSourceElementId(view, { line: 1, character: 3 }, document), 'container');
+    assert.equal(findSourceElementId(view, { line: 0, character: 0 }, document), 'system');
+    assert.equal(findSourceElementId(view, { line: 3, character: 1 }, document), undefined);
+  });
+});
+
+describe('preview navigation message validation', () => {
+  const visibleIds = new Set(['order_api']);
+
+  it('accepts a current visible ID and rejects malformed, stale, unknown, or path-bearing requests', () => {
+    assert.equal(parseNavigationRequest({ type: 'navigate-to-source', revision: 4, id: 'order_api' }, 4, visibleIds), 'order_api');
+    assert.equal(parseNavigationRequest({ type: 'navigate-to-source', revision: 3, id: 'order_api' }, 4, visibleIds), undefined);
+    assert.equal(parseNavigationRequest({ type: 'navigate-to-source', revision: 4, id: 'other' }, 4, visibleIds), undefined);
+    assert.equal(parseNavigationRequest({ type: 'navigate-to-source', revision: 4, id: 'order_api', path: '/etc/passwd' }, 4, visibleIds), undefined);
+    assert.equal(parseNavigationRequest(Object.assign(Object.create({ path: '/etc/passwd' }), {
+      type: 'navigate-to-source', revision: 4, id: 'order_api',
+    }), 4, visibleIds), undefined);
+    assert.equal(parseNavigationRequest({ type: 'open-file', revision: 4, id: 'order_api' }, 4, visibleIds), undefined);
+  });
+});
+
+function location(line: number, column: number, endLine: number, endColumn: number): LocationDto {
+  return { file: 'file:///bound.dsl', line, column, endLine, endColumn };
+}
+
+function mappingDocument(lines: string[], lineBreakLength = 1): SourceMappingDocument {
+  return {
+    documentUri: 'file:///bound.dsl',
+    lineCount: lines.length,
+    lineAt: (line) => ({ text: lines[line] }),
+    offsetAt: ({ line, character }) => lines.slice(0, line).reduce(
+      (length, text) => length + text.length + lineBreakLength, 0,
+    ) + character,
+  };
+}
 
 function fakeCli(mode = 'echo') {
   const directory = mkdtempSync(join(tmpdir(), 'kontur service fake-'));

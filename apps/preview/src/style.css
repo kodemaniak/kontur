@@ -19,6 +19,10 @@ main { display: flex; flex-direction: column; height: calc(100% - 56px); padding
 #diagram { position: relative; flex: 1; min-height: 0; overflow: hidden; touch-action: none; cursor: grab; }
 #diagram.is-panning { cursor: grabbing; }
 #diagram svg { display: block; width: 100%; height: 100%; user-select: none; }
+#diagram [data-element-id] { cursor: pointer; }
+#diagram [data-element-id]:focus { outline: none; filter: drop-shadow(0 0 3px #1f6feb); }
+#diagram .kontur-selected > :is(rect, path, polygon, circle, ellipse) { stroke: #164e9d !important; stroke-width: 4px !important; stroke-dasharray: none !important; }
+#diagram .kontur-source-highlight > :is(rect, path, polygon, circle, ellipse) { stroke: #a23b00 !important; stroke-width: 3px !important; stroke-dasharray: 6 3 !important; }
 #status { min-height: 32px; display: flex; align-items: center; padding: 0 12px; color: #56647a; border-top: 1px solid #e7ebf2; font-size: 12px; }
 #status[data-stale="true"] { color: #8a3c23; background: #fff6f1; }
 #diagnostics:empty { display: none; }

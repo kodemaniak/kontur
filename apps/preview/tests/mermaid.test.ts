@@ -23,7 +23,7 @@ it('renders the selected people, containers, boundaries and all labeled relation
   expect(definition.startsWith('flowchart LR')).toBe(true);
   expect((definition.match(/^subgraph /gm) ?? [])).toHaveLength(2);
   expect((definition.match(/-->/g) ?? [])).toHaveLength(8);
-  expect(definition).toContain('Operations analyst');
+  expect(definition).toContain('Operations Analyst');
   expect(definition).toContain('Orders and audit database');
   expect(definition).toContain('class n');
   expect(definition).not.toContain('r_user_storefront');

@@ -6,10 +6,12 @@ import {
   type PreviewViewport,
 } from './presenter';
 
-type HostMessage =
+type HostStateMessage =
   | { type: 'pending'; revision: number }
   | { type: 'result'; revision: number; result: unknown }
   | { type: 'host-error'; revision: number; message: string };
+type EditorSelectionMessage = { type: 'editor-selection'; revision: number; id: string | null };
+type HostMessage = HostStateMessage | EditorSelectionMessage;
 
 type PersistedState = PreviewPresenterState & {
   schemaVersion: 1;
@@ -29,7 +31,8 @@ const documentUri = document.querySelector<HTMLMetaElement>('meta[name="kontur-d
 let presenter: PreviewPresenter;
 let latestRevision = 0;
 let ready = false;
-let queuedMessage: HostMessage | undefined;
+let queuedMessage: HostStateMessage | undefined;
+let queuedSelection: EditorSelectionMessage | undefined;
 
 function persist(): void {
   const state = presenter.getState();
@@ -41,10 +44,19 @@ function persist(): void {
   }
 }
 
-presenter = mountPreview(root, undefined, { onStateChange: persist });
+presenter = mountPreview(root, undefined, {
+  onStateChange: persist,
+  onNavigate: (id, revision) => vscode.postMessage({ type: 'navigate-to-source', id, revision }),
+});
 
 window.addEventListener('message', ({ data }: MessageEvent<unknown>) => {
   if (!isHostMessage(data) || data.revision < latestRevision) return;
+  if (data.type === 'editor-selection') {
+    if (data.revision !== latestRevision) return;
+    if (!ready) queuedSelection = data;
+    else presenter.setSourceSelection(data.revision, data.id);
+    return;
+  }
   latestRevision = data.revision;
   if (!ready) {
     queuedMessage = data;
@@ -63,11 +75,12 @@ void (async () => {
   }
   if (state) await presenter.restore(state);
   if (queuedMessage) applyHostMessage(queuedMessage);
+  if (queuedSelection) presenter.setSourceSelection(queuedSelection.revision, queuedSelection.id);
   ready = true;
   vscode.postMessage({ type: 'ready' });
 })();
 
-function applyHostMessage(message: HostMessage): void {
+function applyHostMessage(message: HostStateMessage): void {
   if (message.type === 'pending') {
     presenter.markPending(message.revision);
   } else if (message.type === 'host-error') {
@@ -101,6 +114,8 @@ function isHostMessage(value: unknown): value is HostMessage {
   if (!isPositiveRevision(message.revision)) return false;
   if (message.type === 'pending') return hasExactKeys(message, ['type', 'revision']);
   if (message.type === 'result') return hasExactKeys(message, ['type', 'revision', 'result']);
+  if (message.type === 'editor-selection') return hasExactKeys(message, ['type', 'revision', 'id'])
+    && (message.id === null || (typeof message.id === 'string' && message.id.length > 0));
   return message.type === 'host-error' && hasExactKeys(message, ['type', 'revision', 'message'])
     && typeof message.message === 'string' && message.message.length > 0;
 }
@@ -114,7 +129,12 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function hasExactKeys(value: Record<string, unknown>, keys: string[]): boolean {
-  return Object.keys(value).length === keys.length && keys.every((key) => key in value);
+  const prototype = Object.getPrototypeOf(value);
+  const ownKeys = Object.keys(value);
+  return (prototype === Object.prototype || prototype === null)
+    && ownKeys.length === keys.length
+    && keys.every((key) => Object.hasOwn(value, key))
+    && ownKeys.every((key) => keys.includes(key));
 }
 
 function isViewport(value: unknown): value is PreviewViewport {

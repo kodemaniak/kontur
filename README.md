@@ -4,7 +4,7 @@
 
 Kontur is an open-source project for C4-based software architecture as code. Its goal is to make architecture models easy to describe, validate, and explore interactively within the IDE — initially locally for an individual or team, and later across multiple Git repositories.
 
-The repository now includes a local Rust DSL/model/validation pipeline, a JSON CLI, a Mermaid preview, and a Linux x64 VS Code live-preview extension. LSP, completion, source navigation and multi-file workspaces remain future work.
+The repository now includes a local Rust DSL/model/validation pipeline, a JSON CLI, a Mermaid preview, and a Linux x64 VS Code live-preview extension. LSP, completion and multi-file workspaces remain future work.
 
 ## Vision
 
@@ -44,11 +44,11 @@ Implemented in this slice:
 
 - A documented Structurizr DSL subset for people, software systems, containers, relationships, basic metadata, and one explicitly keyed container view.
 - The Rust parser, architecture model, reference resolution, semantic validation and view projection shared by the CLI and preview.
-- The `kontur view <file.dsl> --view <key>` JSON CLI and a VS Code preview opened with **Kontur: Open Preview**. It reflects unsaved edits, reports diagnostics, retains the last valid diagram as stale on errors, and preserves pan/zoom through edits and webview recreation.
+- The `kontur view <file.dsl> --view <key>` JSON CLI and a VS Code preview opened with **Kontur: Open Preview**. It reflects unsaved edits, reports diagnostics, retains the last valid diagram as stale on errors, and preserves pan/zoom through edits and webview recreation. Diagram people, containers and system boundaries navigate to their declarations on double-click or Enter; the editor cursor highlights the matching visible item.
 - A Linux x64 VSIX containing the Rust service executable and browser assets. At runtime it needs no separately installed Rust/Cargo or Node.js, network service, account or license server.
 - A saved-file example and CI checks for formatting, linting, Rust/TypeScript contracts, package contents and browser behavior.
 
-Still planned: an LSP with completion/hover/navigation, source/diagram navigation, view selection, multiple files and stable layout across edits. The current preview uses one Rust-selected view and is supported on Linux x64 only. At Fit, the left-to-right Mermaid view is a wide overview with compact labels; zoom is needed at ordinary screen sizes. This does not promise layout parity or stability. See [the supported DSL subset](docs/dsl-subset.md) and [core/CLI/service contracts](docs/core-api.md).
+Still planned: an LSP with completion/hover/navigation, view selection, multiple files and stable layout across edits. Source navigation is limited to visible people, containers and system boundaries in the current single-file view; relationships and stale diagrams are not navigable. The current preview is supported on Linux x64 only. At Fit, the left-to-right Mermaid view is a wide overview with compact labels; zoom is needed at ordinary screen sizes. This does not promise layout parity or stability. See [the supported DSL subset](docs/dsl-subset.md) and [core/CLI/service contracts](docs/core-api.md).
 
 **Overall milestone acceptance (not yet complete):** A team opens its repository in VS Code, describes two systems with containers and labeled relationships, and visualizes and edits them locally. Diagnostics are clear, and diagram elements link back to their definitions in the source code.
 

@@ -7,6 +7,7 @@ export type PreviewPresenter = {
   markPending(revision: number): void;
   applyResult(revision: number, result: PreviewResult): Promise<void>;
   showHostError(revision: number, message: string): void;
+  setSourceSelection(revision: number, id: string | null): void;
   restore(state: PreviewPresenterState): Promise<void>;
   getState(): PreviewPresenterState | undefined;
   dispose(): void;
@@ -19,6 +20,7 @@ export type PreviewPresenterState = {
   viewport: PreviewViewport;
 };
 type Box = PreviewViewport;
+type BoundaryStrokeSnapshot = { property: string; value: string; priority: string }[];
 
 mermaid.initialize({
   startOnLoad: false,
@@ -51,7 +53,7 @@ const renderMermaid: DiagramRenderer = (id, definition) => mermaid.render(id, de
 export function mountPreview(
   root: HTMLElement,
   render: DiagramRenderer = renderMermaid,
-  options: { onReload?: () => void; onStateChange?: () => void } = {},
+  options: { onReload?: () => void; onStateChange?: () => void; onNavigate?: (id: string, revision: number) => void } = {},
 ): PreviewPresenter {
   root.innerHTML = `
     <header>
@@ -84,14 +86,16 @@ export function mountPreview(
 
   let fittedBox: Box | undefined;
   let currentBox: Box | undefined;
-  let activePointer: { id: number; x: number; y: number; box: Box } | undefined;
+  let activePointer: { id: number; x: number; y: number; box: Box; moved: boolean } | undefined;
   let latestRevision = 0;
   let renderVersion = 0;
   let mermaidId = 0;
   let hasValidPreview = false;
   let lastValidResult: Extract<PreviewResult, { status: 'ok' }> | undefined;
   let lastValidRevision = 0;
+  let sourceSelection: { revision: number; id: string | null } | undefined;
   let disposed = false;
+  const boundaryStrokeSnapshots = new WeakMap<SVGElement, BoundaryStrokeSnapshot>();
 
   function showDiagnostics(items: DiagnosticDto[]): void {
     diagnostics.replaceChildren();
@@ -114,6 +118,77 @@ export function mountPreview(
 
   function showHostDiagnostic(message: string): void {
     showDiagnostics([{ code: 'transport', severity: 'error', message, location: null }]);
+  }
+
+  function clearSourceHighlight(): void {
+    for (const target of diagram.querySelectorAll<SVGGElement>('[data-element-id].kontur-source-highlight')) {
+      target.classList.remove('kontur-source-highlight');
+      updateBoundaryStroke(target);
+    }
+  }
+
+  function applySourceHighlight(): void {
+    clearSourceHighlight();
+    if (!sourceSelection || sourceSelection.revision !== lastValidRevision || status.dataset.stale === 'true') return;
+    for (const target of diagram.querySelectorAll<SVGGElement>('[data-element-id]')) {
+      if (target.dataset.elementId === sourceSelection.id) {
+        target.classList.add('kontur-source-highlight');
+        updateBoundaryStroke(target);
+      }
+    }
+  }
+
+  function updateBoundaryStroke(target: SVGGElement): void {
+    if (!target.matches('g.cluster')) return;
+    const sourceHighlight = target.classList.contains('kontur-source-highlight');
+    const clickSelection = target.classList.contains('kontur-selected');
+    for (const shape of target.querySelectorAll<SVGElement>(':scope > rect')) {
+      if (!sourceHighlight && !clickSelection) {
+        const original = boundaryStrokeSnapshots.get(shape);
+        if (!original) continue;
+        for (const { property, value, priority } of original) {
+          if (value) shape.style.setProperty(property, value, priority);
+          else shape.style.removeProperty(property);
+        }
+        boundaryStrokeSnapshots.delete(shape);
+        continue;
+      }
+
+      if (!boundaryStrokeSnapshots.has(shape)) {
+        boundaryStrokeSnapshots.set(shape, ['stroke', 'stroke-width', 'stroke-dasharray'].map((property) => ({
+          property,
+          value: shape.style.getPropertyValue(property),
+          priority: shape.style.getPropertyPriority(property),
+        })));
+      }
+      const [stroke, width, dash] = sourceHighlight
+        ? ['#a23b00', '3px', '6 3']
+        : ['#164e9d', '4px', 'none'];
+      shape.style.setProperty('stroke', stroke, 'important');
+      shape.style.setProperty('stroke-width', width, 'important');
+      shape.style.setProperty('stroke-dasharray', dash, 'important');
+    }
+  }
+
+  function currentElement(target: EventTarget | null): SVGGElement | undefined {
+    if (!(target instanceof Element)) return undefined;
+    const group = target.closest<SVGGElement>('[data-element-id]');
+    return group && diagram.contains(group) ? group : undefined;
+  }
+
+  function clearDiagramSelection(): void {
+    for (const selected of diagram.querySelectorAll<SVGGElement>('.kontur-selected')) {
+      selected.classList.remove('kontur-selected');
+      selected.setAttribute('aria-pressed', 'false');
+      updateBoundaryStroke(selected);
+    }
+  }
+
+  function selectElement(target: SVGGElement): void {
+    clearDiagramSelection();
+    target.classList.add('kontur-selected');
+    target.setAttribute('aria-pressed', 'true');
+    updateBoundaryStroke(target);
   }
 
   function retainPreviewAsStale(message: string): void {
@@ -191,6 +266,8 @@ export function mountPreview(
     if (!acceptRevision(revision)) return;
     const ticket = ++renderVersion;
     if (result.status === 'error') {
+      sourceSelection = undefined;
+      clearSourceHighlight();
       showDiagnostics(result.diagnostics);
       retainPreviewAsStale(`${result.diagnostics.length} diagnostic${result.diagnostics.length === 1 ? '' : 's'}`);
       return;
@@ -212,11 +289,12 @@ export function mountPreview(
       const nextFit = { x: viewBox[0], y: viewBox[1], width: viewBox[2], height: viewBox[3] };
       const nextView = restoredViewport ?? viewportAfterReload(nextFit);
       const imported = root.ownerDocument.importNode(svg, true);
-      imported.setAttribute('role', 'img');
+      imported.setAttribute('role', 'group');
       imported.setAttribute('aria-label', `Architecture diagram for ${result.view.key}`);
       imported.setAttribute('preserveAspectRatio', 'xMidYMid meet');
       imported.dataset.elementCount = String(result.view.elements.length);
       imported.dataset.relationshipCount = String(result.view.relationships.length);
+      associateDiagramElements(imported, result.view);
       imported.setAttribute('viewBox', `${nextView.x} ${nextView.y} ${nextView.width} ${nextView.height}`);
       diagram.replaceChildren(imported);
 
@@ -227,10 +305,13 @@ export function mountPreview(
       lastValidRevision = stateRevision;
       status.value = `${result.view.elements.length} elements · ${result.view.relationships.length} relationships`;
       status.dataset.stale = 'false';
+      applySourceHighlight();
       showDiagnostics([]);
       options.onStateChange?.();
     } catch (error) {
       if (disposed || ticket !== renderVersion || revision !== latestRevision) return;
+      sourceSelection = undefined;
+      clearSourceHighlight();
       showHostDiagnostic(error instanceof Error ? error.message : String(error));
       retainPreviewAsStale('render failed');
     }
@@ -239,6 +320,8 @@ export function mountPreview(
   function markPending(revision: number): void {
     if (!acceptRevision(revision)) return;
     renderVersion++;
+    sourceSelection = undefined;
+    clearSourceHighlight();
     status.value = hasValidPreview ? 'Reloading · showing last valid preview' : 'Loading preview…';
     status.dataset.stale = String(hasValidPreview);
     diagnostics.replaceChildren();
@@ -247,6 +330,8 @@ export function mountPreview(
   function showHostError(revision: number, message: string): void {
     if (!acceptRevision(revision)) return;
     renderVersion++;
+    sourceSelection = undefined;
+    clearSourceHighlight();
     showHostDiagnostic(message);
     retainPreviewAsStale('reload failed');
   }
@@ -262,19 +347,25 @@ export function mountPreview(
   diagram.addEventListener('pointerdown', (event: PointerEvent) => {
     const svg = diagram.querySelector<SVGSVGElement>('svg');
     if (!svg || !currentBox || event.button !== 0) return;
-    activePointer = { id: event.pointerId, x: event.clientX, y: event.clientY, box: { ...currentBox } };
-    diagram.setPointerCapture(event.pointerId);
-    diagram.classList.add('is-panning');
+    activePointer = { id: event.pointerId, x: event.clientX, y: event.clientY, box: { ...currentBox }, moved: false };
   }, { signal });
   diagram.addEventListener('pointermove', (event: PointerEvent) => {
     const svg = diagram.querySelector<SVGSVGElement>('svg');
     if (!activePointer || !svg || !currentBox || activePointer.id !== event.pointerId) return;
+    const deltaX = event.clientX - activePointer.x;
+    const deltaY = event.clientY - activePointer.y;
+    if (!activePointer.moved && Math.hypot(deltaX, deltaY) < 4) return;
+    if (!activePointer.moved) {
+      activePointer.moved = true;
+      diagram.setPointerCapture(event.pointerId);
+      diagram.classList.add('is-panning');
+    }
     const rect = svg.getBoundingClientRect();
     const scale = Math.min(rect.width / activePointer.box.width, rect.height / activePointer.box.height);
     setViewBox(svg, {
       ...activePointer.box,
-      x: activePointer.box.x - (event.clientX - activePointer.x) / scale,
-      y: activePointer.box.y - (event.clientY - activePointer.y) / scale,
+      x: activePointer.box.x - deltaX / scale,
+      y: activePointer.box.y - deltaY / scale,
     });
   }, { signal });
   const stopPan = (event: PointerEvent): void => {
@@ -284,11 +375,39 @@ export function mountPreview(
   };
   diagram.addEventListener('pointerup', stopPan, { signal });
   diagram.addEventListener('pointercancel', stopPan, { signal });
+  diagram.addEventListener('click', (event: MouseEvent) => {
+    const target = currentElement(event.target);
+    if (target) selectElement(target);
+  }, { signal });
+  diagram.addEventListener('dblclick', (event: MouseEvent) => {
+    const target = currentElement(event.target);
+    if (!target) return;
+    selectElement(target);
+    if (status.dataset.stale !== 'true' && lastValidRevision === latestRevision) {
+      options.onNavigate?.(target.dataset.elementId!, lastValidRevision);
+    }
+  }, { signal });
+  diagram.addEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.key !== 'Enter') return;
+    const target = currentElement(event.target);
+    if (!target) return;
+    event.preventDefault();
+    selectElement(target);
+    if (status.dataset.stale !== 'true' && lastValidRevision === latestRevision) {
+      options.onNavigate?.(target.dataset.elementId!, lastValidRevision);
+    }
+  }, { signal });
 
   return {
     markPending,
     applyResult,
     showHostError,
+    setSourceSelection(revision, id) {
+      if (disposed || revision !== latestRevision) return;
+      clearDiagramSelection();
+      sourceSelection = { revision, id };
+      applySourceHighlight();
+    },
     restore,
     getState() {
       if (!lastValidResult || !currentBox) return undefined;
@@ -302,4 +421,27 @@ export function mountPreview(
       root.replaceChildren();
     },
   };
+}
+
+function associateDiagramElements(svg: SVGSVGElement, view: Extract<PreviewResult, { status: 'ok' }>['view']): void {
+  const nodes = [...svg.querySelectorAll<SVGGElement>('g.node[id]')];
+  for (const [index, element] of view.elements.entries()) {
+    const token = `flowchart-n${index}-`;
+    const group = nodes.find((node) => node.id.startsWith(`${svg.id}-${token}`));
+    if (!group) continue;
+    group.dataset.elementId = element.id;
+    group.setAttribute('role', 'button');
+    group.setAttribute('tabindex', '0');
+    group.setAttribute('aria-label', `${element.kind}: ${element.name}`);
+    group.setAttribute('aria-pressed', 'false');
+  }
+  for (const [index, boundary] of view.boundaries.entries()) {
+    const group = svg.querySelector<SVGGElement>(`g.cluster[id="${svg.id}-s${index}"]`);
+    if (!group) continue;
+    group.dataset.elementId = boundary.id;
+    group.setAttribute('role', 'button');
+    group.setAttribute('tabindex', '0');
+    group.setAttribute('aria-label', `Software system: ${boundary.name}`);
+    group.setAttribute('aria-pressed', 'false');
+  }
 }

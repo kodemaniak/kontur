@@ -41,6 +41,109 @@ test('announces readiness, validates host results and ignores unknown or stale m
   expect(await page.evaluate(() => window.konturMessages)).toEqual([{ type: 'ready' }]);
 });
 
+test('maps visible items to stable IDs and navigates only on double-click or Enter', async ({ page }) => {
+  await page.goto('/webview.html');
+  await expect.poll(() => page.evaluate(() => window.konturMessages)).toContainEqual({ type: 'ready' });
+  await post(page, { type: 'result', revision: 1, result: exampleResult() });
+
+  const person = page.locator('#diagram [data-element-id="operations_analyst"]');
+  const boundary = page.locator('#diagram [data-element-id="order_hub"]');
+  await expect(person).toHaveCount(1);
+  await expect(boundary).toHaveCount(1);
+  await person.click();
+  await expect(person).toHaveClass(/kontur-selected/);
+  expect(await navigationMessages(page)).toEqual([]);
+
+  await person.dblclick();
+  await expect.poll(() => navigationMessages(page)).toEqual([
+    { type: 'navigate-to-source', revision: 1, id: 'operations_analyst' },
+  ]);
+
+  await boundary.focus();
+  await page.keyboard.press('Enter');
+  await expect.poll(() => navigationMessages(page)).toEqual([
+    { type: 'navigate-to-source', revision: 1, id: 'operations_analyst' },
+    { type: 'navigate-to-source', revision: 1, id: 'order_hub' },
+  ]);
+
+  const box = await person.boundingBox();
+  if (!box) throw new Error('Expected the person node to be visible');
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 40, box.y + box.height / 2 + 30);
+  await page.mouse.up();
+  expect(await navigationMessages(page)).toHaveLength(2);
+});
+
+test('applies only current editor-selection highlights and clears them outside a declaration', async ({ page }) => {
+  await page.goto('/webview.html');
+  await expect.poll(() => page.evaluate(() => window.konturMessages)).toContainEqual({ type: 'ready' });
+  await post(page, { type: 'result', revision: 1, result: exampleResult() });
+
+  const node = page.locator('#diagram [data-element-id="order_api"]');
+  await expect(node).toHaveCount(1);
+  const svgIdBefore = await page.locator('#diagram svg').getAttribute('id');
+  await page.evaluate(() => {
+    const malformed = Object.assign(Object.create({ revision: 1 }), {
+      type: 'editor-selection', id: 'order_api', path: '/etc/passwd',
+    });
+    window.dispatchEvent(new MessageEvent('message', { data: malformed }));
+  });
+  await expect(node).not.toHaveClass(/kontur-source-highlight/);
+
+  await post(page, { type: 'editor-selection', revision: 1, id: 'order_api' });
+  await expect(node).toHaveClass(/kontur-source-highlight/);
+  await expect(page.locator('#diagram svg')).toHaveAttribute('id', svgIdBefore!);
+
+  const person = page.locator('#diagram [data-element-id="operations_analyst"]');
+  await person.click();
+  await expect(person).toHaveClass(/kontur-selected/);
+  const clickStroke = await person.locator('rect').first().evaluate((shape) => getComputedStyle(shape).strokeDasharray);
+  await post(page, { type: 'editor-selection', revision: 1, id: 'order_api' });
+  await expect(person).not.toHaveClass(/kontur-selected/);
+  const sourceStroke = await node.locator('rect').first().evaluate((shape) => getComputedStyle(shape).strokeDasharray);
+  expect(sourceStroke).not.toBe(clickStroke);
+
+  await post(page, { type: 'editor-selection', revision: 1, id: null });
+  await expect(node).not.toHaveClass(/kontur-source-highlight/);
+
+  const systemBoundary = page.locator('#diagram [data-element-id="order_hub"]');
+  await systemBoundary.evaluate((target) => target.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+  await expect(systemBoundary).toHaveClass(/kontur-selected/);
+  const clickedBoundaryStroke = await systemBoundary.locator('rect').first().evaluate((shape) => {
+    const style = getComputedStyle(shape);
+    return { stroke: style.stroke, width: style.strokeWidth, dash: style.strokeDasharray };
+  });
+  expect(clickedBoundaryStroke).toEqual({ stroke: 'rgb(22, 78, 157)', width: '4px', dash: 'none' });
+  await post(page, { type: 'editor-selection', revision: 1, id: 'order_hub' });
+  await expect(systemBoundary).not.toHaveClass(/kontur-selected/);
+  await expect(systemBoundary).toHaveClass(/kontur-source-highlight/);
+  const boundaryStroke = await systemBoundary.locator('rect').first().evaluate((shape) => {
+    const style = getComputedStyle(shape);
+    return { stroke: style.stroke, width: style.strokeWidth, dash: style.strokeDasharray };
+  });
+  expect(boundaryStroke).toEqual({ stroke: 'rgb(162, 59, 0)', width: '3px', dash: '6px, 3px' });
+  await post(page, { type: 'editor-selection', revision: 1, id: null });
+  await expect(systemBoundary).not.toHaveClass(/kontur-source-highlight/);
+  const restoredBoundaryStroke = await systemBoundary.locator('rect').first().evaluate((shape) => {
+    const style = getComputedStyle(shape);
+    return { stroke: style.stroke, width: style.strokeWidth, dash: style.strokeDasharray };
+  });
+  expect(restoredBoundaryStroke).toEqual({ stroke: 'rgb(117, 135, 168)', width: '1.5px', dash: '7px, 4px' });
+
+  await post(page, { type: 'pending', revision: 2 });
+  await post(page, { type: 'editor-selection', revision: 1, id: 'order_api' });
+  await expect(node).not.toHaveClass(/kontur-source-highlight/);
+  await node.dblclick();
+  expect(await navigationMessages(page)).toEqual([]);
+});
+
+async function navigationMessages(page: Page): Promise<unknown[]> {
+  return page.evaluate(() => window.konturMessages.filter((message) =>
+    typeof message === 'object' && message !== null
+    && (message as { type?: unknown }).type === 'navigate-to-source'));
+}
+
 test('host failure cancels a render already in progress', async ({ page }) => {
   const result = exampleResult();
   await page.goto('/webview.html');

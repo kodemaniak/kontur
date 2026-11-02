@@ -62,13 +62,14 @@ export async function run(): Promise<void> {
     assert.equal(webviewTabs().length, 1, 'selecting another DSL document must replace the preview');
     assert.ok(webviewTabs()[0].group.viewColumn > (secondEditor.viewColumn ?? 0));
 
-    const editor = secondEditor;
+    let editor = secondEditor;
     await vscode.commands.executeCommand('workbench.action.focusRightGroup');
     await waitUntil(() => webviewTabs()[0]?.isActive === true, 'the preview webview tab to become active');
     const originalLabel = 'Requests authorization with customer and currency context';
     const changedLabel = 'Unsaved authorization relationship';
     assert.ok(initialText.includes(originalLabel), 'expected the example relationship fixture');
-    const changedText = initialText.replace(originalLabel, changedLabel);
+    const changedText = initialText.replace(originalLabel, changedLabel)
+      .replace('"Operations Analyst"', '"Operations 😀 Analyst"');
 
     const debugPort = process.env.KONTUR_VSCODE_DEBUG_PORT;
     assert.ok(debugPort, 'expected the VS Code smoke harness to provide its local debug port');
@@ -76,7 +77,20 @@ export async function run(): Promise<void> {
     cdp = await connectToWebview(browser, second.uri.toString());
     await waitForBrowser(cdp, 'document.querySelector("#diagram svg")?.dataset.elementCount ?? null',
       (value) => value !== null, 'the bundled Rust service should render the example diagram');
-    assert.equal(await cdp.evaluate('document.querySelector("#diagram svg")?.dataset.elementCount'), '6');
+
+    const personStart = initialText.indexOf('operations_analyst = person');
+    const personEnd = initialText.indexOf('\n', personStart);
+    const editorSelectionBeforeClick = editor.selection;
+    await cdp.evaluate('document.querySelector("#diagram [data-element-id=operations_analyst]")?.dispatchEvent(new MouseEvent("click", { bubbles: true }))');
+    assert.deepEqual(editor.selection, editorSelectionBeforeClick, 'a single diagram click must not jump the editor');
+    await cdp.evaluate(`document.querySelector("#diagram [data-element-id=operations_analyst]")?.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }))`);
+    await waitUntil(
+      () => vscode.window.activeTextEditor?.selection.start.isEqual(second.positionAt(personStart)) === true,
+      'double-clicking a diagram item to select its DSL declaration',
+    );
+    editor = vscode.window.activeTextEditor!;
+    assert.equal(editor.document.uri.toString(), second.uri.toString(), 'navigation must stay in the preview-bound document');
+    assert.ok(editor.selection.end.isEqual(second.positionAt(personEnd)), 'navigation should select the declaration range');
 
     await cdp.evaluate('document.querySelector("#zoom-in").click()');
     const beforeEdit = await readViewBox(cdp);
@@ -87,6 +101,36 @@ export async function run(): Promise<void> {
       (value) => String(value).includes(changedLabel), 'the unsaved relationship edit should reach the preview');
     await waitForBrowser(cdp, 'document.querySelector("#status")?.dataset.stale',
       (value) => value === 'false', 'the unsaved preview result should become current');
+    const personUpdatedStart = changedText.indexOf('operations_analyst = person');
+    const personUpdatedEnd = changedText.indexOf('\n', personUpdatedStart);
+    const editorAfterEdit = await vscode.window.showTextDocument(second, vscode.ViewColumn.One);
+    const apiCursor = second.positionAt(changedText.indexOf('order_api = container') + 8);
+    editorAfterEdit.selection = new vscode.Selection(apiCursor, apiCursor);
+    editor = editorAfterEdit;
+    await waitForBrowser(cdp, 'document.querySelector("#diagram [data-element-id=order_api]")?.classList.contains("kontur-source-highlight") ?? false',
+      (value) => value === true, 'the source cursor to highlight its visible container');
+    editor.selection = new vscode.Selection(new vscode.Position(0, 0), new vscode.Position(0, 0));
+    await waitForBrowser(cdp, 'document.querySelector("#diagram [data-element-id=order_api]")?.classList.contains("kontur-source-highlight") ?? false',
+      (value) => value === false, 'a cursor outside visible declarations to clear the highlight');
+    const systemCursor = second.positionAt(changedText.indexOf('order_hub = softwareSystem') + 3);
+    editor.selection = new vscode.Selection(systemCursor, systemCursor);
+    await waitForBrowser(cdp, 'document.querySelector("#diagram [data-element-id=order_hub]")?.classList.contains("kontur-source-highlight") ?? false',
+      (value) => value === true, 'the source cursor to highlight its software-system boundary');
+    const boundaryStroke = await cdp.evaluate(`(() => {
+      const shape = document.querySelector('#diagram [data-element-id="order_hub"] rect');
+      const style = getComputedStyle(shape);
+      return { stroke: style.stroke, width: style.strokeWidth, dash: style.strokeDasharray };
+    })()`) as { stroke: string; width: string; dash: string };
+    assert.deepEqual(boundaryStroke, { stroke: 'rgb(162, 59, 0)', width: '3px', dash: '6px, 3px' },
+      'software-system source highlighting must visibly style the system boundary');
+    await cdp.evaluate(`document.querySelector("#diagram [data-element-id=operations_analyst]")?.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }))`);
+    await waitUntil(
+      () => vscode.window.activeTextEditor?.selection.start.isEqual(second.positionAt(personUpdatedStart)) === true,
+      'Unicode-aware source navigation after an unsaved edit',
+    );
+    editor = vscode.window.activeTextEditor!;
+    assert.ok(editor.selection.end.isEqual(second.positionAt(personUpdatedEnd)), 'Unicode characters must not shift the selected end position');
+    assert.equal(readFileSync(secondPath, 'utf8'), initialText, 'source navigation must not save the unsaved DSL');
     const afterEdit = await readViewBox(cdp);
     assert.ok(afterEdit.width < beforeEdit.width * 1.5, 'the edit should retain a zoomed viewport rather than Fit');
     await cdp.evaluate('document.querySelector("#fit").click()');
@@ -102,11 +146,21 @@ export async function run(): Promise<void> {
     assert.equal(await cdp.evaluate('document.querySelector("#diagram svg")?.outerHTML'), lastValidSvg,
       'invalid DSL must retain the last valid SVG');
 
+    const selectionBeforeStaleNavigation = editor.selection;
+    await cdp.evaluate(`document.querySelector("#diagram [data-element-id=operations_analyst]")?.dispatchEvent(new MouseEvent('dblclick', { bubbles: true }))`);
+    await delay(100);
+    assert.deepEqual(vscode.window.activeTextEditor?.selection, selectionBeforeStaleNavigation,
+      'stale source mappings must not move the editor');
+
     await replaceDocument(editor, changedText);
+    const recoveryCursor = second.positionAt(changedText.indexOf('order_api = container') + 8);
+    editor.selection = new vscode.Selection(recoveryCursor, recoveryCursor);
     await waitForBrowser(cdp, 'document.querySelector("#status")?.dataset.stale',
       (value) => value === 'false', 'a valid edit should recover the preview');
     await waitForBrowser(cdp, 'document.querySelector("#diagram")?.textContent ?? ""',
       (value) => String(value).includes(changedLabel), 'the recovered diagram should show the latest relationship');
+    await waitForBrowser(cdp, 'document.querySelector("#diagram [data-element-id=order_api]")?.classList.contains("kontur-source-highlight") ?? false',
+      (value) => value === true, 'the current source cursor to be reevaluated after recovery');
 
     const hostileLabel = '<img src=x onerror=window.__konturPwned=1>';
     await replaceDocument(editor, changedText.replace(changedLabel, hostileLabel));

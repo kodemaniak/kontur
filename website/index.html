@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#081313" />
+    <meta name="description" content="Kontur explores a living architecture: Git-versioned models connected with code, infrastructure and runtime evidence, with differences made visible." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kontur — Architecture that knows when reality changes" />
+    <meta property="og:description" content="From architecture-as-code toward architecture backed by evidence." />
+    <title>Kontur — Architecture that knows when reality changes</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="#top" aria-label="Kontur home">
+          <svg class="brand-mark" width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+            <rect x="3" y="3" width="24" height="24" rx="7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M9 9v12M9 15h12M21 9l-9 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="21" cy="9" r="2" fill="#79efd0" />
+          </svg>
+          <span>kontur<span class="brand-dot">.</span></span>
+        </a>
+        <nav class="header-nav" aria-label="Main navigation">
+          <a href="#idea">The idea</a>
+          <a href="#principles">Principles</a>
+          <a href="#roadmap">Roadmap</a>
+        </nav>
+        <a class="header-repo" href="https://github.com/kodemaniak/kontur" target="_blank" rel="noopener noreferrer" aria-label="Kontur repository on GitHub (opens new tab)">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.07c-3.09.67-3.74-1.31-3.74-1.31-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.7 1.15 1.7 1.15.99 1.69 2.6 1.2 3.23.92.1-.72.39-1.2.71-1.48-2.47-.28-5.07-1.24-5.07-5.49 0-1.21.43-2.19 1.14-2.97-.12-.28-.5-1.4.11-2.92 0 0 .93-.3 3.05 1.13A10.6 10.6 0 0 1 12 6.02c.94 0 1.88.13 2.76.37 2.12-1.43 3.05-1.13 3.05-1.13.61 1.52.23 2.64.11 2.92.71.78 1.14 1.76 1.14 2.97 0 4.26-2.61 5.2-5.09 5.48.4.35.75 1.03.75 2.08v3.28c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+          <span>GitHub</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero section" id="top" aria-labelledby="hero-heading">
+        <div class="shell hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="pulse-dot"></span> A vision for living software architecture</div>
+            <h1 id="hero-heading">Architecture that knows when <em>reality changes.</em></h1>
+            <p class="hero-lead">Your architecture evolves. Your documentation should, too.</p>
+            <p class="hero-description">Architecture models describe what you intend to build. Code, infrastructure, and running systems tell another part of the story. <strong>Kontur aims to connect them</strong> — so the differences become visible, understandable, and traceable.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#idea">Explore the vision <span aria-hidden="true">↘</span></a>
+              <a class="button button-secondary" href="#now">See what's real today <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-facts" aria-label="Project principles">
+              <span>Git-native</span><i aria-hidden="true"></i><span>Local-first</span><i aria-hidden="true"></i><span>MIT-licensed</span>
+            </div>
+          </div>
+
+          <div class="demo-wrap">
+            <div class="demo" data-mode="diff" aria-label="Interactive illustration of architecture reconciliation">
+              <div class="demo-topline">
+                <div class="demo-title"><span class="signal-icon" aria-hidden="true">⌁</span><span>ARCHITECTURE / SIGNAL</span></div>
+                <span class="demo-live"><span></span> CONCEPT DEMO</span>
+              </div>
+              <div class="demo-mode" role="group" aria-label="Choose an architecture view">
+                <button type="button" data-view="intent" aria-pressed="false">Intent</button>
+                <button type="button" data-view="evidence" aria-pressed="false">Evidence</button>
+                <button type="button" data-view="diff" aria-pressed="true">Difference <span class="difference-count">1</span></button>
+              </div>
+              <div class="demo-graph">
+                <div class="graph-meta"><span>System context</span><span>EXAMPLE / 001</span></div>
+                <svg viewBox="0 0 480 285" role="img" aria-labelledby="graph-title graph-description">
+                  <title id="graph-title">Order Service architecture example</title>
+                  <desc id="graph-description">An Order Service calls a Payment API. In the observed architecture it also depends on a Legacy Database, which is absent from the intended model.</desc>
+                  <defs>
+                    <marker id="arrow-a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#7ce6cf" stroke-width="1.7" /></marker>
+                    <marker id="arrow-b" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="currentColor" stroke-width="1.7" /></marker>
+                  </defs>
+                  <g class="graph-grid"><path d="M0 38H480 M0 94H480 M0 150H480 M0 206H480 M0 262H480 M40 0V285 M112 0V285 M184 0V285 M256 0V285 M328 0V285 M400 0V285" /></g>
+                  <path class="existing-edge" d="M208 92H279" marker-end="url(#arrow-a)" />
+                  <text class="edge-label" x="243" y="76" text-anchor="middle">calls</text>
+                  <path class="drift-edge" d="M169 118 C185 179 245 211 279 211" marker-end="url(#arrow-b)" />
+                  <g class="graph-node intent-node">
+                    <rect x="31" y="63" width="177" height="58" rx="9" />
+                    <circle cx="49" cy="83" r="4" class="node-dot" />
+                    <text x="61" y="88" class="node-name">Order Service</text>
+                    <text x="49" y="107" class="node-kind">CONTAINER</text>
+                  </g>
+                  <g class="graph-node contract-node">
+                    <rect x="280" y="63" width="172" height="58" rx="9" />
+                    <circle cx="298" cy="83" r="4" class="node-dot" />
+                    <text x="310" y="88" class="node-name">Payment API</text>
+                    <text x="298" y="107" class="node-kind">INTERFACE</text>
+                  </g>
+                  <g class="graph-node drift-node">
+                    <rect x="280" y="183" width="172" height="58" rx="9" />
+                    <circle cx="298" cy="203" r="4" class="node-dot" />
+                    <text x="310" y="208" class="node-name">Legacy Database</text>
+                    <text x="298" y="227" class="node-kind">UNDOCUMENTED</text>
+                  </g>
+                  <g class="drift-flag"><rect x="288" y="251" width="156" height="25" rx="12" /><text x="366" y="268" text-anchor="middle">NEW DEPENDENCY</text></g>
+                </svg>
+              </div>
+              <div class="demo-result" role="status" aria-live="polite">
+                <span class="result-icon" aria-hidden="true">!</span>
+                <div><strong id="result-title">Undocumented dependency</strong><span id="result-description">Observed evidence reveals a connection missing from the model.</span></div>
+              </div>
+              <div class="demo-foot"><span>Intent + evidence → questions worth asking</span><span>ILLUSTRATIVE ONLY</span></div>
+            </div>
+            <p class="demo-caption">Reconciliation is a vision, not a shipped feature. This interactive diagram illustrates the direction.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="statement section" id="idea" aria-labelledby="idea-heading">
+        <div class="shell statement-grid">
+          <div class="section-index">01 / THE IDEA</div>
+          <div>
+            <h2 id="idea-heading">Architecture isn't static.<br /><span class="soft">Why should its documentation be?</span></h2>
+            <p>Architecture diagrams often start as a good description of intent. Then teams ship features, infrastructure changes, and new integrations appear. The picture falls behind — even when everyone is doing their job.</p>
+            <p>Kontur explores a different approach: <strong>keep architectural intent in versioned source files, connect it to technical evidence, and make the gaps explicit.</strong> Not every gap is a problem. Every gap is an opportunity to understand what changed.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="method section" aria-labelledby="method-heading">
+        <div class="shell">
+          <div class="section-heading"><span class="section-index">02 / THE APPROACH</span><h2 id="method-heading">Model. Discover. Reconcile.</h2><p>Three complementary perspectives. One shared understanding of architecture.</p></div>
+          <div class="method-grid">
+            <article class="method-card"><div class="card-num">01 <span class="card-state current">FOUNDATION EXISTS</span></div><div class="method-symbol" aria-hidden="true">{ }</div><h3>Model intent</h3><p>Describe people, systems, containers, relationships and views as code. Keep architectural decisions close to the teams that own them.</p><span class="card-link">Versioned by Git →</span></article>
+            <article class="method-card"><div class="card-num">02 <span class="card-state future">LONG-TERM DIRECTION</span></div><div class="method-symbol" aria-hidden="true">⌁</div><h3>Discover evidence</h3><p>Learn from repositories, API specifications, infrastructure definitions and eventually runtime telemetry — always with provenance.</p><span class="card-link">Grounded in sources →</span></article>
+            <article class="method-card"><div class="card-num">03 <span class="card-state future">LONG-TERM VISION</span></div><div class="method-symbol" aria-hidden="true">≠</div><h3>Reconcile differences</h3><p>Compare architectural intent with observed evidence. Highlight changes, uncertainty and contradictions without confusing a target state with the current state.</p><span class="card-link">Explain the drift →</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="principles section" id="principles" aria-labelledby="principles-heading">
+        <div class="shell principles-grid">
+          <div class="principles-intro"><span class="section-index">03 / DESIGN PRINCIPLES</span><h2 id="principles-heading">Built for how teams actually work.</h2><p>Kontur starts in the editor, not in a central diagram database. The model is yours, the files are yours, and the history lives in Git.</p></div>
+          <div class="principles-list">
+            <article><span>01</span><div><h3>Source files are authoritative</h3><p>Models live in Git. Previews, indexes and aggregate views are derived; proposed changes go through ordinary review.</p></div></article>
+            <article><span>02</span><div><h3>Local-first, offline-capable</h3><p>Describing and exploring a local architecture should require no account, central service or always-on connection.</p></div></article>
+            <article><span>03</span><div><h3>Interfaces deserve identity</h3><p>APIs are more than arrows between boxes. Kontur aims to treat contracts, ownership and lifecycle as architectural concepts.</p></div></article>
+            <article><span>04</span><div><h3>Federated by design</h3><p>Individual teams can own their models while a future consolidated view makes cross-team connections visible.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="reality section" id="now" aria-labelledby="now-heading">
+        <div class="shell">
+          <div class="section-heading"><span class="section-index">04 / BUILDING IN THE OPEN — INTENT</span><h2 id="now-heading">A working foundation.<br /><span class="soft">A much bigger ambition.</span></h2><p>We want to be clear about what exists and what is still ahead.</p></div>
+          <div class="reality-grid">
+            <div class="reality-pane available"><div class="pane-header"><span class="status-dot"></span> Current prototype</div><h3>Local architecture modeling</h3><ul><li>Rust-based parser, semantic model and validation</li><li>Documented subset of Structurizr DSL</li><li>CLI for selecting and projecting a view</li><li>Live Mermaid preview in VS Code on Linux x64</li><li>Diagnostics and limited source navigation</li></ul><a href="https://github.com/kodemaniak/kontur/blob/main/README.md" target="_blank" rel="noopener noreferrer">Read current capabilities ↗</a></div>
+            <div class="reality-pane planned"><div class="pane-header"><span class="hollow-dot"></span> Next and beyond</div><h3>Architecture connected to evidence</h3><ul><li>Fuller local editing with language support and multi-file models</li><li>AI-assisted inspection and Git-reviewed changes</li><li>Cross-repository references and consolidated views</li><li>First-class API and ownership modeling</li><li>Source discovery and reconciliation with runtime evidence</li></ul><span class="planned-note">These are directions, not released capabilities.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="roadmap section" id="roadmap" aria-labelledby="roadmap-heading">
+        <div class="shell roadmap-grid"><div><span class="section-index">05 / ROADMAP</span><h2 id="roadmap-heading">Grow from the editor outward.</h2><p>Start with useful local tools. Then build bridges between teams and their systems.</p></div><ol class="roadmap-list"><li class="active"><span class="phase">PHASE 01 · IN PROGRESS</span><h3>Local modeling</h3><p>Rust core, validation, CLI and IDE preview. More complete language support and workspace editing next.</p></li><li><span class="phase">PHASE 02 · PLANNED</span><h3>Local AI assistance</h3><p>Inspect, reason about and propose model changes while keeping Git review in control.</p></li><li><span class="phase">PHASE 03 · PLANNED</span><h3>Federated architecture</h3><p>Reference other teams' versioned models and understand the connections between them.</p></li><li><span class="phase">FUTURE VISION</span><h3>Evidence and reconciliation</h3><p>Bring technical evidence into a consolidated view; show divergence with source traceability.</p></li></ol></div>
+      </section>
+
+      <section class="closing section" aria-labelledby="closing-heading"><div class="shell closing-inner"><span class="section-index">AN OPEN INVITATION</span><h2 id="closing-heading">Make architecture<br /><em>accountable to reality.</em></h2><p>Kontur is an early-stage, MIT-licensed project. The ambition is big; the next step is building a solid local modeling experience.</p><a class="button button-primary" href="https://github.com/kodemaniak/kontur" target="_blank" rel="noopener noreferrer">Explore Kontur on GitHub ↗</a><small>Repository access may be restricted while the project is being prepared for a public release.</small></div></section>
+    </main>
+
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand" href="#top"><span>kontur<span class="brand-dot">.</span></span></a><span>Architecture as code, with a view toward evidence.</span><a href="#top">Back to top ↑</a></div></footer>
+  </body>
+</html>

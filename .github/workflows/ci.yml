@@ -25,6 +25,14 @@ jobs:
       - name: Install preview dependencies
         working-directory: apps/preview
         run: npm ci
+      - name: Build and verify Playground WASM
+        working-directory: apps/playground
+        run: |
+          rustup target add wasm32-unknown-unknown
+          npm ci
+          npm test
+          npm run build
+          node tests/wasm-parity.mjs
       - name: Install Chromium
         working-directory: apps/preview
         run: npx playwright install --with-deps chromium
@@ -35,6 +43,8 @@ jobs:
         working-directory: apps/preview
         run: npm run build
       - name: Browser acceptance
+        env:
+          KONTUR_TEST_PLAYGROUND: '1'
         working-directory: apps/preview
         run: npm run test:e2e
       - name: Install VS Code extension dependencies

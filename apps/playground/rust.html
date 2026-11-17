@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kontur Playground · Rust-Vorschau</title>
+  <link rel="stylesheet" href="./preview.css">
+  <style>
+    body { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+    .editor { display: grid; gap: .5rem; padding: .75rem; }
+    textarea { width: 100%; height: 27vh; resize: vertical; font: 14px monospace; }
+  </style>
+</head>
+<body>
+  <section class="editor">
+    <a href="./">Zurück zum Playground</a>
+    <label for="dsl">Structurizr DSL · Orders &amp; Payments</label>
+    <textarea id="dsl" disabled spellcheck="false"></textarea>
+  </section>
+  <div id="app"></div>
+  <script type="module" src="./rust.js"></script>
+</body>
+</html>

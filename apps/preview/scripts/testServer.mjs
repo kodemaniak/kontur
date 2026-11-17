@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, readFileSync, statSync } from 'node:fs';
+import { copyFileSync, cpSync, mkdirSync, readFileSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { dirname, extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -34,6 +34,10 @@ await build({
 copyFileSync(resolve(root, 'tests/presenter.html'), resolve(output, 'presenter.html'));
 copyFileSync(resolve(root, 'tests/webview.html'), resolve(output, 'webview.html'));
 copyFileSync(resolve(root, 'src/style.css'), resolve(output, 'preview.css'));
+
+if (process.env.KONTUR_TEST_PLAYGROUND === '1') {
+  cpSync(resolve(root, '../playground/dist'), resolve(output, 'kontur/playground'), { recursive: true });
+}
 
 const contentTypes = { '.css': 'text/css; charset=utf-8', '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8' };
 const server = createServer((request, response) => {

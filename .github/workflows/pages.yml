@@ -5,6 +5,13 @@ on:
     branches: [main]
     paths:
       - 'website/**'
+      - 'apps/playground/**'
+      - 'apps/preview/**'
+      - 'crates/**'
+      - 'examples/orders-payments/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'rust-toolchain.toml'
       - 'tools/test-website.mjs'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
@@ -29,12 +36,39 @@ jobs:
         uses: actions/checkout@v4
       - name: Verify landing page
         run: node --test tools/test-website.mjs
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: apps/playground/package-lock.json
+      - name: Install WASM target and preview dependencies
+        run: |
+          rustup target add wasm32-unknown-unknown
+          npm ci --prefix apps/preview
+      - name: Test and build Playground
+        working-directory: apps/playground
+        run: |
+          npm ci
+          npm test
+          npm run build
+          node tests/wasm-parity.mjs
+      - name: Assemble Pages artifact
+        run: |
+          mkdir -p _site/playground
+          cp -a website/. _site/
+          cp -a apps/playground/dist/. _site/playground/
+          diff -r --exclude=playground website _site
+          test -s _site/playground/index.html
+          test -s _site/playground/app.js
+          test -s _site/playground/styles.css
+          test -s _site/playground/kontur_cli.wasm
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: website
+          path: _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

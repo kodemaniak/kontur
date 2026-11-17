@@ -10,6 +10,9 @@ kontur-core = { path = "../kontur-core" }
 serde.workspace = true
 serde_json.workspace = true
 
+[lib]
+crate-type = ["rlib", "cdylib"]
+
 [[bin]]
 name = "kontur"
 path = "src/main.rs"

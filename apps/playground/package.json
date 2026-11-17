@@ -1,0 +1,17 @@
+{
+  "name": "kontur-dsl-playground",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A browser-only experimental Kontur DSL to Mermaid playground",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "mermaid": "^11.12.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.12"
+  }
+}

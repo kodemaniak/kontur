@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0d151a" />
+  <meta name="description" content="Kontur DSL Lab – ein browserbasierter Playground für semantische Architekturmodelle und Mermaid-Diagramme." />
+  <title>Kontur DSL Lab · Browser Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./app.js" type="module" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a href="#" class="brand" aria-label="Kontur DSL Lab Startseite">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">kontur<span class="brand-period">.</span></span>
+        <span class="brand-divider"></span>
+        <span class="brand-lab">DSL LAB</span>
+      </a>
+      <span class="topbar-badge"><span class="live-dot"></span> EXPERIMENTAL / 0.1</span>
+      <div class="topbar-actions">
+        <a class="icon-text-button" href="./rust.html">Rust-Vorschau</a>
+        <span class="local-pill"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg> 100% im Browser</span>
+        <button class="icon-text-button" id="referenceButton" type="button" aria-label="Sprachreferenz öffnen"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.4 2.4 0 0 1 4.6.7c0 1.8-2.3 2.1-2.3 4"/><path d="M12 17.5h.01"/></svg><span>Referenz</span></button>
+      </div>
+    </header>
+
+    <div class="app-grid">
+      <aside class="sidebar" aria-label="Kontur-Quellen">
+        <div class="sidebar-intro">
+          <h1>Quellen</h1>
+          <p>Markiere die Repos für die Sichten. Aktiviere <code>bookshop-inventory</code>, um mit <code>bookshop</code> einen Quellenkonflikt zu sehen.</p>
+        </div>
+        <div class="sidebar-section">
+          <div class="section-heading"><span id="sourceCount"></span><button class="subtle-button" id="addSource" type="button">+ Quelle</button></div>
+          <div id="sourceList" class="source-list" role="group" aria-label="Quellen für die Visualisierung"></div>
+        </div>
+      </aside>
+
+      <main class="main-area">
+        <div class="workspace-heading">
+          <div><div class="eyebrow">WORKSPACE / PLAYGROUND</div><h2>Architecture workbench<span class="heading-period">.</span></h2></div>
+          <div class="workspace-modes" aria-label="Arbeitsbereich">
+            <button class="subtle-button" id="visualizationMode" type="button" aria-pressed="true" aria-controls="visualizationPanel">Visualisierung</button>
+            <button class="subtle-button" id="editorMode" type="button" aria-pressed="false" aria-controls="editorPanel">Editor</button>
+          </div>
+        </div>
+
+        <div class="workbench">
+          <section class="panel editor-panel" id="editorPanel" hidden aria-label="Kontur DSL Editor">
+            <div class="panel-header">
+              <div class="panel-title"><span class="file-icon">{ }</span><div><strong>model.kontur</strong><span>DSL source</span></div></div>
+              <div class="panel-buttons"><button class="subtle-button" type="button" id="resetButton" title="Beispielquelle wiederherstellen" hidden>Zurücksetzen</button><button class="subtle-button" type="button" id="downloadDslButton" title="DSL-Datei herunterladen"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-4-4 4 4 4-4M4 17v3h16v-3"/></svg></button></div>
+            </div>
+            <div class="editor-subhead"><span class="tiny-dot"></span><span id="editorSubtitle"></span><span class="editor-hint">EDITABLE</span></div>
+            <div class="source-controls" id="sourceControls">
+              <div class="source-actions">
+                <label for="sourceSelect">Quellmodell</label>
+                <select id="sourceSelect"></select>
+                <button class="subtle-button" id="removeSource" type="button">Entfernen</button>
+              </div>
+              <div class="source-fields">
+                <label>Git-Repo <input id="sourceRepo" placeholder="org/repo oder URL"></label>
+                <label>Branch / Commit <input id="sourceRevision" placeholder="optional"></label>
+                <label>Quelldatei <input id="sourceFile" placeholder="model.kontur"></label>
+              </div>
+            </div>
+            <div class="editor-surface" id="editorSurface">
+              <div class="line-numbers" id="lineNumbers" aria-hidden="true"></div>
+              <textarea id="dslEditor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Kontur DSL Quelltext"></textarea>
+            </div>
+            <div class="editor-status">
+              <div class="status-left"><span class="status-indicator" id="parseDot"></span><span id="parseStatus">Bereit</span></div>
+              <div class="editor-meta"><span id="lineCount">0 lines</span><span>UTF-8</span><span>KONTUR</span></div>
+            </div>
+          </section>
+
+          <section class="panel preview-panel" id="visualizationPanel" aria-label="Mermaid Preview">
+            <div class="panel-header preview-header">
+              <div class="panel-title"><span class="preview-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h6v5H4zM14 3h6v5h-6zM14 15h6v5h-6zM10 9h4m-7 3v5h7m-7-10V5h7"/></svg></span><div><strong>Visualization</strong><span>Mermaid.js · client-side</span></div></div>
+              <span class="preview-live"><span></span> LIVE</span>
+            </div>
+            <div class="view-toolbar">
+              <label class="view-label" for="viewSelect">VIEW</label>
+              <select id="viewSelect" aria-label="Architektursicht wählen"></select>
+              <label id="stageControl" class="view-label" hidden>
+                STAGE
+                <select id="stageSelect" aria-label="Application Stage wählen"></select>
+              </label>
+              <div class="toolbar-spacer"></div>
+              <button class="toolbar-icon" id="copyMermaidButton" type="button" title="Mermaid-Code kopieren" aria-label="Mermaid-Code kopieren"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg></button>
+              <button class="toolbar-icon" id="downloadSvgButton" type="button" title="SVG exportieren" aria-label="SVG exportieren"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12m-4-4 4 4 4-4M4 17v3h16v-3"/></svg></button>
+            </div>
+            <div class="preview-tabs" role="tablist" aria-label="Vorschauansicht">
+              <button type="button" role="tab" aria-selected="true" class="preview-tab active" id="diagramTab">DIAGRAM <span class="tab-dot"></span></button>
+              <button type="button" role="tab" aria-selected="false" class="preview-tab" id="mermaidTab">MERMAID SOURCE</button>
+              <div class="tabs-spacer"></div>
+              <span class="view-mode-caption">AUTO LAYOUT</span>
+            </div>
+            <div class="preview-body">
+              <div id="diagramPane" class="diagram-pane">
+                <div class="diagram-grid"></div>
+                <div class="diagram-canvas" id="diagramCanvas"><div class="loading-message"><span class="spinner"></span> Initialisiere Mermaid …</div></div>
+                <div class="diagram-tools"><span class="source-touch-hint">ⓘ antippen für Details</span></div>
+                <div class="zoom-controls"><button id="zoomOut" aria-label="Verkleinern" type="button">−</button><span id="zoomValue">100%</span><button id="zoomIn" aria-label="Vergrößern" type="button">+</button><button id="zoomFit" type="button" title="Zoom zurücksetzen" aria-label="Zoom zurücksetzen">⌗</button></div>
+              </div>
+              <div id="sourcePane" class="source-pane" hidden><pre><code id="mermaidSource"></code></pre></div>
+            </div>
+            <div class="preview-footer"><div class="diagram-stats"><span class="tiny-dot green"></span><span id="modelStats">0 elements · 0 relationships</span></div><div class="footer-legend"><span><i class="legend-mark system"></i> System</span><span><i class="legend-mark api"></i> API</span><span><i class="legend-mark org"></i> Owner</span></div></div>
+          </section>
+        </div>
+
+            <div class="panel diagnostics-section" id="diagnosticsPanel" hidden>
+              <div class="diagnostics-heading"><span>DIAGNOSE</span><span class="diagnostic-count" id="diagnosticCount">0</span></div>
+              <div id="diagnosticsList" class="diagnostics-list" role="status" aria-live="polite"></div>
+            </div>
+
+        <section class="merge-report" id="mergeReport" hidden aria-labelledby="mergeReportTitle">
+          <h3 id="mergeReportTitle">Zusammenführung</h3>
+          <p id="mergeSummary"></p>
+          <ul id="mergeConflicts"></ul>
+        </section>
+
+        <p class="under-workbench">Git-Quellen werden simuliert. DSL-Entwürfe und Quellenauswahl werden in diesem Browser gespeichert.</p>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="source-details" id="sourceDetails" aria-labelledby="sourceDetailsTitle">
+    <h2 id="sourceDetailsTitle">Quellen</h2>
+    <p id="sourceDetailsStatus" class="assertion-status" hidden></p>
+    <h3>Quellen</h3>
+    <ul id="sourceDetailsList"></ul>
+    <section id="sourceResponsibilityList" aria-label="Verantwortlichkeiten" hidden></section>
+    <button type="button" class="subtle-button" id="closeSourceDetails" autofocus>Schließen</button>
+  </dialog>
+  <dialog id="referenceDialog" class="reference-dialog" aria-labelledby="referenceTitle">
+    <div class="dialog-header"><div><div class="eyebrow">SPRACHREFERENZ</div><h2 id="referenceTitle">Kontur DSL</h2></div><button id="closeReferenceButton" type="button" class="dialog-close" aria-label="Schließen">×</button></div>
+    <p>Experimenteller Syntaxumfang dieses Playgrounds. Das ist noch keine finale Kontur-Sprachspezifikation.</p>
+    <div class="reference-grid">
+      <div>
+        <h3>Workspace und Schreibweise</h3>
+        <code>workspace "Name" { namespace "demo.beispiel" model { … } views { … } }</code>
+        <p>In <code>workspace { … }</code> sind Name und innere Blöcke optional. <code>model bookshop { … }</code> ist eine Kurzform für einen Workspace mit Namespace <code>bookshop</code> und einem Modellblock. Schlüsselwörter unterscheiden Groß- und Kleinschreibung. IDs beginnen mit A–Z, a–z oder _ und können danach auch Ziffern und Bindestriche enthalten. Globale und qualifizierte Element-IDs sind workspaceweit eindeutig. Vorwärtsreferenzen sind möglich.</p>
+        <p>Textwerte akzeptieren einen Bezeichner oder einfachen bzw. doppelten Anführungszeichen-Text. In Strings stehen <code>\n</code> und <code>\t</code> für Zeilenumbruch und Tabulator. Ein Backslash kann auch das nächste Zeichen maskieren. Kommentare beginnen mit <code>#</code>, <code>//</code> oder <code>/*</code> und enden bei der Blockform mit <code>*/</code>. Semikolons sind innerhalb von Blöcken optional.</p>
+      </div>
+      <div>
+        <h3>Elemente und Hierarchie</h3>
+        <code>id = typ "Name" { … }</code>
+        <p>Alternativ ist <code>typ id "Name" { … }</code> erlaubt. Direkt in <code>model</code> stehen <code>system</code>, <code>actor</code>, <code>api</code>, <code>businessProcess</code>, <code>organization</code>, <code>team</code> und <code>person</code>. In <code>system</code> stehen <code>container</code>, <code>service</code> und <code>datastore</code>. Letztere sind Container mit vorbelegtem <code>kind</code>. In Containern stehen <code>component</code>-Elemente. Elementblöcke sind optional und können auch Beziehungen enthalten.</p>
+        <p>Ältere Modelle dürfen weiterhin den Workspace-Block <code>organization { … }</code> mit <code>id = team "Name"</code> und <code>id = person "Name"</code> verwenden. Deren optionale Blöcke akzeptieren dort <code>description</code>, <code>email</code> und <code>url</code>.</p>
+      </div>
+      <div>
+        <h3>Elementeigenschaften</h3>
+        <p>Textwerte folgen auf <code>description</code>, <code>technology</code>, <code>protocol</code>, <code>style</code>, <code>interaction</code>, <code>lifecycle</code>, <code>kind</code>, <code>email</code> oder <code>url</code>. <code>external true</code> markiert ein externes Element, <code>external false</code> setzt die Markierung zurück.</p>
+        <p><code>contract openapi "./orders.yaml"</code> speichert Format und Pfad. Der Playground liest die Datei nicht ein und warnt bei APIs ohne Vertragsreferenz.</p>
+      </div>
+      <div>
+        <h3>Verantwortlichkeiten und Quellen</h3>
+        <code>businessOwner anna</code>
+        <code>businessOwner ben source "Zuständigkeitsliste"</code>
+        <code>responsibilities { architect clara businessTeam commerce }</code>
+        <p><code>productOwner</code>, <code>businessOwner</code>, <code>technicalOwner</code> und <code>architect</code> erwarten <code>person</code>. <code>businessTeam</code> und <code>technicalTeam</code> erwarten <code>team</code>. Diese Rollen und die allgemeine Rolle <code>owner</code> sind direkt im Elementblock oder in <code>responsibilities</code> gültig. <code>owner</code> und frei benannte Rollen innerhalb von <code>responsibilities</code> akzeptieren <code>person</code> oder <code>team</code>.</p>
+        <p>Jede Rolle kann beliebig oft mit je einer Ziel-ID deklariert werden. Personen und Teams werden unabhängig zugeordnet. Zugehörigkeit entsteht durch <code>partOf</code>. <code>source</code> ergänzt einen optionalen Herkunftshinweis. Bei Beziehungen steht er im Block, etwa <code>{ source "Betriebsvertrag" }</code>.</p>
+      </div>
+      <div>
+        <h3>Event-APIs mit mehreren Topics</h3>
+        <code>events = api "Events" {</code>
+        <code>produces "orders.created", "orders.cancelled"</code>
+        <code>consumes "payments.settled" }</code>
+        <p>Die beiden Listen beschreiben produzierte und konsumierte Topics aus Sicht des API-Anbieters. Listen können mehrfach angegeben werden und werden zusammengeführt. Topic-Namen mit Punkten brauchen Anführungszeichen.</p>
+        <code>worker subscribes events { topics "orders.created" }</code>
+        <p><code>topics</code> ist bei <code>publishes</code> und <code>subscribes</code> optional und verweist auf deklarierte Topics dieser API. Ohne Auswahl bezieht sich die Beziehung auf die API als Ganzes.</p>
+      </div>
+      <div>
+        <h3>Beziehungen</h3>
+        <code>quellId beziehung zielId "Beschreibung" { … }</code>
+        <p>Beschreibung in Anführungszeichen und Block sind optional. <code>provides</code>, <code>consumes</code>, <code>publishes</code> und <code>subscribes</code> verbinden System, Container oder Komponente mit einer API. Nur <code>consumes</code> akzeptiert <code>{ operations "listOrders", "createOrder" }</code>. <code>dependsOn</code> zielt auf ein technisches Element. <code>-&gt;</code> ist eine freie Beziehung. Setze Leerzeichen um den Pfeil.</p>
+      </div>
+      <div>
+        <h3>Organisation und Geschäftsprozesse</h3>
+        <p><code>partOf</code> verbindet Organisation, Team oder Person mit einer Organisation oder einem Team. Mehrere Zugehörigkeiten sind möglich. <code>developedBy</code>, <code>operatedBy</code>, <code>providedBy</code> und <code>customer</code> verweisen auf Organisationen, Teams oder Personen. <code>basedOn</code> beschreibt eine Grundlage, <code>supportedBy</code> eine Unterstützung, etwa <code>dispatch supportedBy shipping</code>. Beide akzeptieren beliebige definierte Elemente. <code>businessProcess</code> beschreibt auch intern erbrachte Prozesse.</p>
+      </div>
+      <div>
+        <h3>Plattformen und technische API-Abhängigkeiten</h3>
+        <code>platform core "Core Platform" {</code>
+        <code>  productOwner anna</code>
+        <code>  capability messaging "Event Streaming" { technology "Kafka" }</code>
+        <code>  environment shared "Shared"</code>
+        <code>}</code>
+        <p><code>platform</code> ist ein System mit eigenen Capabilities und Plattformumgebungen. Es unterstützt Systemeigenschaften wie <code>lifecycle</code> und mehrwertige Verantwortlichkeiten. <code>capability</code> und <code>environment</code> stehen in Plattformblöcken. Ihre qualifizierten IDs sind hier <code>core.messaging</code> und <code>core.shared</code>. Elementdeklarationen unterstützen beide Schreibweisen.</p>
+        <code>api events "Order Events" {</code>
+        <code>  mode async</code>
+        <code>  usesCapability core.messaging</code>
+        <code>  topic created "orders.created"</code>
+        <code>}</code>
+        <p>APIs können im Modell oder in einem Systemblock stehen. Im System <code>shop</code> bekommt diese API die ID <code>shop.events</code>. Innerhalb des Systems ist auch <code>events</code> als Zielreferenz möglich. <code>usesCapability</code> kann je API beliebig oft stehen und akzeptiert eine Capability als Ziel. Optional folgt <code>source "Hinweis"</code>. Dieselbe Beziehung kann auch als <code>shop.events usesCapability core.messaging</code> mit dem üblichen Beziehungsblock stehen.</p>
+        <p><code>mode sync</code> erlaubt <code>provides</code> und <code>consumes</code>. <code>mode async</code> erlaubt <code>publishes</code> und <code>subscribes</code>. Ohne Modus bleiben die bisherigen API-Beziehungen zulässig. <code>topic</code> benennt ein Topic im API-Block. <code>orders publishes events.created</code> nutzt im Systemblock die relative Topic-ID. Von außen lautet das Ziel <code>shop.events.created</code>. Die ältere <code>topics</code>-Schreibweise mit Topic-Namen bleibt gültig.</p>
+      </div>
+      <div>
+        <h3>Application Stages und Bindings</h3>
+        <code>stages dev, stage, prod</code>
+        <code>bindings {</code>
+        <code>  shop.events@dev uses core.messaging@shared</code>
+        <code>  shop.events@prod uses core.messaging@production</code>
+        <code>}</code>
+        <p><code>stages</code> steht im System- oder Plattformblock. <code>bindings</code> kann direkt im Workspace oder im Modell stehen. Ein Binding erwartet eine API, eine Stage ihres Systems, eine per <code>usesCapability</code> referenzierte Capability und eine Umgebung der anbietenden Plattform. Optional folgt <code>source "Hinweis"</code>. Mehrere Stages und Anwendungen können dieselbe Umgebung nutzen. Mehrere passende Bindings werden angezeigt und behalten ihre Fundstellen.</p>
+        <p>Der Stage-Selektor der technischen Sichten startet mit <code>prod</code>. Er verwendet ausschließlich passende Bindings aus den ausgewählten Repositories und zeigt bei fehlendem Binding „nicht spezifiziert“. Infrastruktur und Kubernetes-Deployments lassen sich über die Deployment DSL explizit modellieren.</p>
+        <p>In den technischen Sichten zeigen durchgezogene Kanten deklarierte Interaktionen, Capability-Nutzung und Plattformzugehörigkeit. Gestrichelte Kanten in Platform Capabilities zeigen aus Service-Interaktion und Capability-Nutzung abgeleitete Abhängigkeiten. Sie werden nicht als Assertions gespeichert. Stages und technische Beziehungen werden additiv vereinigt. Identische Aussagen behalten alle Fundstellen, einschließlich der Fundstellen pro Binding.</p>
+      </div>
+      <div>
+        <h3>Sichten</h3>
+        <code>containers "Name" { scope systemId autoLayout lr include * }</code>
+        <p>Typen sind <code>landscape</code> (auch <code>systemLandscape</code>), <code>containers</code> (auch <code>container</code>), <code>components</code>, <code>apis</code> (auch <code>api</code>), <code>deployment</code>, <code>ownership</code>, <code>platformCapabilities</code> und <code>technicalDependencies</code>. Name und Block sind optional. <code>title</code> setzt den Anzeigenamen. <code>autoLayout</code> oder <code>layout</code> akzeptiert <code>lr</code>, <code>rl</code>, <code>tb</code> oder <code>bt</code>, auch in Großbuchstaben. <code>scope</code> referenziert ein Element und filtert Container-, API- und technische Sichten. <code>include *</code> verwendet die Standardauswahl der Sicht. Die Oberfläche gruppiert Container-Sichten nach System und API-Sichten nach API. Für vorhandene Rollenzuordnungen ist eine Zuständigkeitssicht verfügbar.</p>
+      </div>
+      <div>
+        <h3>Deployment</h3>
+        <p>Deployment Environments stehen im <code>model</code>. Deployment Nodes können weitere Nodes, Infrastruktur und benannte Instanzen enthalten. Eine Instanz referenziert das logische Element. Technische Beziehungen zwischen logischen Systemen oder Containern werden auf ihre sichtbaren Instanzen übertragen.</p>
+        <code>prod = deploymentEnvironment "Produktion" {</code>
+        <code>  cluster = deploymentNode "EKS" {</code>
+        <code>    ingress = infrastructureNode "Ingress"</code>
+        <code>    ns = deploymentNode "Namespace bookshop" {</code>
+        <code>      orderService = containerInstance orders</code>
+        <code>      shopInstance = softwareSystemInstance shop</code>
+        <code>    }</code>
+        <code>  }</code>
+        <code>}</code>
+        <code>prod.cluster runsIn core.production</code>
+        <code>prod.cluster.ingress -&gt; prod.cluster.ns.orderService "HTTPS"</code>
+        <p>Deployment-Elemente werden mit ihrem vollständigen Pfad referenziert. <code>runsIn</code> verbindet einen Deployment Node mit einer Platform Environment. Im <code>views</code>-Block wählt <code>environment</code> die Topologie, <code>stage</code> die passenden API-Bindings. Optional beschränkt <code>scope</code> die Instanzen auf ein System oder eine Plattform.</p>
+        <code>deployment "Bookshop · Produktion" {</code>
+        <code>  environment prod stage prod scope shop include * autoLayout lr</code>
+        <code>}</code>
+        <p>API-Interaktionen erscheinen an den beteiligten Instanzen. Die API führt zur genutzten Capability in der gebundenen Platform Environment. Fehlt für die gewählte Stage ein Binding, zeigt die Sicht die Capability mit „nicht spezifiziert“.</p>
+      </div>
+      <div>
+        <h3>Mehrere Quellmodelle</h3>
+        <p>Die zentrale Quellenauswahl gilt für alle Sichten. Repository, Revision und Quelldatei beschreiben die Herkunft des lokal editierten Modells. Standarddatei ist <code>model.kontur</code>. Identität entsteht aus <code>namespace</code> und Element-ID. Ohne Namespace teilen sich Quellen den leeren Namespace. Referenzen dürfen in einer anderen ausgewählten Quelle desselben Namespace definiert sein.</p>
+        <p>Identische Aussagen über eine Beziehung oder Rolle erscheinen einmal, mit allen Fundstellen. Verschiedene Ziele derselben Rolle ergänzen sich. Fehlende Aussagen entfernen keine Zuordnungen. Unter ⓘ lassen sich Fundstellen und Reconciliation-Status per Klick oder Tippen aufrufen.</p>
+        <p>Unbekannte Referenzen und falsche Zieltypen sind Validierungsfehler. Abweichende Werte in Feldern mit einem einzelnen Wert, etwa <code>protocol</code>, werden als Konflikt mit allen Varianten angezeigt. Das Diagramm nutzt für solche Felder den ersten Wert in Quellenreihenfolge. Topic-Listen werden vereinigt. Unvereinbare Elementtypen oder abweichende Parents blockieren die gemeinsame Vorschau. Eine Plattform kann ein System derselben Identität spezialisieren.</p>
+      </div>
+    </div>
+    <div class="dialog-footer"><span>CONTINUOUS DESIGN EXPERIMENT</span><button id="referenceDoneButton" type="button" class="primary-button">Verstanden</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

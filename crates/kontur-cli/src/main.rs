@@ -1,13 +1,14 @@
-mod protocol;
-
 use std::fs;
 use std::io::{self, BufRead, Write};
 
+use kontur_cli::{
+    compile_preview,
+    protocol::{PreviewRequest, PreviewResponse, PreviewResult},
+};
 use kontur_core::diagnostic::{Diagnostic, DiagnosticCode};
 use kontur_core::model::ViewKey;
 use kontur_core::source::SourceFile;
-use kontur_core::{compile_single_view, compile_view};
-use protocol::{PreviewRequest, PreviewResponse, PreviewResult};
+use kontur_core::compile_view;
 
 const MAX_FRAME_BYTES: usize = 5 * 1024 * 1024;
 const MAX_SAFE_REVISION: u64 = 9_007_199_254_740_991;
@@ -59,10 +60,7 @@ fn preview_service() -> Result<(), String> {
             request.document_uri.clone(),
             request.text,
         );
-        let result = match compile_single_view(&source) {
-            Ok(view) => PreviewResult::success(&view, &source),
-            Err(diagnostics) => PreviewResult::failure(&diagnostics, Some(&source)),
-        };
+        let result = compile_preview(&source);
         let response = PreviewResponse {
             schema_version: 1,
             revision: request.revision,

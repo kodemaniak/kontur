@@ -144,6 +144,38 @@ h3 { font-size: 23px; line-height: 1.2; font-weight: 700; }
 .principles-list h3 { margin-bottom: 9px; font-size: 21px; }
 .principles-list p { color: #97ada7; font-size: 14px; line-height: 1.8; margin-bottom: 0; }
 
+
+/* Architecture as context: concept workflow for coding agents. */
+.agents { background: radial-gradient(ellipse at 85% 40%, rgba(46, 142, 123, .12), transparent 47%), #0a1718; border-top: 1px solid #203d38; border-bottom: 1px solid #203d38; }
+.agents-grid { display: grid; grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr); align-items: center; gap: clamp(35px, 6vw, 95px); }
+.agents-story h2 { max-width: 550px; }
+.agents-lead { font-size: 22px; font-weight: 650; letter-spacing: -.03em; color: var(--mint); margin: 0 0 20px; }
+.agents-story p:not(.agents-lead) { max-width: 535px; color: var(--muted); line-height: 1.83; font-size: 15px; }
+.agents-story p strong { color: var(--text); font-weight: 650; }
+.agents-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 25px 0 23px; }
+.agents-tags span { color: #bbded3; background: #18332f; border: 1px solid #31574e; border-radius: 7px; padding: 7px 11px; font: 650 11px ui-monospace, SFMono-Regular, Consolas, monospace; }
+.agents-story p.agents-note { font-size: 12px; color: #8fa99f; border-left: 2px solid #437a6c; padding-left: 13px; }
+.agent-journey { min-width: 0; overflow: hidden; background: #101f20; border: 1px solid #3a5b51; border-radius: 17px; box-shadow: 0 20px 65px rgba(0,0,0,.18); }
+.agent-journey-top, .agent-journey-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #93b8aa; font: 700 10px ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .07em; }
+.agent-journey-top { padding: 18px 21px; border-bottom: 1px solid #2b4540; }
+.agent-journey-top span:last-child { color: #688e81; }
+.agent-journey-body { padding: 26px 28px; }
+.agent-step, .agent-outputs > div, .agent-review { border: 1px solid #3a5c52; border-radius: 10px; padding: 16px 18px; background: #142b29; }
+.agent-step-highlight { background: #1c3934; border-color: #6bc9ad; }
+.agent-step-label { display: block; color: #8de3c9; font: 750 10px ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .065em; margin-bottom: 6px; }
+.agent-step strong, .agent-outputs strong, .agent-review strong { display: block; font-size: 17px; letter-spacing: -.02em; }
+.agent-step p, .agent-outputs p, .agent-review p { color: #a2bbb2; line-height: 1.55; font-size: 12px; margin: 5px 0 0; }
+.agent-connector { display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 2px; padding: 9px 0; color: #84baab; font: 650 11px ui-monospace, SFMono-Regular, Consolas, monospace; text-align: center; }
+.agent-connector > span:first-child { font-size: 20px; line-height: 1; }
+.agent-connector small { color: #9ea99d; font-size: inherit; }
+.agent-outputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.agent-outputs > div { background: #142426; padding: 15px; }
+.agent-outputs strong { font-size: 15px; }
+.agent-review { background: #273125; border-color: #687952; }
+.agent-review .agent-step-label { color: #d5db97; }
+.agent-journey-foot { border-top: 1px solid #2b4540; padding: 14px 21px; color: #79978d; font-size: 9px; }
+.agent-journey-foot span { color: #b18b62; white-space: nowrap; }
+
 .reality-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .reality-pane { padding: 34px; border: 1px solid #2b4843; border-radius: 16px; background: #122523; }
 .reality-pane.planned { background: #0e1b1c; border-color: #263d3a; }
@@ -188,6 +220,9 @@ h3 { font-size: 23px; line-height: 1.2; font-weight: 700; }
   .demo-wrap { max-width: 660px; margin: 0 auto; width: 100%; }
   .hero { padding-top: 95px; }
   .principles-grid { gap: 6%; }
+  .agents-grid { grid-template-columns: 1fr; }
+  .agents-story { max-width: 800px; }
+  .agent-journey { width: 100%; max-width: 680px; margin: 0 auto; }
 }
 @media (max-width: 760px) {
   .shell { width: min(100% - 36px, 550px); }
@@ -222,6 +257,8 @@ h3 { font-size: 23px; line-height: 1.2; font-weight: 700; }
   .method-symbol { margin: 25px 0 20px; }
   .method-card p { margin-bottom: 23px; }
   .reality-pane { padding: 27px; }
+  .agent-journey-body { padding: 19px; }
+  .agent-journey-top, .agent-journey-foot { padding-inline: 16px; }
   .roadmap-list { margin-top: 8px; }
   .closing { padding: 92px 0; }
   .footer-inner { flex-wrap: wrap; }
@@ -231,6 +268,8 @@ h3 { font-size: 23px; line-height: 1.2; font-weight: 700; }
   .hero-actions { flex-direction: column; }
   .demo-foot span:first-child { max-width: 170px; }
   .graph-meta { font-size: 9px; }
+  .agent-outputs { grid-template-columns: 1fr; }
+  .agent-journey-foot { flex-wrap: wrap; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

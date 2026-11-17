@@ -43,6 +43,8 @@ jobs:
         working-directory: apps/preview
         run: npm run build
       - name: Browser acceptance
+        env:
+          KONTUR_TEST_PLAYGROUND: '1'
         working-directory: apps/preview
         run: npm run test:e2e
       - name: Install VS Code extension dependencies

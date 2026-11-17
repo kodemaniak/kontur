@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#081313" />
-    <meta name="description" content="Kontur explores a living architecture: Git-versioned models connected with code, infrastructure and runtime evidence, with differences made visible." />
+    <meta name="description" content="Kontur connects architectural intent, software development and runtime reality. Explore living architecture, evidence-based reconciliation and architecture context for coding agents." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Kontur — Architecture that knows when reality changes" />
-    <meta property="og:description" content="From architecture-as-code toward architecture backed by evidence." />
+    <meta property="og:description" content="Architecture with meaning: context for humans and coding agents, grounded in Git and reconciled with technical evidence." />
     <title>Kontur — Architecture that knows when reality changes</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
@@ -28,6 +28,7 @@
         <nav class="header-nav" aria-label="Main navigation">
           <a href="#idea">The idea</a>
           <a href="#principles">Principles</a>
+          <a href="#agents">For agents</a>
           <a href="#roadmap">Roadmap</a>
         </nav>
         <a class="header-repo" href="https://github.com/kodemaniak/kontur" target="_blank" rel="noopener noreferrer" aria-label="Kontur repository on GitHub (opens new tab)">
@@ -45,7 +46,7 @@
             <div class="eyebrow"><span class="pulse-dot"></span> A vision for living software architecture</div>
             <h1 id="hero-heading">Architecture that knows when <em>reality changes.</em></h1>
             <p class="hero-lead">Your architecture evolves. Your documentation should, too.</p>
-            <p class="hero-description">Architecture models describe what you intend to build. Code, infrastructure, and running systems tell another part of the story. <strong>Kontur aims to connect them</strong> — so the differences become visible, understandable, and traceable.</p>
+            <p class="hero-description">Architecture models describe what you intend to build. Code, infrastructure, and running systems tell another part of the story. <strong>Kontur aims to connect them</strong> — making differences visible and giving future coding agents meaningful architecture context for the next change.</p>
             <div class="hero-actions">
               <a class="button button-primary" href="#idea">Explore the vision <span aria-hidden="true">↘</span></a>
               <a class="button button-secondary" href="#now">See what's real today <span aria-hidden="true">→</span></a>
@@ -118,6 +119,7 @@
             <h2 id="idea-heading">Architecture isn't static.<br /><span class="soft">Why should its documentation be?</span></h2>
             <p>Architecture diagrams often start as a good description of intent. Then teams ship features, infrastructure changes, and new integrations appear. The picture falls behind — even when everyone is doing their job.</p>
             <p>Kontur explores a different approach: <strong>keep architectural intent in versioned source files, connect it to technical evidence, and make the gaps explicit.</strong> Not every gap is a problem. Every gap is an opportunity to understand what changed.</p>
+            <p>With an explicit semantic model behind the diagrams, the same knowledge can explain a system to a human, guide a coding agent, and provide a baseline for validation.</p>
           </div>
         </div>
       </section>
@@ -139,29 +141,73 @@
           <div class="principles-list">
             <article><span>01</span><div><h3>Source files are authoritative</h3><p>Models live in Git. Previews, indexes and aggregate views are derived; proposed changes go through ordinary review.</p></div></article>
             <article><span>02</span><div><h3>Local-first, offline-capable</h3><p>Describing and exploring a local architecture should require no account, central service or always-on connection.</p></div></article>
-            <article><span>03</span><div><h3>Interfaces deserve identity</h3><p>APIs are more than arrows between boxes. Kontur aims to treat contracts, ownership and lifecycle as architectural concepts.</p></div></article>
+            <article><span>03</span><div><h3>Meaning beyond boxes and arrows</h3><p>APIs, contracts, ownership and usage have explicit meaning. Diagrams and agent context are derived views of the same model.</p></div></article>
             <article><span>04</span><div><h3>Federated by design</h3><p>Individual teams can own their models while a future consolidated view makes cross-team connections visible.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="agents section" id="agents" aria-labelledby="agents-heading">
+        <div class="shell agents-grid">
+          <div class="agents-story">
+            <span class="section-index">04 / ARCHITECTURE AS CONTEXT</span>
+            <h2 id="agents-heading">Architecture that guides the code you write.</h2>
+            <p class="agents-lead">Built for humans. Ready for agents.</p>
+            <p>An architecture model should do more than explain yesterday's decisions. Kontur's long-term direction is to make semantic architecture context available to developers <strong>and coding agents</strong> through local tooling and interfaces such as MCP.</p>
+            <p>Which API contract applies? Who owns this service? What dependencies and boundaries should a change respect? In a future spec-driven workflow, an agent could use those answers to propose <strong>code and architecture changes together</strong>, then submit both for normal Git review.</p>
+            <div class="agents-tags" aria-label="Examples of architectural context">
+              <span>API contracts</span><span>Ownership</span><span>Dependencies</span><span>Architecture rules</span>
+            </div>
+            <p class="agents-note">Concept, not a shipped agent or MCP integration. Proposed changes remain reviewable; implementation evidence and runtime observations can still differ from architectural intent.</p>
+          </div>
+          <div class="agent-journey" aria-label="Illustrative spec-driven development with Kontur">
+            <div class="agent-journey-top"><span>ARCHITECTURE / CONTEXT</span><span>CONCEPT / 002</span></div>
+            <div class="agent-journey-body">
+              <div class="agent-step">
+                <span class="agent-step-label">01 · SEMANTIC MODEL</span>
+                <strong>Architecture intent</strong>
+                <p>Systems, API contracts, constraints and owners</p>
+              </div>
+              <div class="agent-connector"><span aria-hidden="true">↓</span><span>Context via MCP / CLI <small>(planned)</small></span></div>
+              <div class="agent-step agent-step-highlight">
+                <span class="agent-step-label">02 · CODING AGENT</span>
+                <strong>Design-aware implementation</strong>
+                <p>Ask questions, understand constraints, propose changes</p>
+              </div>
+              <div class="agent-connector"><span aria-hidden="true">↓</span><span>Changes proposed together</span></div>
+              <div class="agent-outputs">
+                <div><span class="agent-step-label">03A · CODE</span><strong>Implementation</strong><p>Source, tests, configuration</p></div>
+                <div><span class="agent-step-label">03B · MODEL</span><strong>Architecture</strong><p>Intent, contracts, relationships</p></div>
+              </div>
+              <div class="agent-connector"><span aria-hidden="true">↓</span><span>Validate &amp; reconcile</span></div>
+              <div class="agent-review">
+                <span class="agent-step-label">04 · HUMAN REVIEW</span>
+                <strong>One coherent pull request</strong>
+                <p>Code and architectural intent evolve together, with a traceable review history.</p>
+              </div>
+            </div>
+            <div class="agent-journey-foot">SPECIFIED ≠ IMPLEMENTED ≠ OBSERVED <span>ILLUSTRATIVE ONLY</span></div>
           </div>
         </div>
       </section>
 
       <section class="reality section" id="now" aria-labelledby="now-heading">
         <div class="shell">
-          <div class="section-heading"><span class="section-index">04 / BUILDING IN THE OPEN — INTENT</span><h2 id="now-heading">A working foundation.<br /><span class="soft">A much bigger ambition.</span></h2><p>We want to be clear about what exists and what is still ahead.</p></div>
+          <div class="section-heading"><span class="section-index">05 / BUILDING IN THE OPEN — INTENT</span><h2 id="now-heading">A working foundation.<br /><span class="soft">A much bigger ambition.</span></h2><p>We want to be clear about what exists and what is still ahead.</p></div>
           <div class="reality-grid">
             <div class="reality-pane available"><div class="pane-header"><span class="status-dot"></span> Current prototype</div><h3>Local architecture modeling</h3><ul><li>Rust-based parser, semantic model and validation</li><li>Documented subset of Structurizr DSL</li><li>CLI for selecting and projecting a view</li><li>Live Mermaid preview in VS Code on Linux x64</li><li>Diagnostics and limited source navigation</li></ul><a href="https://github.com/kodemaniak/kontur/blob/main/README.md" target="_blank" rel="noopener noreferrer">Read current capabilities ↗</a></div>
-            <div class="reality-pane planned"><div class="pane-header"><span class="hollow-dot"></span> Next and beyond</div><h3>Architecture connected to evidence</h3><ul><li>Fuller local editing with language support and multi-file models</li><li>AI-assisted inspection and Git-reviewed changes</li><li>Cross-repository references and consolidated views</li><li>First-class API and ownership modeling</li><li>Source discovery and reconciliation with runtime evidence</li></ul><span class="planned-note">These are directions, not released capabilities.</span></div>
+            <div class="reality-pane planned"><div class="pane-header"><span class="hollow-dot"></span> Next and beyond</div><h3>Architecture connected to evidence</h3><ul><li>Fuller local editing with language support and multi-file models</li><li>MCP-accessible context for coding agents (planned)</li><li>Spec-driven code and architecture changes through Git review</li><li>Cross-repository references and consolidated views</li><li>First-class API and ownership modeling</li><li>Source discovery and reconciliation with runtime evidence</li></ul><span class="planned-note">These are directions, not released capabilities.</span></div>
           </div>
         </div>
       </section>
 
       <section class="roadmap section" id="roadmap" aria-labelledby="roadmap-heading">
-        <div class="shell roadmap-grid"><div><span class="section-index">05 / ROADMAP</span><h2 id="roadmap-heading">Grow from the editor outward.</h2><p>Start with useful local tools. Then build bridges between teams and their systems.</p></div><ol class="roadmap-list"><li class="active"><span class="phase">PHASE 01 · IN PROGRESS</span><h3>Local modeling</h3><p>Rust core, validation, CLI and IDE preview. More complete language support and workspace editing next.</p></li><li><span class="phase">PHASE 02 · PLANNED</span><h3>Local AI assistance</h3><p>Inspect, reason about and propose model changes while keeping Git review in control.</p></li><li><span class="phase">PHASE 03 · PLANNED</span><h3>Federated architecture</h3><p>Reference other teams' versioned models and understand the connections between them.</p></li><li><span class="phase">FUTURE VISION</span><h3>Evidence and reconciliation</h3><p>Bring technical evidence into a consolidated view; show divergence with source traceability.</p></li></ol></div>
+        <div class="shell roadmap-grid"><div><span class="section-index">06 / ROADMAP</span><h2 id="roadmap-heading">Grow from the editor outward.</h2><p>Start with useful local tools. Then build bridges between teams and their systems.</p></div><ol class="roadmap-list"><li class="active"><span class="phase">PHASE 01 · IN PROGRESS</span><h3>Local modeling</h3><p>Rust core, validation, CLI and IDE preview. More complete language support and workspace editing next.</p></li><li><span class="phase">PHASE 02 · PLANNED</span><h3>Architecture context for agents</h3><p>Expose model knowledge via local tooling and MCP. Let coding agents propose spec-driven changes to code and architectural intent through Git review.</p></li><li><span class="phase">PHASE 03 · PLANNED</span><h3>Federated architecture</h3><p>Reference other teams' versioned models and understand the connections between them.</p></li><li><span class="phase">FUTURE VISION</span><h3>Evidence and reconciliation</h3><p>Bring technical evidence into a consolidated view; show divergence with source traceability.</p></li></ol></div>
       </section>
 
-      <section class="closing section" aria-labelledby="closing-heading"><div class="shell closing-inner"><span class="section-index">AN OPEN INVITATION</span><h2 id="closing-heading">Make architecture<br /><em>accountable to reality.</em></h2><p>Kontur is an early-stage, MIT-licensed project. The ambition is big; the next step is building a solid local modeling experience.</p><a class="button button-primary" href="https://github.com/kodemaniak/kontur" target="_blank" rel="noopener noreferrer">Explore Kontur on GitHub ↗</a><small>Repository access may be restricted while the project is being prepared for a public release.</small></div></section>
+      <section class="closing section" aria-labelledby="closing-heading"><div class="shell closing-inner"><span class="section-index">AN OPEN INVITATION</span><h2 id="closing-heading">Make architecture<br /><em>accountable to reality.</em></h2><p>Kontur is an early-stage, MIT-licensed project. The ambition is big; the next step is building a solid local modeling experience.</p><a class="button button-primary" href="https://github.com/kodemaniak/kontur" target="_blank" rel="noopener noreferrer">Explore Kontur on GitHub ↗</a><small>Building toward design-aware development and evidence-backed architecture.</small></div></section>
     </main>
 
-    <footer class="site-footer"><div class="shell footer-inner"><a class="brand" href="#top"><span>kontur<span class="brand-dot">.</span></span></a><span>Architecture as code, with a view toward evidence.</span><a href="#top">Back to top ↑</a></div></footer>
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand" href="#top"><span>kontur<span class="brand-dot">.</span></span></a><span>Architecture as code. Context for agents. Evidence from reality.</span><a href="#top">Back to top ↑</a></div></footer>
   </body>
 </html>

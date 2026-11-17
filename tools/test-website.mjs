@@ -35,3 +35,15 @@ test('illustrative architecture comparison is keyboard operable', () => {
   assert.match(js, /setAttribute\('aria-pressed'/);
   assert.match(js, /addEventListener\('click'/);
 });
+
+test('architecture as context is a planned, spec-driven coding agent use case', () => {
+  assert.match(html, /id="agents"/);
+  assert.match(html, /Architecture that guides the code you write/i);
+  assert.match(html, /Built for humans\. Ready for agents/i);
+  assert.match(html, /Context via MCP \/ CLI/i);
+  assert.match(html, /spec-driven workflow/i);
+  assert.match(html, /One coherent pull request/i);
+  assert.match(html, /not a shipped agent or MCP integration/i);
+  assert.match(html, /SPECIFIED ≠ IMPLEMENTED ≠ OBSERVED/);
+  assert.match(css, /\.agents-grid/);
+});

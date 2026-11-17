@@ -5,10 +5,10 @@ use kontur_cli::{
     compile_preview,
     protocol::{PreviewRequest, PreviewResponse, PreviewResult},
 };
+use kontur_core::compile_view;
 use kontur_core::diagnostic::{Diagnostic, DiagnosticCode};
 use kontur_core::model::ViewKey;
 use kontur_core::source::SourceFile;
-use kontur_core::compile_view;
 
 const MAX_FRAME_BYTES: usize = 5 * 1024 * 1024;
 const MAX_SAFE_REVISION: u64 = 9_007_199_254_740_991;

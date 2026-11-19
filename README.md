@@ -29,6 +29,8 @@ The long-term goal is a federated architecture repository: teams maintain their 
 
 ## Roadmap
 
+**Unified implementation roadmap:** [Single Core → Architecture as Context](docs/roadmap.md) tracks the shared Rust/WASM core, multi-source semantics, query API, Architecture Explorer and read-only MCP. The phase summary below remains a long-term product outline.
+
 | Phase | Goal |
 | --- | --- |
 | **1. Local modeling** | Describe, validate, and visualize architecture in a local workspace within VS Code. |
